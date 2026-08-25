@@ -7,7 +7,7 @@
       "module_directory": ".",
       "package_directory": "internationalwire",
       "reason": "The package dispatches through switch cases and direct codec calls, which the complete enabled Gremlins operator set cannot transform; exhaustive format tests remain mandatory.",
-      "source_digest": "ed65f3a611d6b376c351039fd29a72b060cc27e2896c304fe051e58309d81a1b"
+      "source_digest": "58ee82e04deb8519e4e75bad902d7383677ec4c8a4103502906ba3ba0f540484"
     }
   ]
 }
