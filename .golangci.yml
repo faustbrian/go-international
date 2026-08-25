@@ -9,25 +9,18 @@ linters:
     - bodyclose
     - errorlint
     - exhaustive
+    - gocritic
     - gosec
-    - misspell
     - nilerr
     - noctx
     - prealloc
     - revive
-    - staticcheck
+    - rowserrcheck
+    - sqlclosecheck
+    - testifylint
     - unconvert
-  exclusions:
-    rules:
-      - path: '_test\.go'
-        linters:
-          - gosec
-          - noctx
-
-formatters:
-  enable:
-    - gofmt
-    - goimports
+    - unparam
+    - wastedassign
 
 issues:
   max-issues-per-linter: 0

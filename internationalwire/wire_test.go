@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/faustbrian/golib/pkg/international/country"
-	"github.com/faustbrian/golib/pkg/international/currency"
-	"github.com/faustbrian/golib/pkg/international/internationalwire"
-	"github.com/faustbrian/golib/pkg/wire"
+	"github.com/faustbrian/go-international/country"
+	"github.com/faustbrian/go-international/currency"
+	"github.com/faustbrian/go-international/internationalwire"
+	"github.com/faustbrian/go-wire"
 )
 
 type document struct {

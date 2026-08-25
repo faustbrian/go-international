@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/faustbrian/golib/pkg/international/postal"
+	"github.com/faustbrian/go-international/postal"
 )
 
 func TestValidSyntaxMatchesLegacyPostcodeContract(t *testing.T) {

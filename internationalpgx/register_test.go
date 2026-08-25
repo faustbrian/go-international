@@ -3,9 +3,9 @@ package internationalpgx_test
 import (
 	"testing"
 
-	"github.com/faustbrian/golib/pkg/international/country"
-	"github.com/faustbrian/golib/pkg/international/internationalpgx"
-	"github.com/faustbrian/golib/pkg/international/phone"
+	"github.com/faustbrian/go-international/country"
+	"github.com/faustbrian/go-international/internationalpgx"
+	"github.com/faustbrian/go-international/phone"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 

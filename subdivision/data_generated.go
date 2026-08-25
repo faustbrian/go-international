@@ -2,7 +2,7 @@
 
 package subdivision
 
-import international "github.com/faustbrian/golib/pkg/international"
+import international "github.com/faustbrian/go-international"
 
 var subdivisionRecords = map[string]record{
 	"AD-02":  {name: "Canillo", status: international.StatusOfficial},

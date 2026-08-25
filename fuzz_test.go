@@ -4,14 +4,14 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/country"
-	"github.com/faustbrian/golib/pkg/international/currency"
-	"github.com/faustbrian/golib/pkg/international/language"
-	"github.com/faustbrian/golib/pkg/international/locale"
-	"github.com/faustbrian/golib/pkg/international/phone"
-	"github.com/faustbrian/golib/pkg/international/postal"
-	"github.com/faustbrian/golib/pkg/international/subdivision"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/country"
+	"github.com/faustbrian/go-international/currency"
+	"github.com/faustbrian/go-international/language"
+	"github.com/faustbrian/go-international/locale"
+	"github.com/faustbrian/go-international/phone"
+	"github.com/faustbrian/go-international/postal"
+	"github.com/faustbrian/go-international/subdivision"
 )
 
 func FuzzTextParsers(fuzzer *testing.F) {

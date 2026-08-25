@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/country"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/country"
 	"golang.org/x/text/language"
 )
 

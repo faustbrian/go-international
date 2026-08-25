@@ -15,7 +15,7 @@ run_apidiff() {
 }
 
 run_apidiff -m -w "$temporary" \
-  github.com/faustbrian/golib/pkg/international
+  github.com/faustbrian/go-international
 run_apidiff -m -incompatible \
   api/v1.txt "$temporary" > "$report"
 test ! -s "$report" || {

@@ -1,3 +1,5 @@
-/build/
-/go.work
-/go.work.sum
+.artifacts/
+.tools/
+.gocache*/
+.DS_Store
+coverage.out

@@ -2,7 +2,7 @@
 
 package currency
 
-import international "github.com/faustbrian/golib/pkg/international"
+import international "github.com/faustbrian/go-international"
 
 var currencyRecords = map[string]record{
 	"ADP": {numeric: "020", name: "", status: international.StatusHistoric, history: "Andorran Peseta\t2003-07"},

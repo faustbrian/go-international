@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"slices"
 
-	international "github.com/faustbrian/golib/pkg/international"
+	international "github.com/faustbrian/go-international"
 )
 
 // DatasetRecords returns a sorted, independent compatibility projection for

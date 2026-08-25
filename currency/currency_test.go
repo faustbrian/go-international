@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/currency"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/currency"
 )
 
 func TestParseActiveCurrencyWithNumericAndMinorUnits(t *testing.T) {

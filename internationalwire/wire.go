@@ -5,12 +5,12 @@ package internationalwire
 import (
 	"errors"
 
-	"github.com/faustbrian/golib/pkg/wire"
-	"github.com/faustbrian/golib/pkg/wire/jsonwire"
-	"github.com/faustbrian/golib/pkg/wire/msgpackwire"
-	"github.com/faustbrian/golib/pkg/wire/tomlwire"
-	"github.com/faustbrian/golib/pkg/wire/xmlwire"
-	"github.com/faustbrian/golib/pkg/wire/yamlwire"
+	"github.com/faustbrian/go-wire"
+	"github.com/faustbrian/go-wire/jsonwire"
+	"github.com/faustbrian/go-wire/msgpackwire"
+	"github.com/faustbrian/go-wire/tomlwire"
+	"github.com/faustbrian/go-wire/xmlwire"
+	"github.com/faustbrian/go-wire/yamlwire"
 )
 
 // ErrUnsupportedFormat marks formats without a scalar-safe default adapter.

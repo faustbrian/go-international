@@ -8,8 +8,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/country"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/country"
 	"golang.org/x/text/unicode/norm"
 )
 

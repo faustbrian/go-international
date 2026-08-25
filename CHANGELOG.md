@@ -4,6 +4,8 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-25
+
 ### Documentation
 
 - Link the package README to the repository-wide Golib documentation portal.
@@ -11,6 +13,7 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Publish the module from its standalone `github.com/faustbrian/go-international` identity while preserving its documented API and behavior.
 - Replace obsolete owned-module pseudo-version pins with the monorepo's local
   `v0.0.0` source-proxy coordinates; release tooling continues to emit exact
   `v1.0.0` dependency versions.
@@ -43,9 +46,9 @@ All notable changes and dataset updates are recorded here.
 - Keep provenance and documentation gates portable on clean CI runners without
   requiring ripgrep outside the declared Go toolchain.
 
-### Planned v1.0.0 scope
+### v1.0.0 scope
 
-The following initial scope is implemented but remains unreleased.
+The following initial scope is included in `v1.0.0`.
 
 - Establish typed country, subdivision, language, locale, currency, phone, and
   postal primitives.
@@ -63,3 +66,6 @@ The following initial scope is implemented but remains unreleased.
   country, locale, currency, phone, and package-policy postal behavior.
 - Add explicit Unicode and resource-budget evidence, concurrent metadata tests,
   and a clean advisory NilAway gate.
+
+[Unreleased]: https://github.com/faustbrian/go-international/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/faustbrian/go-international/releases/tag/v1.0.0

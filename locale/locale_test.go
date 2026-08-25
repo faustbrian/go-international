@@ -6,8 +6,8 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/locale"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/locale"
 )
 
 func TestParsePreservesValidSpellingAndCanonicalizationIsExplicit(t *testing.T) {

@@ -5,11 +5,11 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	"github.com/faustbrian/golib/pkg/international/country"
-	"github.com/faustbrian/golib/pkg/international/internationalvalidation"
-	"github.com/faustbrian/golib/pkg/international/phone"
-	validation "github.com/faustbrian/golib/pkg/validation"
+	international "github.com/faustbrian/go-international"
+	"github.com/faustbrian/go-international/country"
+	"github.com/faustbrian/go-international/internationalvalidation"
+	"github.com/faustbrian/go-international/phone"
+	validation "github.com/faustbrian/go-validation"
 )
 
 func TestRulesDelegateToDistinctStrictParsers(t *testing.T) {

@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-international",
+  "go_version": "1.26.6",
+  "modules": [
+    {
+      "directory": ".",
+      "module_path": "github.com/faustbrian/go-international",
+      "go_version": "1.26.6",
+      "packages": [
+        {
+          "module_directory": ".",
+          "directory": ".",
+          "name": "international",
+          "import_path": "github.com/faustbrian/go-international",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "cmd/international-dataset-review",
+          "name": "main",
+          "import_path": "github.com/faustbrian/go-international/cmd/international-dataset-review",
+          "kind": "tooling",
+          "production": false,
+          "executable": true,
+          "coverage_required": false,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "cmd/international-generate",
+          "name": "main",
+          "import_path": "github.com/faustbrian/go-international/cmd/international-generate",
+          "kind": "tooling",
+          "production": false,
+          "executable": true,
+          "coverage_required": false,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "country",
+          "name": "country",
+          "import_path": "github.com/faustbrian/go-international/country",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "currency",
+          "name": "currency",
+          "import_path": "github.com/faustbrian/go-international/currency",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internal/codec",
+          "name": "codec",
+          "import_path": "github.com/faustbrian/go-international/internal/codec",
+          "kind": "internal",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internal/datasetreview",
+          "name": "datasetreview",
+          "import_path": "github.com/faustbrian/go-international/internal/datasetreview",
+          "kind": "internal",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internal/generate",
+          "name": "generate",
+          "import_path": "github.com/faustbrian/go-international/internal/generate",
+          "kind": "internal",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internationalpgx",
+          "name": "internationalpgx",
+          "import_path": "github.com/faustbrian/go-international/internationalpgx",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internationaltest",
+          "name": "internationaltest",
+          "import_path": "github.com/faustbrian/go-international/internationaltest",
+          "kind": "test support",
+          "production": false,
+          "executable": true,
+          "coverage_required": false,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internationalvalidation",
+          "name": "internationalvalidation",
+          "import_path": "github.com/faustbrian/go-international/internationalvalidation",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "internationalwire",
+          "name": "internationalwire",
+          "import_path": "github.com/faustbrian/go-international/internationalwire",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "language",
+          "name": "language",
+          "import_path": "github.com/faustbrian/go-international/language",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "locale",
+          "name": "locale",
+          "import_path": "github.com/faustbrian/go-international/locale",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "phone",
+          "name": "phone",
+          "import_path": "github.com/faustbrian/go-international/phone",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "postal",
+          "name": "postal",
+          "import_path": "github.com/faustbrian/go-international/postal",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "subdivision",
+          "name": "subdivision",
+          "import_path": "github.com/faustbrian/go-international/subdivision",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        }
+      ],
+      "purpose": "Typed, immutable international identifiers and metadata for Go services. Countries, subdivisions, languages, locales, currencies, phone numbers, and postal values remain distinct types with strict parsing, explicit canonicalization, offline behavior, and versioned dataset provenance.",
+      "lifecycle": "stable",
+      "kind": "public library",
+      "releasable": true,
+      "family": "foundations",
+      "family_label": "Foundations",
+      "family_description": "Common immutable values, deterministic seams, configuration, identity propagation, and input validation.",
+      "family_order": 1,
+      "version": "v1.0.0",
+      "tag_prefix": "v",
+      "owned_dependencies": [
+        "github.com/faustbrian/go-config",
+        "github.com/faustbrian/go-validation",
+        "github.com/faustbrian/go-wire"
+      ],
+      "reverse_owned_dependencies": [
+        "github.com/faustbrian/go-knapsack/objective/gomoney",
+        "github.com/faustbrian/go-localized",
+        "github.com/faustbrian/go-money"
+      ],
+      "external_runtime_dependencies": [
+        "github.com/jackc/pgx/v5",
+        "github.com/nyaruka/phonenumbers",
+        "golang.org/x/text"
+      ],
+      "required_services": [],
+      "build_tags": [],
+      "test_tags": [],
+      "interoperability_tools": [],
+      "specifications": [],
+      "conformance_corpora": [],
+      "provenance": [],
+      "goal_files": [
+        ".ai/GOAL.md",
+        ".ai/GOAL_HARDEN.md"
+      ],
+      "goal_status": "implementation-evidence-inventoried",
+      "goal_evidence": [
+        {
+          "file": ".ai/GOAL.md",
+          "requirements_sha256": "f10a890a1bb7aba0ee84fcf42ed27c3c35d2dcc05e7938eae090171bb9ac979d",
+          "implementation_evidence": [
+            "CHANGELOG.md",
+            "README.md"
+          ],
+          "verification_gates": [
+            "format-check",
+            "tidy-check",
+            "safety",
+            "vet",
+            "test",
+            "race",
+            "coverage",
+            "lint",
+            "staticcheck",
+            "vulnerability",
+            "secrets",
+            "licenses",
+            "sbom",
+            "fuzz",
+            "mutation",
+            "nilaway",
+            "docs",
+            "api",
+            "conformance",
+            "interoperability",
+            "benchmark"
+          ],
+          "implementation_status": "implemented-requires-fresh-verification"
+        },
+        {
+          "file": ".ai/GOAL_HARDEN.md",
+          "requirements_sha256": "7383bc57d2e41525e27ac10c67e6b63839051367a9c6c1bbab16c65d099e53e0",
+          "implementation_evidence": [
+            "CHANGELOG.md",
+            "README.md"
+          ],
+          "verification_gates": [
+            "format-check",
+            "tidy-check",
+            "safety",
+            "vet",
+            "test",
+            "race",
+            "coverage",
+            "lint",
+            "staticcheck",
+            "vulnerability",
+            "secrets",
+            "licenses",
+            "sbom",
+            "fuzz",
+            "mutation",
+            "nilaway",
+            "docs",
+            "api",
+            "conformance",
+            "interoperability",
+            "benchmark"
+          ],
+          "implementation_status": "implemented-requires-fresh-verification"
+        }
+      ],
+      "gates": {
+        "api_compatibility": true,
+        "benchmarks": true,
+        "conformance": false,
+        "coverage": true,
+        "documentation": true,
+        "fuzz": true,
+        "lint": true,
+        "mutation": true,
+        "race": true,
+        "security": true,
+        "tests": true
+      }
+    }
+  ]
+}

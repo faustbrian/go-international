@@ -3,7 +3,7 @@ package currency
 import (
 	"strings"
 
-	international "github.com/faustbrian/golib/pkg/international"
+	international "github.com/faustbrian/go-international"
 )
 
 type record struct {

@@ -9,7 +9,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/faustbrian/golib/pkg/international/internal/datasetreview"
+	"github.com/faustbrian/go-international/internal/datasetreview"
 )
 
 func main() {

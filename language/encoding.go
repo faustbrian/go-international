@@ -3,7 +3,7 @@ package language
 import (
 	"database/sql/driver"
 
-	"github.com/faustbrian/golib/pkg/international/internal/codec"
+	"github.com/faustbrian/go-international/internal/codec"
 )
 
 // MarshalText encodes a present language as canonical ISO 639 text.

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "packages": [
+    {
+      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+      "gremlins_version": "v0.6.0",
+      "module_directory": ".",
+      "package_directory": "internationalwire",
+      "reason": "The package dispatches through switch cases and direct codec calls, which the complete enabled Gremlins operator set cannot transform; exhaustive format tests remain mandatory.",
+      "source_digest": "ed65f3a611d6b376c351039fd29a72b060cc27e2896c304fe051e58309d81a1b"
+    }
+  ]
+}

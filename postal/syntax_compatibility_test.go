@@ -6,7 +6,7 @@ package postal_test
 import (
 	"testing"
 
-	"github.com/faustbrian/golib/pkg/international/postal"
+	"github.com/faustbrian/go-international/postal"
 )
 
 func TestValidSyntaxMatchesPinnedBrickPostcodeCorpus(t *testing.T) {

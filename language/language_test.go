@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
-	intlLanguage "github.com/faustbrian/golib/pkg/international/language"
+	international "github.com/faustbrian/go-international"
+	intlLanguage "github.com/faustbrian/go-international/language"
 	"golang.org/x/text/language"
 )
 

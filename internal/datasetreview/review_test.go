@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/golib/pkg/international"
+	international "github.com/faustbrian/go-international"
 )
 
 func TestCurrentSnapshotRoundTripsDeterministically(t *testing.T) {

@@ -3,7 +3,7 @@ package subdivision
 import (
 	"time"
 
-	international "github.com/faustbrian/golib/pkg/international"
+	international "github.com/faustbrian/go-international"
 )
 
 // DatasetProvenance returns the pinned CLDR subdivision provenance.

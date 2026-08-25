@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/faustbrian/golib/pkg/international/internal/generate"
+	"github.com/faustbrian/go-international/internal/generate"
 )
 
 func main() {

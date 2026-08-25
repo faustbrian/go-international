@@ -6,7 +6,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 
-	international "github.com/faustbrian/golib/pkg/international"
+	international "github.com/faustbrian/go-international"
 )
 
 // MaxEncodedBytes bounds adapter work before a domain parser applies its own

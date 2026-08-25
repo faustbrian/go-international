@@ -3,7 +3,7 @@ package subdivision
 import (
 	"database/sql/driver"
 
-	"github.com/faustbrian/golib/pkg/international/internal/codec"
+	"github.com/faustbrian/go-international/internal/codec"
 )
 
 // MarshalText encodes a present subdivision as canonical ISO 3166-2 text.
