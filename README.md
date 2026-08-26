@@ -43,7 +43,7 @@ in the [verification report](docs/verification.md).
 Requires Go 1.26.6 or newer. Licensed under MIT; dataset licenses remain with
 their upstream publishers.
 
-## Ecosystem
+## Documentation
 
-Use the [Golib documentation portal](https://github.com/faustbrian/golib/blob/main/docs/index.md)
-to choose companion packages, supported stacks, recipes, and operations guidance.
+Start with the [documentation index](docs/README.md) for datasets, provenance,
+integration, migration, and operations guidance.
