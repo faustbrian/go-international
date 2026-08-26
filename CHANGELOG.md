@@ -32,7 +32,7 @@ All notable changes and dataset updates are recorded here.
 
 ### Documentation
 
-- Link the package README to the repository-wide Golib documentation portal.
+- Link the package README to package-owned documentation.
 - Keep the initial `v1.0.0` scope under Unreleased until a tag is published.
 
 ### Changed
