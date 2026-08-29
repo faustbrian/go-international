@@ -1,26 +1,24 @@
 # Performance, FAQ, and troubleshooting
 
-Lookups use immutable generated maps and require no network. Benchmark with
-`make benchmark`; protect regressions by comparing `ns/op`, allocations, and
-bulk conversion throughput on the same Go version and hardware. Phone parsing
-is intentionally heavier than fixed-code lookup.
+Lookups use immutable generated maps and require no network. Benchmark with the
+shared tooling benchmark gate; protect regressions by comparing `ns/op`,
+allocations, and bulk conversion throughput on the same Go version and
+hardware. Phone parsing is intentionally heavier than fixed-code lookup.
 
 ## Local verification
 
-`make release-check` reproduces every blocking release gate: formatting, vet,
-Staticcheck, strict golangci-lint, tests, exact coverage, race detection,
-generated-data drift, provenance and license checks, reviewed mutation checks,
-documentation, API compatibility, vulnerability scanning, workflow linting,
-fuzz smoke, and benchmarks. `make nilaway` runs separately because NilAway is
-an explicitly advisory signal. Every component is also available as its own
-documented Make target; run `make format` to apply formatting changes.
-All Make targets set `GOWORK=off`, so ignored developer workspaces cannot
-replace the dependency versions pinned by `go.mod` or make local evidence
-disagree with CI.
+`make ci` delegates to the pinned shared tool, which reproduces every blocking
+release gate: formatting, vet, Staticcheck, strict golangci-lint, tests, exact
+coverage, race detection, generated-data drift, provenance and license checks,
+reviewed mutation checks, documentation, API compatibility, vulnerability
+scanning, workflow linting, fuzz smoke, and benchmarks. NilAway runs separately
+as an explicitly advisory signal. The generated-data, provenance, and
+documentation checks remain package-owned operations in
+`verification/package.mk`; all other gates are owned by the shared tool.
 
-The generator target acquires checksum-pinned authoritative inputs. Core
-identifier parsing, validation, lookup, and formatting remain offline and do
-not invoke the generator or perform network requests.
+The generated-data operation acquires checksum-pinned authoritative inputs.
+Core identifier parsing, validation, lookup, and formatting remain offline and
+do not invoke the generator or perform network requests.
 
 **Why was a lowercase code rejected?** Strict `Parse` preserves the boundary.
 Use an explicit canonicalization API only when your contract permits it.

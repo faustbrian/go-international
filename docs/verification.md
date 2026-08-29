@@ -75,7 +75,7 @@ module contains no telemetry or logging integration.
 | config | Atomic strict decoding integration test |
 | wire | JSON, XML, YAML, TOML, and MessagePack round trips plus explicit unsupported formats |
 | validation | Parseability rules for every primitive and a distinct valid-phone rule |
-| API compatibility | Pinned `apidiff` comparison against `api/v1.txt` |
+| API compatibility | Pinned `apidiff` comparison against `api/baseline.txt` |
 | Dataset compatibility | Schema-1 semantic snapshot and classified JSON diff command |
 
 Core country, currency, language, locale, phone, postal, and subdivision
@@ -85,8 +85,8 @@ dependency direction.
 
 ## Quality and performance report
 
-The local release contract is `make release-check`; advisory nilness analysis
-is `make nilaway`. The gates include formatting, vet, Staticcheck, strict
+The local release contract is `make ci`; advisory nilness analysis is owned by
+the shared tool. The gates include formatting, vet, Staticcheck, strict
 golangci-lint, the full suite, exact production coverage, race, deterministic
 generation, semantic drift, provenance and licenses, mutation analysis,
 documentation, API compatibility, vulnerability scanning, workflow linting,
@@ -95,8 +95,8 @@ findings.
 
 ### Mutation report
 
-`make mutation` pins Gremlins v0.6.0 and requires both 100% mutant coverage and
-100% efficacy for the acceptance and canonicalization implementation files.
+The shared mutation gate requires both 100% mutant coverage and 100% efficacy
+for the acceptance and canonicalization implementation files.
 The 2026-07-17 run covered and killed every generated mutant with no survivors,
 timeouts, non-viable mutants, or uncovered mutants:
 

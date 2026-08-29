@@ -4,6 +4,12 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+### Changed
+
+- Replace the repository-local verification implementation with the pinned
+  `go-library-tools` v1.0.6 CLI and reusable workflow while preserving module
+  policy, package-owned checks, and content-addressed mutation evidence.
+
 ### Documentation
 
 - Replace the archived monorepo link with package-owned documentation.
