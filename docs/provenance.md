@@ -26,20 +26,22 @@ of the verified source payloads concatenated in the table order. The generator
 also pins and verifies each individual payload checksum before parsing it.
 
 Generated tables never update at runtime. An update must change pinned URLs or
-checksums, run `make generate-check`, review the semantic `DatasetDiff`, verify
-licenses, run `make check`, and record versions and compatibility effects in
+checksums, run the generated-data operation through `make ci`, review the
+semantic `DatasetDiff`, verify licenses, run `make check`, and record versions
+and compatibility effects in
 `CHANGELOG.md`. Additions are normally compatible. Removals, status changes,
 canonicalization changes, or phone classification changes require explicit
 release notes and may require a major release.
 
 The checked semantic baseline, record counts, and exact review procedure are in
-`docs/dataset-report.md`. `make dataset-snapshot` refreshes the projection and
-`make dataset-diff BEFORE=... AFTER=...` emits the classified JSON review.
+`docs/dataset-report.md`. `make -f verification/package.mk dataset-snapshot`
+refreshes the projection and `make -f verification/package.mk dataset-diff
+BEFORE=... AFTER=...` emits the classified JSON review.
 Independently frozen expected results and their source labels are exported by
 `internationaltest`; they protect representative current, historic, reserved,
 canonicalization, formatting, and policy behavior from generator self-agreement.
 
-`make compatibility` compares the current exported module API with the v1
+The shared API gate compares the current exported module API with the v1
 baseline. Intentional incompatible changes require a major-version module path
 and a deliberately reviewed baseline update.
 
