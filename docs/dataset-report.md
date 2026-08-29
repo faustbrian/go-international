@@ -14,7 +14,7 @@ metadata fingerprints.
 
 Regenerating the snapshot from the committed tables produces an empty semantic
 diff for all five classifications: additions, removals, alias changes, status
-changes, and metadata changes. `make generate-check` independently regenerates
+changes, and metadata changes. The generated-data operation independently regenerates
 the Go tables from checksum-pinned upstream inputs and compares both the tables
 and semantic snapshot byte for byte.
 
@@ -22,9 +22,9 @@ For an update, preserve the old snapshot, regenerate the tables and snapshot,
 then run:
 
 ```sh
-make dataset-diff BEFORE=/tmp/international-before.json \
+make -f verification/package.mk dataset-diff BEFORE=/tmp/international-before.json \
   AFTER=data/dataset-snapshot.json
-make release-check
+make ci
 ```
 
 Attach the JSON diff to review and update this report and `CHANGELOG.md` with
