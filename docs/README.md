@@ -9,6 +9,7 @@
 
 - [Dataset report](dataset-report.md)
 - [Provenance](provenance.md)
+- [Specification decisions](specification-decisions.md)
 
 ## Guides
 

@@ -242,16 +242,31 @@
       "build_tags": [],
       "test_tags": [],
       "interoperability_tools": [],
-      "specifications": [],
-      "conformance_corpora": [],
-      "provenance": [],
+      "specifications": [
+        "Unicode CLDR region validity data",
+        "Unicode CLDR subdivision validity data",
+        "IANA Language Subtag Registry snapshot",
+        "BCP 47 language tags",
+        "ISO 4217 currency lists",
+        "libphonenumber metadata profile",
+        "Brick postcode compatibility profile"
+      ],
+      "conformance_corpora": [
+        "Pinned golang.org/x/text country, currency, and language-tag comparisons",
+        "Pinned libphonenumber metadata comparisons",
+        "Brick postcode 0.5.0 formatter corpus"
+      ],
+      "provenance": [
+        "specification/sources.tsv",
+        "specification/archive-sources.json"
+      ],
       "goal_files": [],
       "goal_status": "not-applicable",
       "goal_evidence": [],
       "gates": {
         "api_compatibility": true,
         "benchmarks": true,
-        "conformance": false,
+        "conformance": true,
         "coverage": true,
         "documentation": true,
         "fuzz": true,

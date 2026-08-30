@@ -1,4 +1,7 @@
-.PHONY: generated-check dataset-snapshot dataset-diff provenance docs
+.PHONY: generated-check dataset-snapshot dataset-diff provenance docs conformance
+
+conformance:
+	go test ./country ./currency ./language ./locale ./phone ./postal ./subdivision
 
 generated-check:
 	./scripts/check-generated.sh

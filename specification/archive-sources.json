@@ -1,0 +1,8 @@
+{
+  "brick_postcode": {
+    "id": "brick-postcode-0.5.0-archive",
+    "version": "0.5.0 at ead386982c31d825843e80ab86a1919eca1a1ad5",
+    "source": "deterministic git archive of brick/postcode commit ead386982c31d825843e80ab86a1919eca1a1ad5",
+    "sha256": "8a5dd1f053a349468ea5ee32e6cc55b8e5c9c2adbecbfd2f0ecadc0512e7232f"
+  }
+}

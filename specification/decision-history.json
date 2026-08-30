@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"id":"INTERNATIONAL-DEC-001","digests":["29ed9c6e8a623b4771cf13e9894d35f2ea1c81834ee2a49e49de8e5fbd6ecb25"]},
+    {"id":"INTERNATIONAL-DEC-002","digests":["83725f09367f86e94d18084b30feb57eb83178b6224c407ad99f0c06da41e68c"]},
+    {"id":"INTERNATIONAL-DEC-003","digests":["390292b5428e8c579d9e6010e690b664a24a859e075332b7e0023a72bf641e21"]},
+    {"id":"INTERNATIONAL-DEC-004","digests":["0b2904fb1cdd8a666bfc0f054f196b83fcd2cfa11c300c6df621c479b48605ce"]},
+    {"id":"INTERNATIONAL-DEC-005","digests":["51c6c7168eadc56cc241187229200beb85bc392fc47f6e41a8b9d9e47884481c"]}
+  ]
+}

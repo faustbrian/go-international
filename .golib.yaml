@@ -19,6 +19,13 @@ api:
       path: api/baseline.txt
 operations:
   - module: .
+    gate: conformance
+    steps:
+      - type: make
+        makefile: verification/package.mk
+        target: conformance
+        timeout: 20m
+  - module: .
     gate: test
     steps:
       - type: make

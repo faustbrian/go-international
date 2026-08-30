@@ -6,6 +6,16 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Govern standards-backed behavior through the
+  [specification decision register](docs/specification-decisions.md), pinned
+  source and update authorities, maintained-peer conformance bindings, and a
+  canonical-tooling CI check. Initial decision records:
+  `INTERNATIONAL-DEC-001 sha256:29ed9c6e8a623b4771cf13e9894d35f2ea1c81834ee2a49e49de8e5fbd6ecb25`,
+  `INTERNATIONAL-DEC-002 sha256:83725f09367f86e94d18084b30feb57eb83178b6224c407ad99f0c06da41e68c`,
+  `INTERNATIONAL-DEC-003 sha256:390292b5428e8c579d9e6010e690b664a24a859e075332b7e0023a72bf641e21`,
+  `INTERNATIONAL-DEC-004 sha256:0b2904fb1cdd8a666bfc0f054f196b83fcd2cfa11c300c6df621c479b48605ce`,
+  and `INTERNATIONAL-DEC-005 sha256:51c6c7168eadc56cc241187229200beb85bc392fc47f6e41a8b9d9e47884481c`.
+
 - Replace the repository-local verification implementation with the pinned
   `go-library-tools` v1.0.13 CLI and reusable workflow while preserving module
   policy, package-owned checks, and content-addressed mutation evidence.
