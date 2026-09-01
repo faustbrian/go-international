@@ -4,6 +4,10 @@ This document maps the v1 requirements to executable evidence. It complements
 the API reference and dataset report; a percentage or green aggregate command
 is not treated as proof for an unrelated requirement.
 
+The [specification decision register](specification-decisions.md) binds these
+claims to exact interpretations, sources, change authorities, tests, fuzz
+targets, and maintained-peer comparisons.
+
 ## Standards and policy coverage
 
 | Surface | Authority or explicit policy | Current evidence |

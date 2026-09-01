@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "decisions": [
+    {
+      "id": "INTERNATIONAL-DEC-001",
+      "authoritative_sources": ["cldr-region-48.2", "cldr-region-mappings-48.2", "cldr-subdivision-48.2", "cldr-subdivision-names-48.2", "iso4217-list-one-2026-01-01", "iso4217-list-three-2026-01-01"],
+      "executable_evidence": ["TestHistoricalAndUserAssignedCodesRequireOptIn", "TestDeletedSubdivisionRequiresOptIn", "TestHistoricCurrenciesRequireOptInAndPreserveWithdrawalText", "TestReusedNumericCountryCodesPreserveTheirMappedIdentity"],
+      "fixtures": ["internationaltest/vectors.go"],
+      "fuzz": ["FuzzTextParsers"],
+      "interoperability_evidence": [],
+      "interoperability_classification": "not assessed",
+      "differential_evidence": ["country/differential_test.go", "currency/differential_test.go"],
+      "differential_classification": "maintained peer agreement",
+      "public_behavior": ["Current identifiers are accepted by default; named non-current statuses require explicit options and ambiguous numeric reuse fails."]
+    },
+    {
+      "id": "INTERNATIONAL-DEC-002",
+      "authoritative_sources": ["bcp47-rfc5646", "iana-language-2026-06-14"],
+      "executable_evidence": ["TestParsePreservesValidSpellingAndCanonicalizationIsExplicit", "TestLocalePartsRemainAvailableWithoutLossyFallback", "TestFallbackRequiresAnExplicitPolicy", "TestCanonicalizationDifferentialAgainstPinnedXText"],
+      "fixtures": ["internationaltest/vectors.go"],
+      "fuzz": ["FuzzTextParsers"],
+      "interoperability_evidence": [],
+      "interoperability_classification": "not assessed",
+      "differential_evidence": ["locale/differential_test.go"],
+      "differential_classification": "maintained peer agreement",
+      "public_behavior": ["Parsing preserves valid caller spelling; canonicalization and fallback are explicit operations."]
+    },
+    {
+      "id": "INTERNATIONAL-DEC-003",
+      "authoritative_sources": ["libphonenumber-metadata"],
+      "executable_evidence": ["TestParseInternationalNumberSeparatesCanonicalAndDisplayForms", "TestNationalParsingRequiresExplicitRegionHint", "TestPossibleAndValidAreDistinctMetadataDecisions", "TestDifferentialAgainstPinnedLibphonenumber"],
+      "fixtures": ["internationaltest/vectors.go"],
+      "fuzz": ["FuzzPhoneAndPostalBoundedParsing"],
+      "interoperability_evidence": [],
+      "interoperability_classification": "not assessed",
+      "differential_evidence": ["phone/differential_test.go"],
+      "differential_classification": "maintained peer agreement",
+      "public_behavior": ["Canonical E.164 identity remains separate from extensions, validity, possibility, type, and display formatting."]
+    },
+    {
+      "id": "INTERNATIONAL-DEC-004",
+      "authoritative_sources": ["brick-postcode-0.5.0"],
+      "executable_evidence": ["TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims", "TestValidSyntaxMatchesLegacyPostcodeContract", "TestValidSyntaxMatchesPinnedBrickPostcodeCorpus"],
+      "fixtures": ["postal/syntax_compatibility_test.go"],
+      "fuzz": ["FuzzPhoneAndPostalBoundedParsing"],
+      "interoperability_evidence": [],
+      "interoperability_classification": "not assessed",
+      "differential_evidence": ["postal/syntax_compatibility_test.go"],
+      "differential_classification": "maintained peer agreement",
+      "public_behavior": ["Postal parsing is opaque and bounded; Brick-compatible syntax matching is explicit and does not claim deliverability."]
+    },
+    {
+      "id": "INTERNATIONAL-DEC-005",
+      "authoritative_sources": ["iana-language-2026-06-14"],
+      "executable_evidence": ["TestParseCanonicalISO639LanguageAndConvertISO3", "TestParseISO3UsesAuthoritativeMapping", "TestCanonicalThreeLetterOnlyLanguageRoundTrips", "TestLanguageParsingIsStrictAndBounded"],
+      "fixtures": ["internationaltest/vectors.go"],
+      "fuzz": ["FuzzTextParsers"],
+      "interoperability_evidence": [],
+      "interoperability_classification": "not assessed",
+      "differential_evidence": [],
+      "differential_classification": "not assessed",
+      "public_behavior": ["Language parsing exposes one canonical lowercase ISO 639 identity with explicit ISO 639-3 conversion and no deprecated aliases."]
+    }
+  ]
+}
