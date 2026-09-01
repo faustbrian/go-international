@@ -6,6 +6,14 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
+  navigation for the international module, its target adapters, and its test
+  companion.
+
+- Adopt the checksum-verified `go-library-tools` v1.3.0 CLI, add the local
+  `make cohesion` validation entry point, and pin reusable-workflow cohesion
+  enforcement to its final immutable revision.
+
 - Govern standards-backed behavior through the
   [specification decision register](docs/specification-decisions.md), pinned
   source and update authorities, maintained-peer conformance bindings, and a
