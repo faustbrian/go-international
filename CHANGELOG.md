@@ -16,9 +16,10 @@ All notable changes and dataset updates are recorded here.
   `INTERNATIONAL-DEC-004 sha256:0b2904fb1cdd8a666bfc0f054f196b83fcd2cfa11c300c6df621c479b48605ce`,
   and `INTERNATIONAL-DEC-005 sha256:51c6c7168eadc56cc241187229200beb85bc392fc47f6e41a8b9d9e47884481c`.
 
-- Replace the repository-local verification implementation with the pinned
-  `go-library-tools` v1.0.13 CLI and reusable workflow while preserving module
-  policy, package-owned checks, and content-addressed mutation evidence.
+- Adopt the checksum-verified `go-library-tools` v1.2.0 CLI and immutable
+  shared workflow for specification governance, replacing the temporary
+  source-built specification job while preserving module policy,
+  package-owned checks, and content-addressed mutation evidence.
 
 ### Documentation
 
