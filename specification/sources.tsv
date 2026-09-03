@@ -10,7 +10,8 @@ bcp47-rfc5646	RFC 5646	https://www.rfc-editor.org/rfc/rfc5646.txt	5d9515f053163c
 bcp47-errata	current	https://errata.rfc-editor.org/search/?rfc_number=5646&presentation=records	8a357510f5b7b0b02a90077935af066d3732af65324ab8abcc51b2b588c650c1	pinned
 iso4217-list-one-2026-01-01	2026-01-01	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml	838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9	pinned
 iso4217-list-three-2026-01-01	2026-01-01	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml	98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387	pinned
-iso4217-releases	current	https://www.six-group.com/en/products-services/financial-information/data-standards.html	4059eac6ba6c129331e686d93a60e65965e3af010e78106a3413c73fd99127a2	pinned
+iso4217-list-one-updates	reviewed 2026-09-03	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml	838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9	pinned
+iso4217-list-three-updates	reviewed 2026-09-03	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml	98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387	pinned
 libphonenumber-metadata	v9.0.32 via nyaruka/phonenumbers v1.8.1	https://raw.githubusercontent.com/nyaruka/phonenumbers/v1.8.1/data/metadata.xml.gz	5f819f3becbd7be4b90ffb3dbc273035e5432e9424b4dcba8d73c5a28ed2a2ee	pinned
 libphonenumber-releases	current	https://github.com/google/libphonenumber/releases.atom	1893f8d4b02bab6123cbf3da25078ed90ab03001487098237d3cecdcff2532db	pinned
 brick-postcode-0.5.0	0.5.0 at ead386982c31d825843e80ab86a1919eca1a1ad5	https://raw.githubusercontent.com/brick/postcode/ead386982c31d825843e80ab86a1919eca1a1ad5/composer.json	3f13da8f299f6418bf0a410d73dee6253794bee750a85ec62b5d463c87128032	pinned

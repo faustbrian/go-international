@@ -31,6 +31,10 @@ All notable changes and dataset updates are recorded here.
 
 ### Documentation
 
+- Record the behavior-neutral 2026-09-03 review of unchanged SIX ISO 4217
+  List One and List Three data, and monitor their deterministic XML payloads
+  instead of nondeterministic landing-page chrome.
+
 - Replace the archived monorepo link with package-owned documentation.
 
 ## [1.0.0] - 2026-08-25
