@@ -6,6 +6,11 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Advance shared tooling to the checksum-verified `go-library-tools` v1.4.0
+  release and align local configuration, inventory, cohesion, repository,
+  online specification, workflow, and implementation gates.
+- Resolve `go-config`, `go-validation`, and `go-wire` through their canonical
+  public v1.0.0 module archives.
 - Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
   navigation for the international module, its target adapters, and its test
   companion.
@@ -30,6 +35,14 @@ All notable changes and dataset updates are recorded here.
   package-owned checks, and content-addressed mutation evidence.
 
 ### Documentation
+
+- Point ecosystem and package-family navigation at the immutable v1.4.0
+  documentation set.
+- Record the behavior-neutral review of the CLDR 49 alpha 2 release feed while
+  retaining the pinned CLDR 48.2 dataset and its decision bindings.
+- Record the behavior-neutral 2026-09-03 review of unchanged SIX ISO 4217
+  List One and List Three data, and monitor their deterministic XML payloads
+  instead of nondeterministic landing-page chrome.
 
 - Replace the archived monorepo link with package-owned documentation.
 
