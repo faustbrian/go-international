@@ -23,6 +23,15 @@ claim.
 
 ### 2026-09-03
 
+- The Unicode CLDR release feed added the `release-49-alpha2` prerelease,
+  published on 2026-09-03. Three consecutive fetches were byte-identical at
+  17,063 bytes with SHA-256
+  `eceecf01dca1d5000ec42abad2c45e614033e3b5b1f4d0513a355bb19384095a`.
+- The four selected CLDR 48.2 region, mapping, subdivision, and English-name
+  payloads remain byte-for-byte identical to their pinned checksums. The
+  prerelease therefore does not change the accepted dataset, decision, or
+  conformance bindings.
+
 - SIX ISO 4217 List One remains 47,463 bytes with SHA-256
   `838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9`,
   and List Three remains 30,638 bytes with SHA-256

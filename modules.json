@@ -238,7 +238,20 @@
         "primary_entry_packages": [
           "github.com/faustbrian/go-international"
         ],
-        "package_selection": {},
+        "package_selection": {
+          "github.com/faustbrian/go-international": "Use for shared international status, parse-error, resource-limit, Unicode normalization, and dataset-diff contracts.",
+          "github.com/faustbrian/go-international/country": "Use for immutable ISO 3166 country identifiers, explicit historic-status policy, canonicalization, and display metadata.",
+          "github.com/faustbrian/go-international/currency": "Use for immutable ISO 4217 currency identifiers, numeric mappings, minor-unit metadata, and explicit historic-status policy.",
+          "github.com/faustbrian/go-international/internationalpgx": "Use when mapping international values through caller-owned pgx resources.",
+          "github.com/faustbrian/go-international/internationaltest": "Use only in tests for governed international fixtures and reusable assertions.",
+          "github.com/faustbrian/go-international/internationalvalidation": "Use to validate international values through the Golib validation contract.",
+          "github.com/faustbrian/go-international/internationalwire": "Use to encode and decode international values through bounded Golib wire formats.",
+          "github.com/faustbrian/go-international/language": "Use for immutable ISO 639 language identifiers and IANA registry-backed canonicalization.",
+          "github.com/faustbrian/go-international/locale": "Use for bounded BCP 47 locale tags, canonicalization, matching, and explicit fallback.",
+          "github.com/faustbrian/go-international/phone": "Use for bounded phone-number parsing, E.164 identity, metadata validation, and privacy-safe formatting.",
+          "github.com/faustbrian/go-international/postal": "Use for country-bound opaque postal values, explicit normalization, and opt-in syntax validation.",
+          "github.com/faustbrian/go-international/subdivision": "Use for immutable ISO 3166-2-derived subdivision identifiers and explicit historic-status policy."
+        },
         "lifecycle_status": "active",
         "maturity": "stable",
         "construction_styles": [
@@ -296,7 +309,7 @@
           "faq": "docs/operations.md",
           "changelog": "CHANGELOG.md",
           "pkg_go_dev": "https://pkg.go.dev/github.com/faustbrian/go-international",
-          "ecosystem_index": "https://github.com/faustbrian/go-library-tools/blob/v1.3.0/docs/ecosystem/README.md"
+          "ecosystem_index": "https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/README.md"
         },
         "known_good_compatibility_sets": [],
         "delivery": {
