@@ -9,6 +9,9 @@
 | `currency` | ISO 4217 alphabetic/numeric | distinct active types |
 | `phone` | E.164 and libphonenumber metadata | bounded parseable numbers |
 | `postal` | country-contextual opaque value; optional pinned syntax validation | bounded printable UTF-8 |
+| `adapters/postgres` | pgx integration | eleven International scalar types registered as PostgreSQL text |
+| `adapters/validation` | Golib Validation integration | twelve pure synchronous parser-backed string rules |
+| `adapters/wire` | Golib Wire integration | bounded JSON, XML, YAML, TOML, and MessagePack dispatch |
 
 `Parse` validates a representation without changing it. APIs named
 `Canonicalize`, `Canonical`, or `Normalize` perform explicit transformations.
@@ -50,6 +53,11 @@ metadata changes for update review.
 All exported declarations are documented in Go doc. Core deliberately excludes
 message catalogs, content negotiation, money arithmetic, address validation,
 geocoding, tax, sanctions, delivery, and locale detection.
+
+The legacy `internationalpgx`, `internationalvalidation`, and
+`internationalwire` packages remain importable compatibility paths. Their
+target-oriented successors preserve signatures and behavior; new code should
+select the successor imports above.
 
 `internationaltest` exports immutable copies of governed country, subdivision,
 language, locale, currency, phone, and postal vectors. Each vector family has a

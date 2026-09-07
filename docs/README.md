@@ -25,3 +25,8 @@
 
 - [Contribution guide](../CONTRIBUTING.md)
 - [Release history](../CHANGELOG.md)
+
+## Support and security
+
+- [Support policy](../SUPPORT.md)
+- [Security policy and private reporting](../SECURITY.md)

@@ -1,5 +1,27 @@
 # Migration guide
 
+## Target-oriented adapters
+
+No call signature changes are required. Change the import path as follows:
+
+| Existing import | Successor import |
+| --- | --- |
+| `github.com/faustbrian/go-international/internationalpgx` | `github.com/faustbrian/go-international/adapters/postgres` |
+| `github.com/faustbrian/go-international/internationalvalidation` | `github.com/faustbrian/go-international/adapters/validation` |
+| `github.com/faustbrian/go-international/internationalwire` | `github.com/faustbrian/go-international/adapters/wire` |
+
+The PostgreSQL successor's package identifier is `internationalpostgres`.
+Rename `internationalpgx.Register` selectors accordingly, or explicitly alias
+the successor import as `internationalpgx` while migrating. The Validation and
+wire successors retain their legacy package identifiers.
+
+The existing paths remain supported for the longer of 180 days after public
+successor availability and two subsequently published stable root-module minor
+releases. First adopt public `go-validation v1.1.0`, then adopt International
+v1.1.0 and migrate imports independently. Before publication, rollback the
+coherent owner change normally. After publication, keep both import families
+resolvable and use a forward patch; never delete or move the published tag.
+
 ## From `cline/intl`
 
 Replace universal string codes with the matching package type. Move implicit

@@ -18,3 +18,10 @@ Ambiguities require documented decisions and stable tests. The
 [specification decision register](docs/specification-decisions.md) is part of
 this compatibility contract. Deprecated APIs follow
 [`DEPRECATION.md`](DEPRECATION.md).
+
+The `internationalpgx`, `internationalvalidation`, and `internationalwire`
+packages remain supported for the longer of 180 days after their
+target-oriented successors become public and two subsequently published stable
+root-module minor releases. Their `adapters/postgres`, `adapters/validation`,
+and `adapters/wire` successors are additive and preserve call signatures and
+observable behavior.

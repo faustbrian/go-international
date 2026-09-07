@@ -1,5 +1,41 @@
 # Five-minute quickstarts
 
+## Adapters
+
+```go
+import (
+    internationalpostgres "github.com/faustbrian/go-international/adapters/postgres"
+    internationalvalidation "github.com/faustbrian/go-international/adapters/validation"
+    internationalwire "github.com/faustbrian/go-international/adapters/wire"
+    "github.com/faustbrian/go-international/country"
+    validation "github.com/faustbrian/go-validation"
+    "github.com/faustbrian/go-wire"
+    "github.com/jackc/pgx/v5/pgtype"
+)
+
+fi, err := country.Parse("FI")
+if err != nil {
+    return err
+}
+
+typeMap := pgtype.NewMap()
+internationalpostgres.Register(typeMap) // before concurrent map use
+
+ctx, err := validation.NewContext(validation.DefaultLimits())
+if err != nil {
+    return err
+}
+if err := internationalvalidation.Country().Validate(ctx, "FI").Err(); err != nil {
+    return err
+}
+
+payload, err := internationalwire.Encode(wire.FormatJSON, fi)
+```
+
+The [executable adapter example](../adapter_successor_test.go) is compiled and
+run by the root test suite. These operations are synchronous and retain no
+caller-owned values or contexts.
+
 ## Country
 
 ```go
