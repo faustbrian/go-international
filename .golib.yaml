@@ -64,6 +64,16 @@ operations:
         fuzz: '^FuzzGeneratedDataRanges$'
         budget: 10000x
         timeout: 20m
+      - type: go-test
+        packages: [./internationalwire]
+        fuzz: '^FuzzLegacyWireDispatch$'
+        budget: 10000x
+        timeout: 20m
+      - type: go-test
+        packages: [./adapters/wire]
+        fuzz: '^FuzzSuccessorWireDispatch$'
+        budget: 10000x
+        timeout: 20m
   - module: .
     gate: docs
     steps:

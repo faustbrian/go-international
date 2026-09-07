@@ -2,15 +2,25 @@
 
 All notable changes and dataset updates are recorded here.
 
-## [Unreleased]
+## [1.1.0] - Unreleased
+
+### Added
+
+- Add target-oriented `adapters/postgres`, `adapters/validation`, and
+  `adapters/wire` packages with behavior-preserving legacy compatibility paths.
 
 ### Changed
+
+- Adopt public `go-validation` v1.1.0 while keeping International rules pure
+  and synchronous.
+- Document the adapter migration, support interval, rollback order, ownership,
+  package selection, and error identities.
 
 - Advance shared tooling to the checksum-verified `go-library-tools` v1.4.0
   release and align local configuration, inventory, cohesion, repository,
   online specification, workflow, and implementation gates.
-- Resolve `go-config`, `go-validation`, and `go-wire` through their canonical
-  public v1.0.0 module archives.
+- Resolve `go-config` and `go-wire` through their canonical public v1.0.0
+  module archives and `go-validation` through public v1.1.0.
 - Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
   navigation for the international module, its target adapters, and its test
   companion.
@@ -46,7 +56,7 @@ All notable changes and dataset updates are recorded here.
 
 - Replace the archived monorepo link with package-owned documentation.
 
-## [1.0.0] - 2026-08-25
+## [1.0.0] - 2026-08-26
 
 ### Changed
 
@@ -129,5 +139,5 @@ The following initial scope is included in `v1.0.0`.
 - Add explicit Unicode and resource-budget evidence, concurrent metadata tests,
   and a clean advisory NilAway gate.
 
-[Unreleased]: https://github.com/faustbrian/go-international/compare/v1.0.0...HEAD
+[1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/faustbrian/go-international/releases/tag/v1.0.0

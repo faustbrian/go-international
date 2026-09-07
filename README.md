@@ -15,6 +15,10 @@ Countries, subdivisions, languages, locales, currencies, phone numbers, and
 postal values remain distinct types with strict parsing, explicit
 canonicalization, offline behavior, and versioned dataset provenance.
 
+```sh
+go get github.com/faustbrian/go-international@v1.1.0
+```
+
 ```go
 finland, err := country.Parse("FI")
 if err != nil { return err }
@@ -44,8 +48,36 @@ Shared construction, ownership, lifecycle, and composition expectations are in
 the versioned [Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/README.md)
 and its [Foundations family](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/design-language.md#package-families-and-selection).
 
-Requires Go 1.26.6 or newer. Licensed under MIT; dataset licenses remain with
-their upstream publishers.
+The module is stable and active and requires Go 1.26.6 or newer. Its APIs are
+stateless: callers retain all configuration, buffers, pgx maps, and validation
+contexts, and the module starts no background work. Parse and validation
+failures preserve `international.ErrInvalid` or
+`international.ErrResourceLimit`; unsupported wire formats preserve the
+calling adapter's `ErrUnsupportedFormat` sentinel.
+
+## Package map
+
+| Package | Use |
+| --- | --- |
+| root | Shared status, parse-error, resource-limit, normalization, and dataset-diff contracts |
+| `country`, `subdivision` | ISO 3166 and governed subdivision identities |
+| `language`, `locale` | ISO 639 and bounded BCP 47 identities |
+| `currency` | ISO 4217 alphabetic and numeric identities |
+| `phone`, `postal` | Bounded, privacy-safe phone and country-bound postal values |
+| `adapters/postgres` | pgx text registration on a caller-owned type map |
+| `adapters/validation` | Pure International rules for Golib Validation |
+| `adapters/wire` | Strict bounded JSON, XML, YAML, TOML, and MessagePack dispatch |
+| `internationaltest` | Test-only governed fixtures and assertions |
+
+The former `internationalpgx`, `internationalvalidation`, and
+`internationalwire` paths remain supported compatibility facades; new code
+should use the target-oriented adapters. See the
+[compiler-checked adapter example](adapter_successor_test.go) and the
+[migration guide](docs/migration.md).
+
+Licensed under MIT; dataset licenses remain with their upstream publishers.
+For help, see [Support](SUPPORT.md). Report vulnerabilities through the
+private process in [Security](SECURITY.md).
 
 ## Documentation
 

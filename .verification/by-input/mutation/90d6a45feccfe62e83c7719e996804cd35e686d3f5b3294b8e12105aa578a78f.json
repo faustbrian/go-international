@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-international",
+  "module": ".",
+  "package": "adapters/postgres",
+  "gate": "mutation",
+  "input_digest": "sha256:90d6a45feccfe62e83c7719e996804cd35e686d3f5b3294b8e12105aa578a78f",
+  "verifier_digest": "sha256:9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+  "result": "passed",
+  "report_digest": "sha256:386c2712a387b5fbc6e6b626e5eb9c7ca58290948f3fd4fa1fc695523cfd8bbb",
+  "environment": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "arm64",
+    "GOOS": "darwin",
+    "GOVERSION": "go1.26.6",
+    "gremlins_binary_sha256": "sha256:e05bf25d661b16ab96d6f2e17aed481d393930e0f24205cc341b010f887368a0"
+  },
+  "completed_at": "2026-09-07T08:01:15.225904Z"
+}

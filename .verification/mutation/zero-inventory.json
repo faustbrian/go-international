@@ -5,9 +5,41 @@
       "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
       "gremlins_version": "v0.6.0",
       "module_directory": ".",
+      "package_directory": "adapters/wire",
+      "reason": "The package contains only direct dispatch delegation and an immutable error initialization, so the complete enabled Gremlins operator set has no viable transformation.",
+      "source_digest": "bf0b072b7c49f2e1fff47b6bfd921c55c89545b137099431f207a65c577546d2"
+    },
+    {
+      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+      "gremlins_version": "v0.6.0",
+      "module_directory": ".",
+      "package_directory": "internal/wireadapter",
+      "reason": "The package dispatches through switch cases and direct codec calls that the complete enabled Gremlins operator set cannot transform; exhaustive format tests remain mandatory.",
+      "source_digest": "2917e0ad610bb17cc444d4953b2223a120d25c8bf8cc668cda4e12ce76ef13a7"
+    },
+    {
+      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+      "gremlins_version": "v0.6.0",
+      "module_directory": ".",
+      "package_directory": "internationalpgx",
+      "reason": "The deprecated package now contains only a direct delegation to the fully mutation-tested canonical PostgreSQL adapter, so the complete enabled Gremlins operator set has no viable transformation.",
+      "source_digest": "5ae0c411a5025a4efdada503eec2aecd906b4ccb539d9e632272fba8cd41a9fd"
+    },
+    {
+      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+      "gremlins_version": "v0.6.0",
+      "module_directory": ".",
+      "package_directory": "internationalvalidation",
+      "reason": "The deprecated package now contains only typed direct delegations to the fully mutation-tested canonical Validation adapter, so the complete enabled Gremlins operator set has no viable transformation.",
+      "source_digest": "93117e64019228685faf98503c793b31a057e23df5e5fa84608beb9510a59b7d"
+    },
+    {
+      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+      "gremlins_version": "v0.6.0",
+      "module_directory": ".",
       "package_directory": "internationalwire",
-      "reason": "The package dispatches through switch cases and direct codec calls, which the complete enabled Gremlins operator set cannot transform; exhaustive format tests remain mandatory.",
-      "source_digest": "58ee82e04deb8519e4e75bad902d7383677ec4c8a4103502906ba3ba0f540484"
+      "reason": "The package contains only direct dispatch delegation and an immutable error initialization, so the complete enabled Gremlins operator set has no viable transformation.",
+      "source_digest": "8945d4df5d01f4f10380242c9e47ca6c4419a2677649590dc41e422a3b765a83"
     }
   ]
 }
