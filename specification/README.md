@@ -21,6 +21,18 @@ claim.
 
 ## Upstream review history
 
+### 2026-09-09
+
+- The Unicode CLDR GitHub feed added the unrelated
+  `production/2026-09-08-1807z` snapshot. The feed mixes stable releases,
+  prereleases, and production snapshots, so exact-byte monitoring produced a
+  repository-wide failure without identifying a change to the selected CLDR
+  48.2 inputs.
+- Replace that noisy feed with Unicode's versioned CLDR 48 stable-distribution
+  record. The four exact CLDR 48.2 source payloads remain pinned and monitored,
+  and adopting a later stable CLDR release remains an explicit dataset review
+  rather than a gate on unrelated pull requests.
+
 ### 2026-09-03
 
 - The Unicode CLDR release feed added the `release-49-alpha2` prerelease,

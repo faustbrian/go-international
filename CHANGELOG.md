@@ -46,6 +46,9 @@ All notable changes and dataset updates are recorded here.
 
 ### Documentation
 
+- Replace noisy CLDR GitHub-feed monitoring with Unicode's versioned stable
+  distribution authority while retaining the four pinned CLDR 48.2 source
+  payloads and explicit dataset review policy.
 - Point ecosystem and package-family navigation at the immutable v1.4.0
   documentation set.
 - Record the behavior-neutral review of the CLDR 49 alpha 2 release feed while
