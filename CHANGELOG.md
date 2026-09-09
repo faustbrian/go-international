@@ -2,7 +2,7 @@
 
 All notable changes and dataset updates are recorded here.
 
-## [1.1.0] - Unreleased
+## [1.1.0] - 2026-09-09
 
 ### Added
 
@@ -139,5 +139,5 @@ The following initial scope is included in `v1.0.0`.
 - Add explicit Unicode and resource-budget evidence, concurrent metadata tests,
   and a clean advisory NilAway gate.
 
-[1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...HEAD
+[1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-international/releases/tag/v1.0.0
