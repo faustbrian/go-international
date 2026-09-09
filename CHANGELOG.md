@@ -2,7 +2,7 @@
 
 All notable changes and dataset updates are recorded here.
 
-## [1.1.0] - Unreleased
+## [1.1.0] - 2026-09-09
 
 ### Added
 
@@ -46,6 +46,9 @@ All notable changes and dataset updates are recorded here.
 
 ### Documentation
 
+- Replace noisy CLDR GitHub-feed monitoring with Unicode's versioned stable
+  distribution authority while retaining the four pinned CLDR 48.2 source
+  payloads and explicit dataset review policy.
 - Point ecosystem and package-family navigation at the immutable v1.4.0
   documentation set.
 - Record the behavior-neutral review of the CLDR 49 alpha 2 release feed while
@@ -139,5 +142,5 @@ The following initial scope is included in `v1.0.0`.
 - Add explicit Unicode and resource-budget evidence, concurrent metadata tests,
   and a clean advisory NilAway gate.
 
-[1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...HEAD
+[1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-international/releases/tag/v1.0.0
