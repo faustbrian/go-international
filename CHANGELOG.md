@@ -2,6 +2,12 @@
 
 All notable changes and dataset updates are recorded here.
 
+## [Unreleased]
+
+### Changed
+
+- Require Go 1.27.0 for the module and repository verification.
+
 ## [1.1.0] - 2026-09-09
 
 ### Added

@@ -135,7 +135,7 @@ These numbers are a reproducibility reference, not cross-hardware pass/fail
 thresholds. Compare regressions on the same Go version, architecture, and
 hardware.
 
-[Go 1.26.6](https://go.dev/doc/devel/release) is both the module minimum and
-the official stable release verified at implementation time. Workflow actions,
+At the time of the reference run, [Go 1.26.6](https://go.dev/doc/devel/release)
+was the module minimum and official stable release. Workflow actions,
 Go tools, module dependencies, dataset versions, source checksums, and
 generator identity are pinned.
