@@ -8,7 +8,7 @@ require (
 	github.com/faustbrian/go-wire v1.0.0
 	github.com/jackc/pgx/v5 v5.10.0
 	github.com/nyaruka/phonenumbers v1.8.1
-	golang.org/x/text v0.40.0
+	golang.org/x/text v0.41.0
 )
 
 require (
