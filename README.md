@@ -45,7 +45,7 @@ The requirement-to-test mapping, resource budgets, and local gate evidence are
 in the [verification report](docs/verification.md). Observable interpretations
 are recorded in the [specification decision register](docs/specification-decisions.md).
 Shared construction, ownership, lifecycle, and composition expectations are in
-the versioned [Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/README.md)
+the versioned [Golib ecosystem index](https://raw.githubusercontent.com/faustbrian/go-library-tools/531e4db50fd81a7201257a7b488a0cf22d333aca/docs/ecosystem/README.md)
 and its [Foundations family](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/design-language.md#package-families-and-selection).
 
 The module is stable and active and requires Go 1.27.0 or newer. Its APIs are
