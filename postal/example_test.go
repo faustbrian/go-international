@@ -3,8 +3,8 @@ package postal_test
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/postal"
+	"github.com/faustbrian/go-international/v2/country"
+	"github.com/faustbrian/go-international/v2/postal"
 )
 
 func Example() {

@@ -8,13 +8,50 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international"
-	successor "github.com/faustbrian/go-international/adapters/validation"
-	"github.com/faustbrian/go-international/country"
-	legacy "github.com/faustbrian/go-international/internationalvalidation"
-	"github.com/faustbrian/go-international/phone"
-	validation "github.com/faustbrian/go-validation"
+	international "github.com/faustbrian/go-international/v2"
+	successor "github.com/faustbrian/go-international/v2/adapters/validation"
+	"github.com/faustbrian/go-international/v2/country"
+	legacy "github.com/faustbrian/go-international/v2/internationalvalidation"
+	"github.com/faustbrian/go-international/v2/phone"
+	validation "github.com/faustbrian/go-validation/v2"
 )
+
+func TestValidationMajorNormalValues(t *testing.T) {
+	finland, err := country.Parse("FI")
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx, err := validation.NewContext(validation.DefaultLimits())
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, test := range []struct {
+		name, value         string
+		canonical, retained validation.Validator[string]
+	}{
+		{"country", "FI", successor.Country(), legacy.Country()},
+		{"country alpha-3", "FIN", successor.CountryAlpha3(), legacy.CountryAlpha3()},
+		{"country numeric", "246", successor.CountryNumeric(), legacy.CountryNumeric()},
+		{"subdivision", "FI-18", successor.Subdivision(), legacy.Subdivision()},
+		{"language", "fi", successor.Language(), legacy.Language()},
+		{"locale", "fi-FI", successor.Locale(), legacy.Locale()},
+		{"currency", "EUR", successor.Currency(), legacy.Currency()},
+		{"currency numeric", "978", successor.CurrencyNumeric(), legacy.CurrencyNumeric()},
+		{"calling code", "+358", successor.CallingCode(), legacy.CallingCode()},
+		{"phone", "040 123 4567", successor.Phone(phone.ParseOptions{RegionHint: finland}), legacy.Phone(phone.ParseOptions{RegionHint: finland})},
+		{"valid phone", "+16502530000", successor.ValidPhone(phone.ParseOptions{}), legacy.ValidPhone(phone.ParseOptions{})},
+		{"postal", "00100", successor.Postal(finland), legacy.Postal(finland)},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			for _, rule := range []validation.Validator[string]{test.canonical, test.retained} {
+				report := rule.Validate(ctx, test.value)
+				if err := report.Err(); err != nil || !report.Empty() || len(report.Violations()) != 0 {
+					t.Fatalf("normal value report = %#v, %v", report, err)
+				}
+			}
+		})
+	}
+}
 
 func TestFactoriesPreserveLegacyReports(t *testing.T) {
 	t.Parallel()

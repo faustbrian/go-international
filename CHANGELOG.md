@@ -7,6 +7,12 @@ All notable changes and dataset updates are recorded here.
 ### Changed
 
 - Require Go 1.27.0 for the module and repository verification.
+- Prepare the `github.com/faustbrian/go-international/v2` module on main and
+  adopt published `go-validation/v2` v2.0.0. Canonical and retained Validation
+  factories now return that major's nominal `Validator[string]` type.
+- Preserve the v1 API baseline and release history. Applications must migrate
+  International and Validation imports together; existing v1 consumers remain
+  on their independently selected v1 dependencies.
 
 ## [1.1.0] - 2026-09-09
 

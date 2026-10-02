@@ -1,6 +1,25 @@
 # Migration guide
 
-## Target-oriented adapters
+## Version 2 module adoption
+
+Use `github.com/faustbrian/go-international/v2` and its package paths together
+with `github.com/faustbrian/go-validation/v2` v2.0.0 on Go 1.27. The canonical
+`adapters/validation` and retained `internationalvalidation` factories both
+return Validation v2's `Validator[string]`; their synchronous successful-value
+behavior is unchanged.
+
+Update all International imports in one application composition. International
+v1 and v2 values are distinct nominal Go types, not interchangeable aliases.
+Keep consumers using the v1 Money, Localized, and Knapsack contracts on their
+existing International v1 dependency until those consumers deliberately adopt
+matching major identities. Tools' retained v1 fixture is likewise not evidence
+of v2 adoption. Select public versions from their stable tags and releases.
+
+The released v1 API bytes remain in `api/baseline.txt`; the current v2 API is
+maintained separately in `api/v2.txt`. No version-specific source directory or
+branch is required.
+
+## Target-oriented adapters within v1
 
 No call signature changes are required. Change the import path as follows:
 

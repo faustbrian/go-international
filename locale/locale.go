@@ -6,8 +6,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/go-international"
-	intlLanguage "github.com/faustbrian/go-international/language"
+	international "github.com/faustbrian/go-international/v2"
+	intlLanguage "github.com/faustbrian/go-international/v2/language"
 	textlanguage "golang.org/x/text/language"
 )
 
