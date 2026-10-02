@@ -102,12 +102,30 @@ func TestRunRejectsInvalidInvocationAndDependencyFailures(t *testing.T) {
 	if err := Run(nil); err == nil {
 		t.Fatal("Run(nil) succeeded")
 	}
-	if err := runContext(context.Background(), []string{"-country-output", "x"}, nil, nil); err == nil {
-		t.Fatal("runContext(nil fetch) succeeded")
-	}
-	if err := runContext(context.Background(), []string{"-country-output", "x"},
-		func(context.Context, string, string) ([]byte, error) { return nil, nil }, nil); err == nil {
-		t.Fatal("runContext(nil writer) succeeded")
+	for _, dependency := range []string{"both", "fetch", "writer"} {
+		t.Run(dependency, func(t *testing.T) {
+			fetchCalled, writeCalled := false, false
+			var fetch contextFetchFunc = func(context.Context, string, string) ([]byte, error) {
+				fetchCalled = true
+				return nil, nil
+			}
+			var write writeFileFunc = func(string, []byte, os.FileMode) error {
+				writeCalled = true
+				return nil
+			}
+			if dependency == "both" || dependency == "fetch" {
+				fetch = nil
+			}
+			if dependency == "both" || dependency == "writer" {
+				write = nil
+			}
+			if err := runContext(context.Background(), []string{"-country-output", "x"}, fetch, write); err == nil {
+				t.Fatal("runContext(missing collaborator) succeeded")
+			}
+			if fetchCalled || writeCalled {
+				t.Fatalf("missing collaborator reached work: fetch=%t write=%t", fetchCalled, writeCalled)
+			}
+		})
 	}
 	noopFetch := func(string, string) ([]byte, error) { return nil, errors.New("fetch") }
 	noopWrite := func(string, []byte, os.FileMode) error { return nil }
