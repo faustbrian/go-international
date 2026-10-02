@@ -3,7 +3,7 @@ package phone
 import (
 	"time"
 
-	international "github.com/faustbrian/go-international/v2"
+	international "github.com/faustbrian/go-international/v3"
 )
 
 // DatasetProvenance returns the pinned libphonenumber-compatible provenance.

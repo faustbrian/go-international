@@ -5,8 +5,15 @@ include real phone numbers, postal codes, credentials, or customer data.
 
 Parsers bound bytes, locale segments, Unicode normalization, extensions,
 metadata, and diagnostics. Contracts reject invalid UTF-8 rather than repairing
-it. Generated inputs are HTTPS-fetched, size-limited, checksum-pinned,
-deterministically transformed, license-reviewed, and drift-checked.
+it. Parse diagnostics retain only package-defined reason classifications;
+unrecognized caller-provided reasons and fixture classifications are replaced
+rather than echoed. Generated inputs are HTTPS-fetched, size-limited,
+checksum-pinned, deterministically transformed, license-reviewed, and
+drift-checked. Malformed dataset values and transport or response-body failure
+details are omitted from generator diagnostics, as are output-write failure
+details. The generation command passes interrupt cancellation through every
+dataset request in addition to its fixed HTTP timeout and checks cancellation
+before each generated output write.
 
 Threats considered include Unicode confusables and normalization mismatch,
 numeric ambiguity, regex denial of service, metadata poisoning, dependency

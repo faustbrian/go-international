@@ -2,6 +2,7 @@ package generate
 
 import (
 	"bytes"
+	"context"
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
@@ -29,6 +30,58 @@ func TestRegionParserRejectsMalformedSourcesAndRanges(t *testing.T) {
 		if _, err := expandCodeRange(token); err == nil {
 			t.Fatalf("expandCodeRange(%q) succeeded", token)
 		}
+	}
+}
+
+func TestGeneratorDiagnosticsDoNotEchoDatasetValues(t *testing.T) {
+	t.Parallel()
+
+	secret := strings.Repeat("customer@example.com", 1024)
+	xmlSecret := strings.Repeat("customer", 1024)
+	for name, generate := range map[string]func() error{
+		"XML structure": func() error {
+			_, err := parseRegionValidity(strings.NewReader("<root><region></" + xmlSecret + ">"))
+			return err
+		},
+		"country range": func() error {
+			_, err := expandCodeRange(secret)
+			return err
+		},
+		"numeric country code": func() error {
+			validity := `<supplementalData><idValidity><id type="region" idStatus="regular">AA</id></idValidity></supplementalData>`
+			mappings := `<supplementalData><codeMappings><territoryCodes type="AA" numeric="` + secret + `" alpha3="AAA"/></codeMappings></supplementalData>`
+			_, err := generateCountryData(strings.NewReader(validity), strings.NewReader(mappings))
+			return err
+		},
+		"subdivision range": func() error {
+			_, err := expandSubdivisionRange(secret)
+			return err
+		},
+		"current currency conflict": func() error {
+			current := `<ISO_4217 Pblshd="v"><CcyTbl>` +
+				`<CcyNtry><CcyNm>First</CcyNm><Ccy>CUS</Ccy><CcyNbr>001</CcyNbr><CcyMnrUnts>2</CcyMnrUnts></CcyNtry>` +
+				`<CcyNtry><CcyNm>Second</CcyNm><Ccy>CUS</Ccy><CcyNbr>002</CcyNbr><CcyMnrUnts>2</CcyMnrUnts></CcyNtry>` +
+				`</CcyTbl></ISO_4217>`
+			historic := `<ISO_4217 Pblshd="v"><HstrcCcyTbl></HstrcCcyTbl></ISO_4217>`
+			_, _, err := generateCurrencyData(strings.NewReader(current), strings.NewReader(historic))
+			return err
+		},
+	} {
+		name, generate := name, generate
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			err := generate()
+			if err == nil {
+				t.Fatal("malformed dataset value succeeded")
+			}
+			diagnostic := err.Error()
+			if strings.Contains(diagnostic, "customer") || strings.Contains(diagnostic, "CUS") {
+				t.Fatal("diagnostic echoed a dataset value")
+			}
+			if len(diagnostic) > 256 {
+				t.Fatalf("diagnostic length = %d, want <= 256", len(diagnostic))
+			}
+		})
 	}
 }
 
@@ -145,10 +198,10 @@ func TestSubdivisionHelpersRejectMalformedSourcesAndRanges(t *testing.T) {
 	}
 }
 
-type errorReader struct{}
+type errorReader struct{ err error }
 
-func (errorReader) Read([]byte) (int, error) { return 0, errors.New("read failure") }
-func (errorReader) Close() error             { return nil }
+func (reader errorReader) Read([]byte) (int, error) { return 0, reader.err }
+func (errorReader) Close() error                    { return nil }
 
 type roundTripper func(*http.Request) (*http.Response, error)
 
@@ -169,11 +222,12 @@ func (doer doerFunc) Do(request *http.Request) (*http.Response, error) {
 func TestDownloadTransportResultBoundary(t *testing.T) {
 	t.Parallel()
 
-	cause := errors.New("offline")
+	cause := errors.New("customer@example.com transport failure")
 	if _, err := download(doerFunc(func(*http.Request) (*http.Response, error) {
 		return nil, cause
-	}), "http://example.invalid", ""); !errors.Is(err, cause) {
-		t.Fatalf("download(transport failure) error = %v", err)
+	}), "http://example.invalid", ""); err == nil || errors.Is(err, cause) ||
+		strings.Contains(err.Error(), "customer@example.com") || len(err.Error()) > 256 {
+		t.Fatal("download(transport failure) returned unsafe error metadata")
 	}
 
 	payload := []byte("data")
@@ -186,6 +240,23 @@ func TestDownloadTransportResultBoundary(t *testing.T) {
 	}), "http://example.invalid", hex.EncodeToString(checksum[:]))
 	if err != nil || !bytes.Equal(actual, payload) {
 		t.Fatalf("download(success) = %q, %v", actual, err)
+	}
+}
+
+func TestDownloadPropagatesCallerCancellation(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	_, err := downloadContext(ctx, doerFunc(func(request *http.Request) (*http.Response, error) {
+		if !errors.Is(request.Context().Err(), context.Canceled) {
+			t.Fatalf("request context error = %v, want context.Canceled", request.Context().Err())
+		}
+		return nil, request.Context().Err()
+	}), "http://example.invalid", "")
+	if !errors.Is(err, context.Canceled) {
+		t.Fatalf("download() error = %v, want context.Canceled", err)
 	}
 }
 
@@ -205,10 +276,11 @@ func TestDownloadEnforcesTransportStatusSizeAndChecksum(t *testing.T) {
 		t.Fatal("transport error succeeded")
 	}
 	readFailed := &http.Client{Transport: roundTripper(func(*http.Request) (*http.Response, error) {
-		return &http.Response{StatusCode: http.StatusOK, Body: errorReader{}}, nil
+		return &http.Response{StatusCode: http.StatusOK, Body: errorReader{err: errors.New("customer@example.com body failure")}}, nil
 	})}
-	if _, err := download(readFailed, "http://invalid", ""); err == nil {
-		t.Fatal("read error succeeded")
+	if _, err := download(readFailed, "http://invalid", ""); err == nil ||
+		strings.Contains(err.Error(), "customer@example.com") || len(err.Error()) > 256 {
+		t.Fatal("read error returned unsafe metadata")
 	}
 	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		switch request.URL.Path {

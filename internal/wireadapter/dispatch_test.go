@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/faustbrian/go-international/v2/internal/wireadapter"
+	"github.com/faustbrian/go-international/v3/internal/wireadapter"
 	"github.com/faustbrian/go-wire"
 )
 

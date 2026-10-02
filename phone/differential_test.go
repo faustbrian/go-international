@@ -3,9 +3,9 @@ package phone_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v2/country"
-	"github.com/faustbrian/go-international/v2/internationaltest"
-	"github.com/faustbrian/go-international/v2/phone"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/internationaltest"
+	"github.com/faustbrian/go-international/v3/phone"
 	"github.com/nyaruka/phonenumbers"
 )
 

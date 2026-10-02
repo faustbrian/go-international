@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v2"
-	successor "github.com/faustbrian/go-international/v2/adapters/validation"
-	"github.com/faustbrian/go-international/v2/country"
-	legacy "github.com/faustbrian/go-international/v2/internationalvalidation"
-	"github.com/faustbrian/go-international/v2/phone"
+	international "github.com/faustbrian/go-international/v3"
+	successor "github.com/faustbrian/go-international/v3/adapters/validation"
+	"github.com/faustbrian/go-international/v3/country"
+	legacy "github.com/faustbrian/go-international/v3/internationalvalidation"
+	"github.com/faustbrian/go-international/v3/phone"
 	validation "github.com/faustbrian/go-validation/v2"
 )
 

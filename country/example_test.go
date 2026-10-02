@@ -3,7 +3,7 @@ package country_test
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/v2/country"
+	"github.com/faustbrian/go-international/v3/country"
 )
 
 func Example() {

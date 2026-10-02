@@ -1,8 +1,8 @@
 package locale
 
 import (
-	international "github.com/faustbrian/go-international/v2"
-	intlLanguage "github.com/faustbrian/go-international/v2/language"
+	international "github.com/faustbrian/go-international/v3"
+	intlLanguage "github.com/faustbrian/go-international/v3/language"
 )
 
 // DatasetProvenance returns the IANA and x/text parsing provenance.

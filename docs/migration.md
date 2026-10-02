@@ -1,8 +1,25 @@
 # Migration guide
 
+## Version 3 diagnostic redaction
+
+Use `github.com/faustbrian/go-international/v3` consistently across an
+application. Validation remains on published `go-validation/v2` v2.0.0.
+International v1, v2, and v3 values have distinct nominal Go identities.
+
+`NewParseError` retains only package-defined kind and reason classifications.
+Callers that supplied free-form diagnostic text must use their own explicitly
+redacted application errors; package parse failures still match
+`international.ErrInvalid` through `errors.Is`. `FormatFixtureError` replaces
+unrecognized fixture kinds with `value`.
+
+Released v1 and v2 API bytes remain in `api/baseline.txt` and `api/v2.txt`.
+The current v3 API is maintained separately in `api/v3.txt`; no
+version-specific source directory or branch is required.
+
 ## Version 2 module adoption
 
-Use `github.com/faustbrian/go-international/v2` and its package paths together
+The published v2 module uses `github.com/faustbrian/go-international/v2` and
+its package paths together
 with `github.com/faustbrian/go-validation/v2` v2.0.0 on Go 1.27. The canonical
 `adapters/validation` and retained `internationalvalidation` factories both
 return Validation v2's `Validator[string]`; their synchronous successful-value
@@ -15,8 +32,8 @@ existing International v1 dependency until those consumers deliberately adopt
 matching major identities. Tools' retained v1 fixture is likewise not evidence
 of v2 adoption. Select public versions from their stable tags and releases.
 
-The released v1 API bytes remain in `api/baseline.txt`; the current v2 API is
-maintained separately in `api/v2.txt`. No version-specific source directory or
+The released v1 API bytes remain in `api/baseline.txt`; the released v2 API is
+retained separately in `api/v2.txt`. No version-specific source directory or
 branch is required.
 
 ## Target-oriented adapters within v1

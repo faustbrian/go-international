@@ -1,4 +1,4 @@
-module github.com/faustbrian/go-international/v2
+module github.com/faustbrian/go-international/v3
 
 go 1.27.0
 

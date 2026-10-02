@@ -6,9 +6,9 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v2"
-	"github.com/faustbrian/go-international/v2/country"
-	"github.com/faustbrian/go-international/v2/postal"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/postal"
 )
 
 func TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims(t *testing.T) {
