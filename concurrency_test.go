@@ -5,13 +5,13 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/currency"
-	intlLanguage "github.com/faustbrian/go-international/language"
-	"github.com/faustbrian/go-international/locale"
-	"github.com/faustbrian/go-international/phone"
-	"github.com/faustbrian/go-international/postal"
-	"github.com/faustbrian/go-international/subdivision"
+	"github.com/faustbrian/go-international/v2/country"
+	"github.com/faustbrian/go-international/v2/currency"
+	intlLanguage "github.com/faustbrian/go-international/v2/language"
+	"github.com/faustbrian/go-international/v2/locale"
+	"github.com/faustbrian/go-international/v2/phone"
+	"github.com/faustbrian/go-international/v2/postal"
+	"github.com/faustbrian/go-international/v2/subdivision"
 	textlanguage "golang.org/x/text/language"
 )
 

@@ -4,9 +4,9 @@ import (
 	"database/sql/driver"
 	"strings"
 
-	international "github.com/faustbrian/go-international"
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/internal/codec"
+	international "github.com/faustbrian/go-international/v2"
+	"github.com/faustbrian/go-international/v2/country"
+	"github.com/faustbrian/go-international/v2/internal/codec"
 )
 
 const contextSeparator = "\t"

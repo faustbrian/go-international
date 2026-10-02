@@ -23,5 +23,9 @@ The `internationalpgx`, `internationalvalidation`, and `internationalwire`
 packages remain supported for the longer of 180 days after their
 target-oriented successors become public and two subsequently published stable
 root-module minor releases. Their `adapters/postgres`, `adapters/validation`,
-and `adapters/wire` successors are additive and preserve call signatures and
-observable behavior.
+and `adapters/wire` successors are additive within a module major and preserve
+call signatures and observable behavior.
+
+International v2 uses the official `/v2` module suffix and Validation v2 nominal
+types. Applications must select matching major identities explicitly; retaining
+the v1 releases and their API baseline does not migrate existing v1 consumers.

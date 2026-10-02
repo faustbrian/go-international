@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	international "github.com/faustbrian/go-international"
+	international "github.com/faustbrian/go-international/v2"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"
 )

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/go-international"
-	"github.com/faustbrian/go-international/country"
+	international "github.com/faustbrian/go-international/v2"
+	"github.com/faustbrian/go-international/v2/country"
 	"github.com/nyaruka/phonenumbers"
 )
 

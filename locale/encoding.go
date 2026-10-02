@@ -3,7 +3,7 @@ package locale
 import (
 	"database/sql/driver"
 
-	"github.com/faustbrian/go-international/internal/codec"
+	"github.com/faustbrian/go-international/v2/internal/codec"
 )
 
 // MarshalText encodes the preserved, standards-valid caller representation.

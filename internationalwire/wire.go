@@ -1,14 +1,14 @@
 // Package internationalwire provides bounded wire dispatch for structures
 // containing international scalar types.
 //
-// Deprecated: use github.com/faustbrian/go-international/adapters/wire. This
+// Deprecated: use github.com/faustbrian/go-international/v2/adapters/wire. This
 // package remains supported for the longer of 180 days after successor public
 // availability and two subsequently published stable root-module minor
 // releases.
 package internationalwire
 
 import (
-	"github.com/faustbrian/go-international/internal/wireadapter"
+	"github.com/faustbrian/go-international/v2/internal/wireadapter"
 	"github.com/faustbrian/go-wire"
 )
 

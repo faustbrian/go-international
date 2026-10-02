@@ -7,10 +7,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/faustbrian/go-international/internationalpgx"
-	"github.com/faustbrian/go-international/internationalvalidation"
-	"github.com/faustbrian/go-international/internationalwire"
-	validation "github.com/faustbrian/go-validation"
+	"github.com/faustbrian/go-international/v2/internationalpgx"
+	"github.com/faustbrian/go-international/v2/internationalvalidation"
+	"github.com/faustbrian/go-international/v2/internationalwire"
+	validation "github.com/faustbrian/go-validation/v2"
 	"github.com/faustbrian/go-wire"
 	"github.com/jackc/pgx/v5/pgtype"
 )

@@ -3,7 +3,7 @@
 package internationalwire
 
 import (
-	"github.com/faustbrian/go-international/internal/wireadapter"
+	"github.com/faustbrian/go-international/v2/internal/wireadapter"
 	"github.com/faustbrian/go-wire"
 )
 
