@@ -7,8 +7,9 @@ offline.
 
 Pinned inputs are CLDR 48.2 country/subdivision data, the IANA Language Subtag
 Registry dated 2026-06-14 through `x/text` v0.40.0, SIX ISO 4217 lists published
-2026-01-01, and `nyaruka/phonenumbers` v1.8.1 reconciled with libphonenumber
-v9.0.32. Postal syntax compatibility is pinned to `brick/postcode` 0.5.0 at
+2026-09-17 (List One) and 2026-01-01 (List Three), and `nyaruka/phonenumbers`
+v1.8.1 reconciled with libphonenumber v9.0.32. Postal syntax compatibility is
+pinned to `brick/postcode` 0.5.0 at
 commit `ead386982c31d825843e80ab86a1919eca1a1ad5`. See
 `THIRD_PARTY_NOTICES.md` for licenses.
 
@@ -17,7 +18,7 @@ commit `ead386982c31d825843e80ab86a1919eca1a1ad5`. See
 | Country | Unicode CLDR 48.2 `region.xml` plus `supplementalData.xml` | Unicode-3.0 | `e751e0eedd46b52c38f3cdb72b0fab61ac8b48e052e8b28ba74b6ac26c4c8cb1` plus `cd2af39aef82fdbfba4d591c87548203350538ad2318486d104b3b38b8d62f1a` |
 | Subdivision | Unicode CLDR 48.2 `subdivision.xml` plus English names | Unicode-3.0 | `93b12c9d55938266c96d44a7ccbb66800afeef4f9dd48b0dc16edfab89833d95` plus `997a14da1144bb66f36a829db1783afe41f7529e33070afbe964bdd8e387b1d2` |
 | Language and locale | IANA registry 2026-06-14 through `x/text` v0.40.0 | IANA terms; BSD-3-Clause | `be1fad86a99e3a932d07b80c9b3c271ec2381a5909ce22420144e5077ab0a43a` |
-| Currency | SIX ISO 4217 List One and List Three, 2026-01-01 | SIX ISO 4217 terms | `838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9` plus `98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387` |
+| Currency | SIX ISO 4217 List One 2026-09-17 and List Three 2026-01-01 | SIX ISO 4217 terms | `33139b438657d1cee116ba737807ea71d19d6de4b90f799a09c56f0cc6a1b0ff` plus `98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387` |
 | Phone | `nyaruka/phonenumbers` v1.8.1, upstream v9.0.32 | Apache-2.0 | `79ff27d5ee74c223c5851d9c562751bc21863358c1b7070d3ec2ab9b0cd6a070` |
 | Postal syntax | `brick/postcode` 0.5.0 formatter rules and upstream test vectors | MIT | commit `ead386982c31d825843e80ab86a1919eca1a1ad5`; deterministic Git archive `8a5dd1f053a349468ea5ee32e6cc55b8e5c9c2adbecbfd2f0ecadc0512e7232f` |
 

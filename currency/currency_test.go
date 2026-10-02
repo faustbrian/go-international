@@ -209,7 +209,7 @@ func TestCurrencyDatasetProvenanceIsOfficialAndPinned(t *testing.T) {
 	if err := provenance.Validate(); err != nil {
 		t.Fatalf("DatasetProvenance().Validate() error = %v", err)
 	}
-	if provenance.UpstreamVersion != "ISO 4217 2026-01-01" {
+	if provenance.UpstreamVersion != "ISO 4217 List One 2026-09-17; List Three 2026-01-01" {
 		t.Fatalf("version = %q", provenance.UpstreamVersion)
 	}
 }

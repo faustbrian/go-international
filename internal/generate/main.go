@@ -30,7 +30,7 @@ const (
 	cldrMappingsSHA256 = "cd2af39aef82fdbfba4d591c87548203350538ad2318486d104b3b38b8d62f1a"
 	sixCurrentURL      = "https://www.six-group.com/dam/download/financial-information/" +
 		"data-center/iso-currrency/lists/list-one.xml"
-	sixCurrentSHA256 = "838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9"
+	sixCurrentSHA256 = "33139b438657d1cee116ba737807ea71d19d6de4b90f799a09c56f0cc6a1b0ff"
 	sixHistoricURL   = "https://www.six-group.com/dam/download/financial-information/" +
 		"data-center/iso-currrency/lists/list-three.xml"
 	sixHistoricSHA256          = "98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387"
@@ -329,8 +329,9 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 	if err != nil {
 		return nil, "", err
 	}
-	if current.Published == "" || current.Published != historic.Published {
-		return nil, "", errors.New("currency lists have missing or mismatched publication dates")
+	// SIX publishes the current and historic lists independently.
+	if current.Published == "" || historic.Published == "" {
+		return nil, "", errors.New("currency lists have missing publication dates")
 	}
 
 	records := make(map[string]currencyRecord)

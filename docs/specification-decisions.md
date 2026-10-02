@@ -20,7 +20,7 @@ Additional authoritative source: `{"id":"cldr-region-mappings-48.2","version":"C
 
 Additional authoritative source: `{"id":"cldr-subdivision-names-48.2","version":"CLDR 48.2","url":"https://raw.githubusercontent.com/unicode-org/cldr/release-48-2/common/subdivisions/en.xml","specifications":["Unicode CLDR subdivision validity data"]}`
 
-Additional authoritative source: `{"id":"iso4217-list-one-2026-01-01","version":"2026-01-01","url":"https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml","specifications":["ISO 4217 currency lists"]}`
+Additional authoritative source: `{"id":"iso4217-list-one-2026-09-17","version":"2026-09-17","url":"https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml","specifications":["ISO 4217 currency lists"]}`
 
 Additional authoritative source: `{"id":"iso4217-list-three-2026-01-01","version":"2026-01-01","url":"https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml","specifications":["ISO 4217 currency lists"]}`
 
