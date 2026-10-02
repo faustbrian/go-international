@@ -95,7 +95,7 @@ func TestCurrencyHelpersRejectConflictsAndMalformedRows(t *testing.T) {
 		t.Fatalf("empty historic code was not ignored: %v", err)
 	}
 	for _, pair := range [][2]string{
-		{"<", historic("v", "")}, {current(active), "<"}, {current(active), historic("x", "")},
+		{"<", historic("v", "")}, {current(active), "<"}, {current(active), historic("", "")},
 		{current(`<CcyNtry><CcyNm>Bad</CcyNm><Ccy>BAD</Ccy><CcyNbr>999</CcyNbr><CcyMnrUnts>x</CcyMnrUnts></CcyNtry>`), historic("v", "")},
 		{current(active), historic("v", `<HstrcCcyNtry><CcyNm>Bad</CcyNm><Ccy>BAD</Ccy></HstrcCcyNtry>`)},
 		{current(active + strings.Replace(active, "978", "977", 1)), historic("v", "")},

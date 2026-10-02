@@ -6,6 +6,10 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Refresh the checksum-pinned SIX current currency list to 2026-09-17 while
+  retaining the historic list dated 2026-01-01. Generation accepts independently
+  published lists; currency codes, names, minor units and status remain unchanged.
+  Currency provenance records both publication dates and the refreshed checksum.
 - Require Go 1.27.0 for the module and repository verification.
 - Prepare the `github.com/faustbrian/go-international/v2` module on main and
   adopt published `go-validation/v2` v2.0.0. Canonical and retained Validation

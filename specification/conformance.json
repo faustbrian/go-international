@@ -3,7 +3,7 @@
   "decisions": [
     {
       "id": "INTERNATIONAL-DEC-001",
-      "authoritative_sources": ["cldr-region-48.2", "cldr-region-mappings-48.2", "cldr-subdivision-48.2", "cldr-subdivision-names-48.2", "iso4217-list-one-2026-01-01", "iso4217-list-three-2026-01-01"],
+      "authoritative_sources": ["cldr-region-48.2", "cldr-region-mappings-48.2", "cldr-subdivision-48.2", "cldr-subdivision-names-48.2", "iso4217-list-one-2026-09-17", "iso4217-list-three-2026-01-01"],
       "executable_evidence": ["TestHistoricalAndUserAssignedCodesRequireOptIn", "TestDeletedSubdivisionRequiresOptIn", "TestHistoricCurrenciesRequireOptInAndPreserveWithdrawalText", "TestReusedNumericCountryCodesPreserveTheirMappedIdentity"],
       "fixtures": ["internationaltest/vectors.go"],
       "fuzz": ["FuzzTextParsers"],
