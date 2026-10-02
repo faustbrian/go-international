@@ -3,8 +3,8 @@ package subdivision
 import (
 	"strings"
 
-	international "github.com/faustbrian/go-international/v2"
-	"github.com/faustbrian/go-international/v2/country"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
 )
 
 type record struct {

@@ -3,7 +3,7 @@
 package language
 
 import (
-	international "github.com/faustbrian/go-international/v2"
+	international "github.com/faustbrian/go-international/v3"
 	textlanguage "golang.org/x/text/language"
 	"golang.org/x/text/language/display"
 )

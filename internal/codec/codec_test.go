@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v2"
-	"github.com/faustbrian/go-international/v2/internal/codec"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/internal/codec"
 )
 
 func TestEncodedInputBoundsPrecedeParsing(t *testing.T) {

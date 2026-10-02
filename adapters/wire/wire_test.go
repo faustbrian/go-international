@@ -7,10 +7,10 @@ import (
 	"errors"
 	"testing"
 
-	successor "github.com/faustbrian/go-international/v2/adapters/wire"
-	"github.com/faustbrian/go-international/v2/country"
-	"github.com/faustbrian/go-international/v2/currency"
-	legacy "github.com/faustbrian/go-international/v2/internationalwire"
+	successor "github.com/faustbrian/go-international/v3/adapters/wire"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/currency"
+	legacy "github.com/faustbrian/go-international/v3/internationalwire"
 	"github.com/faustbrian/go-wire"
 )
 

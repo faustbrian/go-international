@@ -3,8 +3,8 @@ package phone_test
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/v2/country"
-	"github.com/faustbrian/go-international/v2/phone"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/phone"
 )
 
 func Example() {

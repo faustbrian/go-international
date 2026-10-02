@@ -16,9 +16,11 @@ as an explicitly advisory signal. The generated-data, provenance, and
 documentation checks remain package-owned operations in
 `verification/package.mk`; all other gates are owned by the shared tool.
 
-The generated-data operation acquires checksum-pinned authoritative inputs.
-Core identifier parsing, validation, lookup, and formatting remain offline and
-do not invoke the generator or perform network requests.
+The generated-data operation acquires checksum-pinned authoritative inputs. Its
+requests have a fixed timeout and inherit command-interrupt cancellation;
+cancellation is checked again before each generated output write. Core identifier
+parsing, validation, lookup, and formatting remain offline and do not invoke the
+generator or perform network requests.
 
 **Why was a lowercase code rejected?** Strict `Parse` preserves the boundary.
 Use an explicit canonicalization API only when your contract permits it.

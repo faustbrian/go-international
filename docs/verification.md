@@ -52,7 +52,7 @@ and semantic record counts are in `docs/provenance.md` and
 | Postal | 32 UTF-8 bytes before optional normalization |
 | Full Unicode lowercase | Caller-owned input and expanded-output byte limit |
 | Generic JSON and SQL adapters | 512 encoded bytes |
-| Parse diagnostics | 256 bytes, with UTF-8-safe truncation and no caller input |
+| Diagnostics | Bounded package-defined parse and fixture classifications; unrecognized caller values and malformed dataset values are replaced or omitted |
 | Dataset diff | 100,000 records per side |
 | Semantic snapshot | 2 MiB |
 | Generator source | 8 MiB per checksum-pinned input |

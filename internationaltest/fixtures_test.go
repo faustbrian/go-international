@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v2"
-	"github.com/faustbrian/go-international/v2/country"
-	"github.com/faustbrian/go-international/v2/internationaltest"
-	"github.com/faustbrian/go-international/v2/phone"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/internationaltest"
+	"github.com/faustbrian/go-international/v3/phone"
 )
 
 type recordingT struct{ message string }
@@ -42,6 +42,9 @@ func TestFormatFixtureErrorDoesNotExposeCause(t *testing.T) {
 	}
 	if got := internationaltest.FormatFixtureError("country", errors.New("secret rejected value")); got != "invalid country fixture" {
 		t.Fatalf("FormatFixtureError() = %q", got)
+	}
+	if got := internationaltest.FormatFixtureError("customer phone +358401234567", errors.New("rejected")); got != "invalid value fixture" {
+		t.Fatalf("FormatFixtureError(untrusted kind) = %q", got)
 	}
 }
 
