@@ -249,14 +249,28 @@ func TestDownloadPropagatesCallerCancellation(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
 
-	_, err := downloadContext(ctx, doerFunc(func(request *http.Request) (*http.Response, error) {
-		if !errors.Is(request.Context().Err(), context.Canceled) {
-			t.Fatalf("request context error = %v, want context.Canceled", request.Context().Err())
-		}
-		return nil, request.Context().Err()
-	}), "http://example.invalid", "")
-	if !errors.Is(err, context.Canceled) {
-		t.Fatalf("download() error = %v, want context.Canceled", err)
+	deadline, stop := context.WithTimeout(context.Background(), 0)
+	defer stop()
+
+	for _, expected := range []struct {
+		name string
+		ctx  context.Context
+		err  error
+	}{
+		{name: "cancellation", ctx: ctx, err: context.Canceled},
+		{name: "deadline", ctx: deadline, err: context.DeadlineExceeded},
+	} {
+		t.Run(expected.name, func(t *testing.T) {
+			_, err := downloadContext(expected.ctx, doerFunc(func(request *http.Request) (*http.Response, error) {
+				if !errors.Is(request.Context().Err(), expected.err) {
+					t.Fatalf("request context error = %v, want %v", request.Context().Err(), expected.err)
+				}
+				return nil, request.Context().Err()
+			}), "http://example.invalid", "")
+			if !errors.Is(err, expected.err) {
+				t.Fatalf("download error = %v, want %v", err, expected.err)
+			}
+		})
 	}
 }
 
