@@ -30,3 +30,4 @@
 
 - [Support policy](../SUPPORT.md)
 - [Security policy and private reporting](../SECURITY.md)
+- [Versioned threat model](threat-model.md)
