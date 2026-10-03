@@ -3,6 +3,9 @@
 Report vulnerabilities privately through GitHub security advisories. Do not
 include real phone numbers, postal codes, credentials, or customer data.
 
+The [versioned threat model](docs/threat-model.md) documents repository-specific
+trust boundaries, control ownership, and maintained contract limitations.
+
 Parsers bound bytes, locale segments, Unicode normalization, extensions,
 metadata, and diagnostics. Contracts reject invalid UTF-8 rather than repairing
 it. Parse diagnostics retain only package-defined reason classifications;
