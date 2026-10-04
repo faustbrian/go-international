@@ -3,7 +3,7 @@ module github.com/faustbrian/go-international/v3
 go 1.27.0
 
 require (
-	github.com/faustbrian/go-config v1.0.0
+	github.com/faustbrian/go-config v1.1.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
 	github.com/faustbrian/go-wire v1.0.0
 	github.com/jackc/pgx/v5 v5.10.0
