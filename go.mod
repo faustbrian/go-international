@@ -6,7 +6,7 @@ require (
 	github.com/faustbrian/go-config v1.1.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
 	github.com/faustbrian/go-wire v1.0.0
-	github.com/jackc/pgx/v5 v5.10.0
+	github.com/jackc/pgx/v5 v5.11.0
 	github.com/nyaruka/phonenumbers v1.8.1
 	golang.org/x/text v0.42.0
 )
