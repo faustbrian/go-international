@@ -4,6 +4,8 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+## [3.0.1] - 2026-10-04
+
 ### Changed
 
 - Adopt `golang.org/x/text` v0.42.0 and its selected `x/sync` v0.23.0
@@ -12,6 +14,15 @@ All notable changes and dataset updates are recorded here.
   characters. Parsing and stored values remain unchanged unless callers
   request normalization. Keep the unchanged language registry data while
   identifying the active parser version in language and locale provenance.
+- Adopt `go-config` v1.1.0, `go-wire` v1.0.1, and PGX v5.11.0 while
+  retaining scalar decoding and legacy and successor adapter contracts.
+  Applications implementing PGX `Rows` directly must provide its new
+  `TypeMap` method; International uses `pgtype` scalar maps instead.
+
+## [3.0.0] - 2026-10-02
+
+### Changed
+
 - Advance International to `/v3` for package-owned parse and fixture diagnostic
   classifications. Unrecognized caller kinds and reasons are replaced rather
   than echoed; callers requiring free-form diagnostics must own their redacted
@@ -19,6 +30,10 @@ All notable changes and dataset updates are recorded here.
 - Redact dataset, transport, response-body, and output-write failure details
   from generator diagnostics while preserving caller cancellation identity.
   Generator requests and output writes inherit command-interrupt cancellation.
+
+## [2.0.0] - 2026-10-02
+
+### Changed
 
 - Refresh the checksum-pinned SIX current currency list to 2026-09-17 while
   retaining the historic list dated 2026-01-01. Generation accepts independently
@@ -174,3 +189,7 @@ The following initial scope is included in `v1.0.0`.
 
 [1.1.0]: https://github.com/faustbrian/go-international/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-international/releases/tag/v1.0.0
+
+[3.0.1]: https://github.com/faustbrian/go-international/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/faustbrian/go-international/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.com/faustbrian/go-international/compare/v1.1.0...v2.0.0
