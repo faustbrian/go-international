@@ -16,10 +16,8 @@ postal values remain distinct types with strict parsing, explicit
 canonicalization, offline behavior, and versioned dataset provenance.
 
 ```sh
-go get github.com/faustbrian/go-international/v3@v3.0.0
+go get github.com/faustbrian/go-international/v3@v3.0.1
 ```
-
-The `/v3` installation command applies once v3.0.0 is published.
 
 ```go
 finland, err := country.Parse("FI")
