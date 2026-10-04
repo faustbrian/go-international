@@ -3,7 +3,7 @@ package country
 import (
 	"database/sql/driver"
 
-	"github.com/faustbrian/go-international/internal/codec"
+	"github.com/faustbrian/go-international/v3/internal/codec"
 )
 
 // MarshalText encodes a present country code as canonical alpha-2 text.

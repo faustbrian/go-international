@@ -3,7 +3,7 @@ package internationalwire_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/internationalwire"
+	"github.com/faustbrian/go-international/v3/internationalwire"
 	"github.com/faustbrian/go-wire"
 )
 

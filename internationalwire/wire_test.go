@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/currency"
-	"github.com/faustbrian/go-international/internationalwire"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/currency"
+	"github.com/faustbrian/go-international/v3/internationalwire"
 	"github.com/faustbrian/go-wire"
 )
 

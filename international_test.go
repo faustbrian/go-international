@@ -8,7 +8,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/go-international"
+	international "github.com/faustbrian/go-international/v3"
 )
 
 func TestStatusHasStableTextAndKnownSemantics(t *testing.T) {
@@ -237,6 +237,24 @@ func TestErrorDiagnosticsAreBoundedAndDoNotEchoInput(t *testing.T) {
 	}
 }
 
+func TestErrorDiagnosticsReplaceUnrecognizedReasons(t *testing.T) {
+	t.Parallel()
+
+	for _, reason := range []string{
+		"customer phone +358401234567",
+		"postal code 00100",
+		"invalid syntax: customer@example.com",
+	} {
+		diagnostic := international.NewParseError("phone", reason).Error()
+		if got, want := diagnostic, "international: invalid phone: invalid value"; got != want {
+			t.Fatalf("NewParseError(%q).Error() = %q, want %q", reason, got, want)
+		}
+		if strings.Contains(diagnostic, reason) {
+			t.Fatalf("diagnostic echoed unrecognized reason %q", reason)
+		}
+	}
+}
+
 func TestErrorDiagnosticsRejectUntrustedKindsWithoutPanicking(t *testing.T) {
 	t.Parallel()
 
@@ -250,17 +268,33 @@ func TestErrorDiagnosticsRejectUntrustedKindsWithoutPanicking(t *testing.T) {
 	}
 }
 
-func TestErrorDiagnosticsValidateKindCharacterBoundaries(t *testing.T) {
+func TestErrorDiagnosticsReplaceUnrecognizedKinds(t *testing.T) {
 	t.Parallel()
 
-	for _, kind := range []string{"a", "z", "a a", "a-a", strings.Repeat("a", 64)} {
+	for _, kind := range []string{"john doe", "customer phone", "helsinki postal"} {
+		diagnostic := international.NewParseError(kind, "invalid syntax").Error()
+		if got, want := diagnostic, "international: invalid value: invalid syntax"; got != want {
+			t.Fatalf("NewParseError(%q).Error() = %q, want %q", kind, got, want)
+		}
+	}
+}
+
+func TestErrorDiagnosticsPreserveOnlyRecognizedKinds(t *testing.T) {
+	t.Parallel()
+
+	for _, kind := range []string{
+		"calling code", "country alpha-3 code", "country code", "country numeric code",
+		"currency code", "currency numeric code", "language code", "locale", "locale tag",
+		"phone", "phone format", "phone number", "postal", "postal code", "postal normalization",
+		"status", "subdivision code", "text", "value",
+	} {
 		diagnostic := international.NewParseError(kind, "invalid syntax").Error()
 		if !strings.Contains(diagnostic, "invalid "+kind+":") {
 			t.Fatalf("valid kind %q replaced in %q", kind, diagnostic)
 		}
 	}
 
-	for _, kind := range []string{"", "!", "{", "A", strings.Repeat("a", 65), string([]byte{0xff})} {
+	for _, kind := range []string{"", "!", "{", "A", "a", "a a", "a-a", strings.Repeat("a", 64), string([]byte{0xff})} {
 		diagnostic := international.NewParseError(kind, "invalid syntax").Error()
 		if !strings.Contains(diagnostic, "invalid value:") {
 			t.Fatalf("invalid kind %q retained in %q", kind, diagnostic)

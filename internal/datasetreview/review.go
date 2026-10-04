@@ -9,10 +9,10 @@ import (
 	"fmt"
 	"io"
 
-	international "github.com/faustbrian/go-international"
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/currency"
-	"github.com/faustbrian/go-international/subdivision"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/currency"
+	"github.com/faustbrian/go-international/v3/subdivision"
 )
 
 const (

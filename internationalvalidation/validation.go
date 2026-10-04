@@ -1,17 +1,17 @@
 // Package internationalvalidation integrates strict international parsers with
 // validation without introducing validation dependencies into core types.
 //
-// Deprecated: use github.com/faustbrian/go-international/adapters/validation.
+// Deprecated: use github.com/faustbrian/go-international/v3/adapters/validation.
 // This package remains supported for the longer of 180 days after successor
 // public availability and two subsequently published stable root-module minor
 // releases.
 package internationalvalidation
 
 import (
-	adapter "github.com/faustbrian/go-international/adapters/validation"
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/phone"
-	validation "github.com/faustbrian/go-validation"
+	adapter "github.com/faustbrian/go-international/v3/adapters/validation"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/phone"
+	validation "github.com/faustbrian/go-validation/v2"
 )
 
 // Country returns a strict current ISO 3166-1 alpha-2 rule.

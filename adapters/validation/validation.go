@@ -5,15 +5,15 @@ package internationalvalidation
 import (
 	"errors"
 
-	international "github.com/faustbrian/go-international"
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/currency"
-	"github.com/faustbrian/go-international/language"
-	"github.com/faustbrian/go-international/locale"
-	"github.com/faustbrian/go-international/phone"
-	"github.com/faustbrian/go-international/postal"
-	"github.com/faustbrian/go-international/subdivision"
-	validation "github.com/faustbrian/go-validation"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/currency"
+	"github.com/faustbrian/go-international/v3/language"
+	"github.com/faustbrian/go-international/v3/locale"
+	"github.com/faustbrian/go-international/v3/phone"
+	"github.com/faustbrian/go-international/v3/postal"
+	"github.com/faustbrian/go-international/v3/subdivision"
+	validation "github.com/faustbrian/go-validation/v2"
 )
 
 // Country returns a country rule.

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/faustbrian/go-international/country"
+	"github.com/faustbrian/go-international/v3/country"
 	textlanguage "golang.org/x/text/language"
 )
 

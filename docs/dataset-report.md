@@ -6,6 +6,12 @@ This v1 baseline is the semantic projection in
 It contains no names or values outside compatibility-relevant generated
 metadata fingerprints.
 
+The 2026-10-02 source review adopts SIX List One dated 2026-09-17 while
+retaining List Three dated 2026-01-01. All 178 current currency records and the
+combined 307-record currency table are unchanged; the regenerated semantic
+snapshot remains byte-identical. Only source provenance and independent-date
+generation admission change.
+
 | Dataset | Total | Current | Historic/deleted | Other statuses |
 |---|---:|---:|---:|---:|
 | Country | 301 | 249 official | 12 deleted | 13 reserved, 26 user-assigned, 1 unknown |

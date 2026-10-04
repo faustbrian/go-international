@@ -3,7 +3,7 @@ package country
 import (
 	"testing"
 
-	international "github.com/faustbrian/go-international"
+	international "github.com/faustbrian/go-international/v3"
 )
 
 func TestUnknownFutureStatusIsRejected(t *testing.T) {

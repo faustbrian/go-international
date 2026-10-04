@@ -30,7 +30,7 @@ const (
 	cldrMappingsSHA256 = "cd2af39aef82fdbfba4d591c87548203350538ad2318486d104b3b38b8d62f1a"
 	sixCurrentURL      = "https://www.six-group.com/dam/download/financial-information/" +
 		"data-center/iso-currrency/lists/list-one.xml"
-	sixCurrentSHA256 = "838dfb991648cf36df939edd5fe3811737962b75a32252847d239cedd1e291c9"
+	sixCurrentSHA256 = "33139b438657d1cee116ba737807ea71d19d6de4b90f799a09c56f0cc6a1b0ff"
 	sixHistoricURL   = "https://www.six-group.com/dam/download/financial-information/" +
 		"data-center/iso-currrency/lists/list-three.xml"
 	sixHistoricSHA256          = "98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387"
@@ -108,11 +108,43 @@ type subdivisionName struct {
 
 // Run executes deterministic acquisition and generation for command arguments.
 func Run(arguments []string) error {
-	return run(arguments, fetchRemote, os.WriteFile)
+	return RunContext(context.Background(), arguments)
+}
+
+// RunContext executes deterministic acquisition and generation with caller-owned cancellation.
+func RunContext(ctx context.Context, arguments []string) error {
+	return runContext(ctx, arguments, fetchRemoteContext, os.WriteFile)
+}
+
+type contextFetchFunc func(context.Context, string, string) ([]byte, error)
+
+func runContext(ctx context.Context, arguments []string, fetch contextFetchFunc, writeFile writeFileFunc) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if fetch == nil || writeFile == nil {
+		return errors.New("generator dependencies are required")
+	}
+
+	return run(arguments, func(source, checksum string) ([]byte, error) {
+		if err := ctx.Err(); err != nil {
+			return nil, err
+		}
+		return fetch(ctx, source, checksum)
+	}, func(path string, data []byte, mode os.FileMode) error {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+		return writeFile(path, data, mode)
+	})
 }
 
 func fetchRemote(source, checksum string) ([]byte, error) {
-	return download(&http.Client{Timeout: remoteTimeout}, source, checksum)
+	return fetchRemoteContext(context.Background(), source, checksum)
+}
+
+func fetchRemoteContext(ctx context.Context, source, checksum string) ([]byte, error) {
+	return downloadContext(ctx, &http.Client{Timeout: remoteTimeout}, source, checksum)
 }
 
 type fetchFunc func(string, string) ([]byte, error)
@@ -150,7 +182,7 @@ func run(arguments []string, fetch fetchFunc, writeFile writeFileFunc) error {
 			return err
 		}
 		if err := writeFile(*countryOutput, generated, 0o644); err != nil {
-			return fmt.Errorf("write country data: %w", err)
+			return redactedOperationError("write country data", err)
 		}
 	}
 	if *currencyOutput != "" {
@@ -167,7 +199,7 @@ func run(arguments []string, fetch fetchFunc, writeFile writeFileFunc) error {
 			return err
 		}
 		if err := writeFile(*currencyOutput, generated, 0o644); err != nil {
-			return fmt.Errorf("write currency data: %w", err)
+			return redactedOperationError("write currency data", err)
 		}
 	}
 	if *subdivisionOutput != "" {
@@ -184,7 +216,7 @@ func run(arguments []string, fetch fetchFunc, writeFile writeFileFunc) error {
 			return err
 		}
 		if err := writeFile(*subdivisionOutput, generated, 0o644); err != nil {
-			return fmt.Errorf("write subdivision data: %w", err)
+			return redactedOperationError("write subdivision data", err)
 		}
 	}
 	return nil
@@ -193,7 +225,7 @@ func run(arguments []string, fetch fetchFunc, writeFile writeFileFunc) error {
 func parseRegionValidity(reader io.Reader) (map[string]string, error) {
 	var document validityDocument
 	if err := xml.NewDecoder(io.LimitReader(reader, maxSourceReadBytes)).Decode(&document); err != nil {
-		return nil, fmt.Errorf("decode CLDR region validity: %w", err)
+		return nil, errors.New("decode CLDR region validity")
 	}
 
 	statuses := make(map[string]string)
@@ -223,15 +255,15 @@ func expandCodeRange(token string) ([]string, error) {
 		return parts, nil
 	}
 	if len(parts) != 2 || !validAlpha2(parts[0]) || len(parts[1]) != 1 {
-		return nil, fmt.Errorf("invalid CLDR region range %q", token)
+		return nil, errors.New("invalid CLDR region range")
 	}
 	start := parts[0]
 	end := parts[1][0]
 	if end < start[1] {
-		return nil, fmt.Errorf("invalid CLDR region range %q", token)
+		return nil, errors.New("invalid CLDR region range")
 	}
 	if end < 'A' || end > 'Z' {
-		return nil, fmt.Errorf("invalid CLDR region range %q", token)
+		return nil, errors.New("invalid CLDR region range")
 	}
 	codes := []string{}
 	for current := start[1]; current <= end; current++ {
@@ -252,7 +284,7 @@ func generateCountryData(validityReader, mappingsReader io.Reader) ([]byte, erro
 
 	var mappings mappingDocument
 	if err := xml.NewDecoder(io.LimitReader(mappingsReader, maxSourceReadBytes)).Decode(&mappings); err != nil {
-		return nil, fmt.Errorf("decode CLDR territory mappings: %w", err)
+		return nil, errors.New("decode CLDR territory mappings")
 	}
 
 	records := make([]countryRecord, 0, len(mappings.Mappings))
@@ -262,7 +294,7 @@ func generateCountryData(validityReader, mappingsReader io.Reader) ([]byte, erro
 		}
 		numeric, err := strconv.Atoi(mapping.Numeric)
 		if err != nil {
-			return nil, fmt.Errorf("parse numeric country code: %w", err)
+			return nil, errors.New("invalid numeric country code")
 		}
 		status, include := generatedStatus(mapping.Alpha2, statuses[mapping.Alpha2])
 		if !include {
@@ -279,7 +311,7 @@ func generateCountryData(validityReader, mappingsReader io.Reader) ([]byte, erro
 	var output bytes.Buffer
 	output.WriteString("// Code generated by go generate; DO NOT EDIT.\n\n")
 	output.WriteString("package country\n\n")
-	output.WriteString("import international \"github.com/faustbrian/go-international\"\n\n")
+	output.WriteString("import international \"github.com/faustbrian/go-international/v3\"\n\n")
 	output.WriteString("var countryRecords = map[string]record{\n")
 	for _, record := range records {
 		fmt.Fprintf(&output, "\t%q: {alpha3: %q, numeric: %d, status: international.%s},\n",
@@ -329,8 +361,9 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 	if err != nil {
 		return nil, "", err
 	}
-	if current.Published == "" || current.Published != historic.Published {
-		return nil, "", errors.New("currency lists have missing or mismatched publication dates")
+	// SIX publishes the current and historic lists independently.
+	if current.Published == "" || historic.Published == "" {
+		return nil, "", errors.New("currency lists have missing publication dates")
 	}
 
 	records := make(map[string]currencyRecord)
@@ -343,7 +376,7 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 			return nil, "", err
 		}
 		if existing, exists := records[record.code]; exists && existing != record {
-			return nil, "", fmt.Errorf("conflicting current currency %s", record.code)
+			return nil, "", errors.New("conflicting current currency")
 		}
 		records[record.code] = record
 	}
@@ -357,7 +390,7 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 		}
 		if existing, exists := records[record.code]; exists {
 			if existing.numeric != record.numeric {
-				return nil, "", fmt.Errorf("conflicting historic currency %s", record.code)
+				return nil, "", errors.New("conflicting historic currency")
 			}
 			existing.history = mergeMetadata(existing.history, record.history)
 			records[record.code] = existing
@@ -375,7 +408,7 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 	var output bytes.Buffer
 	output.WriteString("// Code generated by go generate; DO NOT EDIT.\n\n")
 	output.WriteString("package currency\n\n")
-	output.WriteString("import international \"github.com/faustbrian/go-international\"\n\n")
+	output.WriteString("import international \"github.com/faustbrian/go-international/v3\"\n\n")
 	output.WriteString("var currencyRecords = map[string]record{\n")
 	for _, code := range codes {
 		record := records[code]
@@ -408,7 +441,7 @@ func generateCurrencyData(currentReader, historicReader io.Reader) ([]byte, stri
 func decodeCurrencyDocument(reader io.Reader) (currencyDocument, error) {
 	var document currencyDocument
 	if err := xml.NewDecoder(io.LimitReader(reader, maxSourceReadBytes)).Decode(&document); err != nil {
-		return currencyDocument{}, fmt.Errorf("decode ISO 4217 list: %w", err)
+		return currencyDocument{}, errors.New("decode ISO 4217 list")
 	}
 	return document, nil
 }
@@ -485,7 +518,7 @@ func generateSubdivisionData(validityReader, namesReader io.Reader) ([]byte, err
 
 	var namesDocument subdivisionNamesDocument
 	if err := xml.NewDecoder(io.LimitReader(namesReader, maxSourceReadBytes)).Decode(&namesDocument); err != nil {
-		return nil, fmt.Errorf("decode CLDR subdivision names: %w", err)
+		return nil, errors.New("decode CLDR subdivision names")
 	}
 	names := make(map[string]string)
 	for _, entry := range namesDocument.Names {
@@ -506,7 +539,7 @@ func generateSubdivisionData(validityReader, namesReader io.Reader) ([]byte, err
 	var output bytes.Buffer
 	output.WriteString("// Code generated by go generate; DO NOT EDIT.\n\n")
 	output.WriteString("package subdivision\n\n")
-	output.WriteString("import international \"github.com/faustbrian/go-international\"\n\n")
+	output.WriteString("import international \"github.com/faustbrian/go-international/v3\"\n\n")
 	output.WriteString("var subdivisionRecords = map[string]record{\n")
 	for _, id := range ids {
 		code := subdivisionCode(id)
@@ -546,7 +579,7 @@ func formatGenerated(kind string, source []byte) ([]byte, error) {
 func parseSubdivisionValidity(reader io.Reader) (map[string]string, error) {
 	var document validityDocument
 	if err := xml.NewDecoder(io.LimitReader(reader, maxSourceReadBytes)).Decode(&document); err != nil {
-		return nil, fmt.Errorf("decode CLDR subdivision validity: %w", err)
+		return nil, errors.New("decode CLDR subdivision validity")
 	}
 	statuses := make(map[string]string)
 	for _, entry := range document.IDs {
@@ -572,15 +605,15 @@ func expandSubdivisionRange(token string) ([]string, error) {
 		return parts, nil
 	}
 	if len(parts) != 2 || !validLowerAlphanumeric(parts[0]) || len(parts[1]) != 1 {
-		return nil, fmt.Errorf("invalid CLDR subdivision range %q", token)
+		return nil, errors.New("invalid CLDR subdivision range")
 	}
 	start := parts[0]
 	end := parts[1][0]
 	if end < start[len(start)-1] {
-		return nil, fmt.Errorf("invalid CLDR subdivision range %q", token)
+		return nil, errors.New("invalid CLDR subdivision range")
 	}
 	if !sameCharacterClass(start[len(start)-1], end) {
-		return nil, fmt.Errorf("invalid CLDR subdivision range %q", token)
+		return nil, errors.New("invalid CLDR subdivision range")
 	}
 	ids := []string{}
 	for current := start[len(start)-1]; current <= end; current++ {
@@ -648,16 +681,20 @@ type httpDoer interface {
 }
 
 func download(client httpDoer, source, expectedChecksum string) ([]byte, error) {
+	return downloadContext(context.Background(), client, source, expectedChecksum)
+}
+
+func downloadContext(ctx context.Context, client httpDoer, source, expectedChecksum string) ([]byte, error) {
 	if client == nil {
 		return nil, errors.New("download dataset: HTTP client is required")
 	}
-	request, err := http.NewRequestWithContext(context.Background(), http.MethodGet, source, nil)
+	request, err := http.NewRequestWithContext(ctx, http.MethodGet, source, nil)
 	if err != nil {
-		return nil, fmt.Errorf("create dataset request: %w", err)
+		return nil, errors.New("create dataset request")
 	}
 	response, err := client.Do(request)
 	if err != nil {
-		return nil, fmt.Errorf("download dataset: %w", err)
+		return nil, redactedOperationError("download dataset", err)
 	}
 	if response == nil {
 		return nil, errors.New("download dataset: empty HTTP response")
@@ -668,7 +705,7 @@ func download(client httpDoer, source, expectedChecksum string) ([]byte, error) 
 	}
 	payload, err := io.ReadAll(io.LimitReader(response.Body, maxSourceReadBytes))
 	if err != nil {
-		return nil, fmt.Errorf("read dataset: %w", err)
+		return nil, redactedOperationError("read dataset", err)
 	}
 	if len(payload) == maxSourceReadBytes {
 		return nil, errors.New("download dataset: source exceeds byte limit")
@@ -678,4 +715,15 @@ func download(client httpDoer, source, expectedChecksum string) ([]byte, error) 
 		return nil, errors.New("download dataset: checksum mismatch")
 	}
 	return payload, nil
+}
+
+func redactedOperationError(operation string, err error) error {
+	switch {
+	case errors.Is(err, context.Canceled):
+		return fmt.Errorf("%s: %w", operation, context.Canceled)
+	case errors.Is(err, context.DeadlineExceeded):
+		return fmt.Errorf("%s: %w", operation, context.DeadlineExceeded)
+	default:
+		return errors.New(operation)
+	}
 }

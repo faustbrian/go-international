@@ -6,8 +6,8 @@ package internationalwire_test
 import (
 	"testing"
 
-	successor "github.com/faustbrian/go-international/adapters/wire"
-	legacy "github.com/faustbrian/go-international/internationalwire"
+	successor "github.com/faustbrian/go-international/v3/adapters/wire"
+	legacy "github.com/faustbrian/go-international/v3/internationalwire"
 	"github.com/faustbrian/go-wire"
 )
 

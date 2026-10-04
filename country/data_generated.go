@@ -2,7 +2,7 @@
 
 package country
 
-import international "github.com/faustbrian/go-international"
+import international "github.com/faustbrian/go-international/v3"
 
 var countryRecords = map[string]record{
 	"AA": {alpha3: "AAA", numeric: 958, status: international.StatusReserved},

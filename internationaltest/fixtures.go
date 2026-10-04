@@ -3,16 +3,14 @@
 package internationaltest
 
 import (
-	"fmt"
-
-	international "github.com/faustbrian/go-international"
-	"github.com/faustbrian/go-international/country"
-	"github.com/faustbrian/go-international/currency"
-	"github.com/faustbrian/go-international/language"
-	"github.com/faustbrian/go-international/locale"
-	"github.com/faustbrian/go-international/phone"
-	"github.com/faustbrian/go-international/postal"
-	"github.com/faustbrian/go-international/subdivision"
+	international "github.com/faustbrian/go-international/v3"
+	"github.com/faustbrian/go-international/v3/country"
+	"github.com/faustbrian/go-international/v3/currency"
+	"github.com/faustbrian/go-international/v3/language"
+	"github.com/faustbrian/go-international/v3/locale"
+	"github.com/faustbrian/go-international/v3/phone"
+	"github.com/faustbrian/go-international/v3/postal"
+	"github.com/faustbrian/go-international/v3/subdivision"
 )
 
 // TestingT is the subset of testing.TB used by helpers.
@@ -102,5 +100,15 @@ func FormatFixtureError(kind string, err error) string {
 	if err == nil {
 		return ""
 	}
-	return fmt.Sprintf("invalid %s fixture", kind)
+	return "invalid " + fixtureKind(kind) + " fixture"
+}
+
+func fixtureKind(kind string) string {
+	switch kind {
+	case "country", "country alpha-3", "country numeric", "currency", "currency numeric",
+		"language", "locale", "phone", "postal", "subdivision":
+		return kind
+	default:
+		return "value"
+	}
 }

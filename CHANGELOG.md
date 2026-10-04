@@ -6,7 +6,25 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Advance International to `/v3` for package-owned parse and fixture diagnostic
+  classifications. Unrecognized caller kinds and reasons are replaced rather
+  than echoed; callers requiring free-form diagnostics must own their redacted
+  application errors. Preserve the published v1 and v2 API snapshots.
+- Redact dataset, transport, response-body, and output-write failure details
+  from generator diagnostics while preserving caller cancellation identity.
+  Generator requests and output writes inherit command-interrupt cancellation.
+
+- Refresh the checksum-pinned SIX current currency list to 2026-09-17 while
+  retaining the historic list dated 2026-01-01. Generation accepts independently
+  published lists; currency codes, names, minor units and status remain unchanged.
+  Currency provenance records both publication dates and the refreshed checksum.
 - Require Go 1.27.0 for the module and repository verification.
+- Prepare the `github.com/faustbrian/go-international/v2` module on main and
+  adopt published `go-validation/v2` v2.0.0. Canonical and retained Validation
+  factories now return that major's nominal `Validator[string]` type.
+- Preserve the v1 API baseline and release history. Applications must migrate
+  International and Validation imports together; existing v1 consumers remain
+  on their independently selected v1 dependencies.
 
 ## [1.1.0] - 2026-09-09
 

@@ -1,11 +1,23 @@
 package generate
 
 import (
+	"context"
 	"errors"
 	"os"
 	"strings"
 	"testing"
 )
+
+func TestRunContextStopsBeforeGenerationWhenCanceled(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	if err := RunContext(ctx, []string{"-country-output", "country.go"}); !errors.Is(err, context.Canceled) {
+		t.Fatalf("RunContext() error = %v, want context.Canceled", err)
+	}
+}
 
 func TestRunGeneratesEveryRequestedDatasetOffline(t *testing.T) {
 	t.Parallel()
@@ -18,8 +30,8 @@ func TestRunGeneratesEveryRequestedDatasetOffline(t *testing.T) {
 		cldrSubdivisionNamesURL:    `<ldml><localeDisplayNames><subdivisions><subdivision type="fi18">Uusimaa</subdivision></subdivisions></localeDisplayNames></ldml>`,
 	}
 	writes := map[string][]byte{}
-	err := run([]string{"-country-output", "country.go", "-currency-output", "currency.go", "-subdivision-output", "subdivision.go"},
-		func(source, _ string) ([]byte, error) { return []byte(sources[source]), nil },
+	err := runContext(context.Background(), []string{"-country-output", "country.go", "-currency-output", "currency.go", "-subdivision-output", "subdivision.go"},
+		func(_ context.Context, source, _ string) ([]byte, error) { return []byte(sources[source]), nil },
 		func(path string, data []byte, mode os.FileMode) error {
 			if mode != 0o644 {
 				t.Fatalf("mode = %v", mode)
@@ -37,10 +49,83 @@ func TestRunGeneratesEveryRequestedDatasetOffline(t *testing.T) {
 	}
 }
 
+func TestRunContextStopsBetweenDatasetRequests(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	calls := 0
+	err := runContext(ctx, []string{"-country-output", "country.go"},
+		func(_ context.Context, source, _ string) ([]byte, error) {
+			calls++
+			cancel()
+			return successfulSource(source), nil
+		},
+		func(string, []byte, os.FileMode) error { return nil },
+	)
+	if !errors.Is(err, context.Canceled) {
+		t.Fatalf("runContext() error = %v, want context.Canceled", err)
+	}
+	if calls != 1 {
+		t.Fatalf("fetch calls = %d, want 1", calls)
+	}
+}
+
+func TestRunContextStopsBeforeWritingCanceledGeneration(t *testing.T) {
+	t.Parallel()
+
+	ctx, cancel := context.WithCancel(context.Background())
+	calls := 0
+	writes := 0
+	err := runContext(ctx, []string{"-country-output", "country.go"},
+		func(_ context.Context, source, _ string) ([]byte, error) {
+			calls++
+			if calls == 2 {
+				cancel()
+			}
+			return successfulSource(source), nil
+		},
+		func(string, []byte, os.FileMode) error {
+			writes++
+			return nil
+		},
+	)
+	if !errors.Is(err, context.Canceled) {
+		t.Fatalf("runContext() error = %v, want context.Canceled", err)
+	}
+	if writes != 0 {
+		t.Fatalf("write calls = %d, want 0", writes)
+	}
+}
+
 func TestRunRejectsInvalidInvocationAndDependencyFailures(t *testing.T) {
 	t.Parallel()
 	if err := Run(nil); err == nil {
 		t.Fatal("Run(nil) succeeded")
+	}
+	for _, dependency := range []string{"both", "fetch", "writer"} {
+		t.Run(dependency, func(t *testing.T) {
+			fetchCalled, writeCalled := false, false
+			var fetch contextFetchFunc = func(context.Context, string, string) ([]byte, error) {
+				fetchCalled = true
+				return nil, nil
+			}
+			var write writeFileFunc = func(string, []byte, os.FileMode) error {
+				writeCalled = true
+				return nil
+			}
+			if dependency == "both" || dependency == "fetch" {
+				fetch = nil
+			}
+			if dependency == "both" || dependency == "writer" {
+				write = nil
+			}
+			if err := runContext(context.Background(), []string{"-country-output", "x"}, fetch, write); err == nil {
+				t.Fatal("runContext(missing collaborator) succeeded")
+			}
+			if fetchCalled || writeCalled {
+				t.Fatalf("missing collaborator reached work: fetch=%t write=%t", fetchCalled, writeCalled)
+			}
+		})
 	}
 	noopFetch := func(string, string) ([]byte, error) { return nil, errors.New("fetch") }
 	noopWrite := func(string, []byte, os.FileMode) error { return nil }
@@ -74,7 +159,7 @@ func TestRunRejectsInvalidInvocationAndDependencyFailures(t *testing.T) {
 			t.Fatalf("generation failure for %s succeeded", flagName)
 		}
 	}
-	writeFailure := func(string, []byte, os.FileMode) error { return errors.New("write") }
+	writeFailure := func(string, []byte, os.FileMode) error { return errors.New("customer@example.com write failure") }
 	validCountryFetch := func(source, _ string) ([]byte, error) {
 		if strings.Contains(source, "region.xml") {
 			return []byte(`<supplementalData><idValidity><id type="region" idStatus="regular">FI</id></idValidity></supplementalData>`), nil
@@ -83,10 +168,14 @@ func TestRunRejectsInvalidInvocationAndDependencyFailures(t *testing.T) {
 	}
 	if err := run([]string{"-country-output", "x"}, validCountryFetch, writeFailure); err == nil {
 		t.Fatal("write failure succeeded")
+	} else if strings.Contains(err.Error(), "customer@example.com") || len(err.Error()) > 256 {
+		t.Fatal("write failure returned unsafe metadata")
 	}
 	for _, flagName := range []string{"-currency-output", "-subdivision-output"} {
 		if err := run([]string{flagName, "x"}, func(source, _ string) ([]byte, error) { return successfulSource(source), nil }, writeFailure); err == nil {
 			t.Fatalf("write failure for %s succeeded", flagName)
+		} else if strings.Contains(err.Error(), "customer@example.com") || len(err.Error()) > 256 {
+			t.Fatalf("write failure for %s returned unsafe metadata", flagName)
 		}
 	}
 }
