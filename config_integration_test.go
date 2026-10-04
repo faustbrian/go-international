@@ -40,7 +40,8 @@ func TestGoConfigUsesStrictTextContracts(t *testing.T) {
 		t.Fatalf("decode.Into() error = %v", err)
 	}
 	if decoded.Country.String() != "FI" || decoded.Postal.Raw() != "00100" ||
-		decoded.Phone.E164() != "+16502530000" {
+		decoded.Phone.E164() != "+16502530000" ||
+		decoded.Language.String() != "fi" || decoded.Locale.String() != "fi-FI" {
 		t.Fatalf("decoded configuration = %#v", decoded)
 	}
 

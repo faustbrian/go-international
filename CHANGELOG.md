@@ -6,6 +6,12 @@ All notable changes and dataset updates are recorded here.
 
 ### Changed
 
+- Adopt `golang.org/x/text` v0.42.0 and its selected `x/sync` v0.23.0
+  dependency. Explicit postal NFC normalization now applies corrected
+  composition after Hangul, across intervening starters and for supplementary
+  characters. Parsing and stored values remain unchanged unless callers
+  request normalization. Keep the unchanged language registry data while
+  identifying the active parser version in language and locale provenance.
 - Advance International to `/v3` for package-owned parse and fixture diagnostic
   classifications. Unrecognized caller kinds and reasons are replaced rather
   than echoed; callers requiring free-form diagnostics must own their redacted
