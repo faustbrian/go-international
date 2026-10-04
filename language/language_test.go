@@ -96,7 +96,7 @@ func TestLanguageProvenanceIsPinnedToIANARegistry(t *testing.T) {
 	if err := provenance.Validate(); err != nil {
 		t.Fatalf("DatasetProvenance().Validate() error = %v", err)
 	}
-	if provenance.UpstreamVersion != "IANA registry 2026-06-14; x/text v0.40.0" {
+	if provenance.UpstreamVersion != "IANA registry 2026-06-14; x/text v0.42.0" {
 		t.Fatalf("version = %q", provenance.UpstreamVersion)
 	}
 }
