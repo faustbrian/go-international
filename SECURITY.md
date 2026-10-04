@@ -1,7 +1,15 @@
 # Security policy
 
-Report vulnerabilities privately through GitHub security advisories. Do not
-include real phone numbers, postal codes, credentials, or customer data.
+Report vulnerabilities through the
+[private GitHub security-advisory workflow](https://github.com/faustbrian/go-international/security/advisories/new).
+Do not include real phone numbers, postal codes, credentials, or customer data.
+
+Severity classification, acknowledgement and remediation targets, embargo
+handling, advisories, and coordinated releases follow the shared
+[ecosystem vulnerability-management policy](https://github.com/faustbrian/go-library-tools/blob/main/docs/ecosystem/security/vulnerability-management.md).
+
+The [versioned threat model](docs/threat-model.md) documents repository-specific
+trust boundaries, control ownership, and maintained contract limitations.
 
 Parsers bound bytes, locale segments, Unicode normalization, extensions,
 metadata, and diagnostics. Contracts reject invalid UTF-8 rather than repairing

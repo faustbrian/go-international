@@ -21,6 +21,39 @@ claim.
 
 ## Upstream review history
 
+### 2026-10-03
+
+- The IANA Language Subtag Registry advances its File-Date from 2026-08-08
+  to 2026-09-17 and adds `Naoero` as the primary description for region `NR`,
+  retaining `Nauru` as a secondary description. The
+  [official registration form](https://www.iana.org/assignments/lang-subtags-templates/NR.txt)
+  records the ISO 3166 English-name change effective 2026-08-26.
+- Reversing only that description addition and File-Date change reproduces the
+  previous full registry checksum
+  `be21e91b6851f750a7b1a687f11209d46ad5a8471d6b10a1efc8d1dac4c8a926`.
+  The reviewed current registry checksum is
+  `755fad43283be7b41ebe3c89ad054b6eaf928f404f9c0edb74799e0eab74beb1`;
+  language identifiers, aliases, preferred values, and region codes are unchanged.
+- This refresh changes monitoring metadata only. Runtime parsing and display
+  remain backed by pinned `x/text` v0.40.0. Its monitored language tables still
+  match `876a73fb8b8fffd239efa592ffdf903c25757b4d17b715fc80d7aee8db2b985e`;
+  runtime dataset provenance, dependencies, generated assets, and conformance
+  decisions are unchanged.
+- The libphonenumber release feed announces v9.0.39 and v9.0.40, published
+  after the original monitor adoption. Their
+  [official release notes](https://github.com/google/libphonenumber/blob/v9.0.40/release_notes.txt)
+  describe newer upstream numbering, formatting, and other metadata changes.
+  These releases are available but are not adopted by this monitoring refresh;
+  no conformance to their newer metadata is claimed.
+- The selected runtime remains `nyaruka/phonenumbers` v1.8.1 reconciled with
+  libphonenumber v9.0.32. Its monitored metadata remains 53,278 bytes with
+  checksum `5f819f3becbd7be4b90ffb3dbc273035e5432e9424b4dcba8d73c5a28ed2a2ee`.
+  Two current release-feed fetches matched at 13,819 bytes with checksum
+  `d16b96f4bbb69cbd0df752b5f8bc8f2eaa3547aa1d7eeef4af0392b9eeef0273`.
+  Historical feed bytes are unavailable, so this review does not certify every
+  historical Atom-field delta. The release-feed URL and change guard remain
+  intact; adopting newer runtime metadata requires a separate dataset review.
+
 ### 2026-09-09
 
 - The Unicode CLDR GitHub feed added the unrelated
