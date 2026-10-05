@@ -4,6 +4,12 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+### Changed
+
+- Adopt public `go-config/v2` v2.0.0 for configuration integration tests,
+  retaining strict scalar decoding and atomic validation assertions. No
+  International public API or production import changes.
+
 ## [3.0.1] - 2026-10-04
 
 ### Changed

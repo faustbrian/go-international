@@ -375,7 +375,7 @@
       "version": "3.0.1",
       "tag_prefix": "v",
       "owned_dependencies": [
-        "github.com/faustbrian/go-config",
+        "github.com/faustbrian/go-config/v2",
         "github.com/faustbrian/go-validation/v2",
         "github.com/faustbrian/go-wire"
       ],
