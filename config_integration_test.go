@@ -3,7 +3,7 @@ package international_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-config/decode"
+	"github.com/faustbrian/go-config/v2/decode"
 	"github.com/faustbrian/go-international/v3/country"
 	"github.com/faustbrian/go-international/v3/currency"
 	"github.com/faustbrian/go-international/v3/language"
