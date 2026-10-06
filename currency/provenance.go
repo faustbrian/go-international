@@ -3,7 +3,7 @@ package currency
 import (
 	"time"
 
-	international "github.com/faustbrian/go-international/v3"
+	international "github.com/faustbrian/go-international/v4"
 )
 
 // DatasetProvenance returns the pinned SIX List One and List Three provenance.

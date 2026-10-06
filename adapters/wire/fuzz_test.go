@@ -6,9 +6,9 @@ package internationalwire_test
 import (
 	"testing"
 
-	successor "github.com/faustbrian/go-international/v3/adapters/wire"
-	legacy "github.com/faustbrian/go-international/v3/internationalwire"
-	"github.com/faustbrian/go-wire"
+	successor "github.com/faustbrian/go-international/v4/adapters/wire"
+	legacy "github.com/faustbrian/go-international/v4/internationalwire"
+	"github.com/faustbrian/go-wire/v3"
 )
 
 func FuzzSuccessorWireDispatch(fuzzer *testing.F) {

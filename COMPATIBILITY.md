@@ -29,3 +29,9 @@ call signatures and observable behavior.
 International v2 uses the official `/v2` module suffix and Validation v2 nominal
 types. Applications must select matching major identities explicitly; retaining
 the v1 releases and their API baseline does not migrate existing v1 consumers.
+
+International v4 uses `/v4` and Wire v3's `/v3` nominal types in both public
+wire paths. All International scalar identities move with that module major;
+Validation remains on `/v2`. Earlier releases and their API snapshots remain
+available. See [the migration guide](docs/migration.md) before combining major
+identities in an application.

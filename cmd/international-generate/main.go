@@ -7,7 +7,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/faustbrian/go-international/v3/internal/generate"
+	"github.com/faustbrian/go-international/v4/internal/generate"
 )
 
 func main() {

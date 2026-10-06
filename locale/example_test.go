@@ -3,7 +3,7 @@ package locale_test
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/v3/locale"
+	"github.com/faustbrian/go-international/v4/locale"
 )
 
 func Example() {

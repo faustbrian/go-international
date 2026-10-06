@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v3"
+	international "github.com/faustbrian/go-international/v4"
 	"github.com/nyaruka/phonenumbers"
 )
 

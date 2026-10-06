@@ -1,5 +1,43 @@
 # Migration guide
 
+## Version 4 Wire adoption
+
+Use `github.com/faustbrian/go-international/v4` and all of its package paths
+together with public `github.com/faustbrian/go-wire/v3` v3.0.0 on Go 1.27.
+Both `adapters/wire` and the retained `internationalwire` facade now accept
+Wire v3's nominal `Format` type and return that major's categorized codec
+errors. Update Wire imports, `errors.Is` sentinels, and `errors.As` targets
+together; Wire v1, v2, and v3 identities are not interchangeable.
+
+International v4 values also have distinct nominal identities from earlier
+majors, including PostgreSQL and Validation adapter inputs. Validation remains
+on public `/v2` v2.0.0; Config remains on public `/v2` v2.0.0 for the tested
+configuration composition. Consumers pinned to earlier International majors
+must retain them until their composition deliberately migrates.
+
+The five supported formats, ordinary strict scalar round-trip fixtures, and
+explicit SOAP/CBOR/BSON/unknown-format rejection remain supported. This major
+intentionally inherits Wire v3's safer MessagePack defaults: aggregate-value
+and key-comparison-work limits can reject payloads accepted by older Wire
+versions even when byte, per-container, and depth limits are satisfied. Those
+admission failures match `wire.ErrSizeLimit`, carry `wire.ErrorKindSizeLimit`,
+and leave the decode target unchanged. Wire v3 also corrects YAML block and
+folded scalar handling; applications must not rely on earlier misparsed values
+or assume every previously accepted input or serialized byte sequence is
+unchanged. Both canonical and facade paths retain the producer's safe defaults.
+Wire's codec errors retain classification through `errors.Is` and `errors.As`
+while rendering privacy-safe messages rather than underlying diagnostic text.
+International's unsupported-format sentinels retain their message and separate
+facade/canonical replacement behavior.
+
+Canonical and facade package suffixes remain available within `/v4`. The
+documented facade support window remains the longer of 180 days after public
+successor availability and two subsequently published stable root-module minor
+releases; adopting a major does not remove the facades. Released API snapshots
+in `api/baseline.txt`, `api/v2.txt`, and `api/v3.txt` remain unchanged; the
+current major uses `api/v4.txt`. No version-specific source directory or branch
+is required.
+
 ## Version 3 diagnostic redaction
 
 Use `github.com/faustbrian/go-international/v3` consistently across an
@@ -13,7 +51,7 @@ redacted application errors; package parse failures still match
 unrecognized fixture kinds with `value`.
 
 Released v1 and v2 API bytes remain in `api/baseline.txt` and `api/v2.txt`.
-The current v3 API is maintained separately in `api/v3.txt`; no
+The released v3 API is retained separately in `api/v3.txt`; no
 version-specific source directory or branch is required.
 
 ## Version 2 module adoption
