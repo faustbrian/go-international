@@ -4,6 +4,8 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+## [3.0.2] - 2026-10-06
+
 ### Changed
 
 - Adopt public `go-config/v2` v2.0.0 for configuration integration tests,
