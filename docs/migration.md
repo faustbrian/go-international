@@ -22,7 +22,7 @@ and key-comparison-work limits can reject payloads accepted by older Wire
 versions even when byte, per-container, and depth limits are satisfied. Those
 admission failures match `wire.ErrSizeLimit`, carry `wire.ErrorKindSizeLimit`,
 and leave the decode target unchanged. Wire v3 also corrects YAML block and
-folded scalar handling; applications must not rely on earlier misparsed values
+folded scalar handling; applications must not rely on earlier incorrectly parsed values
 or assume every previously accepted input or serialized byte sequence is
 unchanged. Both canonical and facade paths retain the producer's safe defaults.
 Wire's codec errors retain classification through `errors.Is` and `errors.As`
