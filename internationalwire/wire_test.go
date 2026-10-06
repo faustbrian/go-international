@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/faustbrian/go-international/v3/country"
-	"github.com/faustbrian/go-international/v3/currency"
-	"github.com/faustbrian/go-international/v3/internationalwire"
-	"github.com/faustbrian/go-wire"
+	"github.com/faustbrian/go-international/v4/country"
+	"github.com/faustbrian/go-international/v4/currency"
+	"github.com/faustbrian/go-international/v4/internationalwire"
+	"github.com/faustbrian/go-wire/v3"
 )
 
 type document struct {

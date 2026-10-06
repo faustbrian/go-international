@@ -3,7 +3,7 @@ package currency_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v3/currency"
+	"github.com/faustbrian/go-international/v4/currency"
 	textcurrency "golang.org/x/text/currency"
 )
 

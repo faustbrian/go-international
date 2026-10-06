@@ -3,7 +3,7 @@ package currency
 import (
 	"testing"
 
-	international "github.com/faustbrian/go-international/v3"
+	international "github.com/faustbrian/go-international/v4"
 )
 
 func TestInternalCodeAndNumericBoundaries(t *testing.T) {

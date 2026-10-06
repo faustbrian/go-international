@@ -3,8 +3,8 @@ package internationalwire_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v3/internationalwire"
-	"github.com/faustbrian/go-wire"
+	"github.com/faustbrian/go-international/v4/internationalwire"
+	"github.com/faustbrian/go-wire/v3"
 )
 
 func FuzzLegacyWireDispatch(fuzzer *testing.F) {

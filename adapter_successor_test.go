@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"testing"
 
-	internationalpostgres "github.com/faustbrian/go-international/v3/adapters/postgres"
-	internationalvalidation "github.com/faustbrian/go-international/v3/adapters/validation"
-	internationalwire "github.com/faustbrian/go-international/v3/adapters/wire"
-	"github.com/faustbrian/go-international/v3/country"
+	internationalpostgres "github.com/faustbrian/go-international/v4/adapters/postgres"
+	internationalvalidation "github.com/faustbrian/go-international/v4/adapters/validation"
+	internationalwire "github.com/faustbrian/go-international/v4/adapters/wire"
+	"github.com/faustbrian/go-international/v4/country"
 	validation "github.com/faustbrian/go-validation/v2"
-	"github.com/faustbrian/go-wire"
+	"github.com/faustbrian/go-wire/v3"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 

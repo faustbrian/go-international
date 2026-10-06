@@ -5,14 +5,14 @@ package internationalvalidation
 import (
 	"errors"
 
-	international "github.com/faustbrian/go-international/v3"
-	"github.com/faustbrian/go-international/v3/country"
-	"github.com/faustbrian/go-international/v3/currency"
-	"github.com/faustbrian/go-international/v3/language"
-	"github.com/faustbrian/go-international/v3/locale"
-	"github.com/faustbrian/go-international/v3/phone"
-	"github.com/faustbrian/go-international/v3/postal"
-	"github.com/faustbrian/go-international/v3/subdivision"
+	international "github.com/faustbrian/go-international/v4"
+	"github.com/faustbrian/go-international/v4/country"
+	"github.com/faustbrian/go-international/v4/currency"
+	"github.com/faustbrian/go-international/v4/language"
+	"github.com/faustbrian/go-international/v4/locale"
+	"github.com/faustbrian/go-international/v4/phone"
+	"github.com/faustbrian/go-international/v4/postal"
+	"github.com/faustbrian/go-international/v4/subdivision"
 	validation "github.com/faustbrian/go-validation/v2"
 )
 

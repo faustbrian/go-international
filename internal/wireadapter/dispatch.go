@@ -3,12 +3,12 @@
 package wireadapter
 
 import (
-	"github.com/faustbrian/go-wire"
-	"github.com/faustbrian/go-wire/jsonwire"
-	"github.com/faustbrian/go-wire/msgpackwire"
-	"github.com/faustbrian/go-wire/tomlwire"
-	"github.com/faustbrian/go-wire/xmlwire"
-	"github.com/faustbrian/go-wire/yamlwire"
+	"github.com/faustbrian/go-wire/v3"
+	"github.com/faustbrian/go-wire/v3/jsonwire"
+	"github.com/faustbrian/go-wire/v3/msgpackwire"
+	"github.com/faustbrian/go-wire/v3/tomlwire"
+	"github.com/faustbrian/go-wire/v3/xmlwire"
+	"github.com/faustbrian/go-wire/v3/yamlwire"
 )
 
 // UnsupportedFormatError is the immutable initial identity shared by public

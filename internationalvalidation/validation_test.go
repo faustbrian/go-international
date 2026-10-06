@@ -5,10 +5,10 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v3"
-	"github.com/faustbrian/go-international/v3/country"
-	"github.com/faustbrian/go-international/v3/internationalvalidation"
-	"github.com/faustbrian/go-international/v3/phone"
+	international "github.com/faustbrian/go-international/v4"
+	"github.com/faustbrian/go-international/v4/country"
+	"github.com/faustbrian/go-international/v4/internationalvalidation"
+	"github.com/faustbrian/go-international/v4/phone"
 	validation "github.com/faustbrian/go-validation/v2"
 )
 

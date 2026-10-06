@@ -3,10 +3,10 @@ package international_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v3/country"
-	"github.com/faustbrian/go-international/v3/currency"
-	"github.com/faustbrian/go-international/v3/locale"
-	"github.com/faustbrian/go-international/v3/phone"
+	"github.com/faustbrian/go-international/v4/country"
+	"github.com/faustbrian/go-international/v4/currency"
+	"github.com/faustbrian/go-international/v4/locale"
+	"github.com/faustbrian/go-international/v4/phone"
 )
 
 func BenchmarkCountryLookup(benchmark *testing.B) {

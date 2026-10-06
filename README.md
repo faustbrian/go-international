@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-international/v3.svg)](https://pkg.go.dev/github.com/faustbrian/go-international/v3)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-international/v4.svg)](https://pkg.go.dev/github.com/faustbrian/go-international/v4)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-international?sort=semver)](https://github.com/faustbrian/go-international/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -16,7 +16,7 @@ postal values remain distinct types with strict parsing, explicit
 canonicalization, offline behavior, and versioned dataset provenance.
 
 ```sh
-go get github.com/faustbrian/go-international/v3@v3.0.1
+go get github.com/faustbrian/go-international/v4@v4.0.0
 ```
 
 ```go

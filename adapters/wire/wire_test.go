@@ -7,11 +7,11 @@ import (
 	"errors"
 	"testing"
 
-	successor "github.com/faustbrian/go-international/v3/adapters/wire"
-	"github.com/faustbrian/go-international/v3/country"
-	"github.com/faustbrian/go-international/v3/currency"
-	legacy "github.com/faustbrian/go-international/v3/internationalwire"
-	"github.com/faustbrian/go-wire"
+	successor "github.com/faustbrian/go-international/v4/adapters/wire"
+	"github.com/faustbrian/go-international/v4/country"
+	"github.com/faustbrian/go-international/v4/currency"
+	legacy "github.com/faustbrian/go-international/v4/internationalwire"
+	"github.com/faustbrian/go-wire/v3"
 )
 
 type document struct {

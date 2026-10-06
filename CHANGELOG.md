@@ -4,6 +4,20 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+### Changed
+
+- Advance International to `/v4` and adopt public `go-wire/v3` v3.0.0.
+  Canonical and retained wire adapters now use Wire v3's nominal `Format` and
+  categorized codec errors; migrate International and Wire imports together.
+  Preserve ordinary supported-format round-trip fixtures, unsupported-format
+  sentinel behavior, and the facade lifecycle. Intentionally inherit Wire v3's
+  MessagePack aggregate-value and key-comparison-work admission limits and
+  corrected YAML block/folded scalar handling; older accepted inputs or bytes
+  are not universally preserved. MessagePack work-limit rejection matches
+  `wire.ErrSizeLimit` and leaves the decode target unchanged. Wire codec
+  messages are privacy-safe while their categories remain inspectable through
+  `errors.Is` and `errors.As`. Preserve released v1, v2, and v3 API snapshots.
+
 ## [3.0.2] - 2026-10-06
 
 ### Changed
