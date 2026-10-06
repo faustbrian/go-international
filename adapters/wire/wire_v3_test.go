@@ -18,7 +18,6 @@ func TestWireV3ErrorCategoriesReachBothPublicPaths(t *testing.T) {
 
 	for name, decode := range map[string]func(wire.Format, []byte, any) error{
 		"canonical": successor.Decode,
-		//lint:ignore SA1019 This reference verifies the supported deprecated facade's Wire identity.
 		//nolint:staticcheck // Compatibility coverage requires the supported deprecated facade.
 		"facade": legacy.Decode,
 	} {
@@ -69,7 +68,6 @@ func TestMessagePackWorkLimitPreservesTargetsThroughBothPublicPaths(t *testing.T
 
 	for name, decode := range map[string]func(wire.Format, []byte, any) error{
 		"canonical": successor.Decode,
-		//lint:ignore SA1019 This reference verifies the supported deprecated facade's admission contract.
 		//nolint:staticcheck // Compatibility coverage requires the supported deprecated facade.
 		"facade": legacy.Decode,
 	} {
