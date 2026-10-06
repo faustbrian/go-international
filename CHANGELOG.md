@@ -4,6 +4,8 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+## [4.0.0] - 2026-10-06
+
 ### Changed
 
 - Advance International to `/v4` and adopt public `go-wire/v3` v3.0.0.
