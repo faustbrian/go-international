@@ -4,6 +4,11 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+### Documentation
+
+- Record the current v4 security boundary and version-specific diagnostic and
+  generator hardening disposition while preserving the historical v3 model.
+
 ## [4.0.0] - 2026-10-06
 
 ### Changed
