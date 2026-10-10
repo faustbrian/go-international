@@ -21,6 +21,29 @@ claim.
 
 ## Upstream review history
 
+### 2026-10-10
+
+- All 17 declared authorities were fetched. Fifteen retain their recorded
+  checksums, including every pinned runtime dataset, registry and RFC source.
+  The review date is refreshed after this acquisition; its 30-day interval
+  and every authority URL remain unchanged.
+- The libphonenumber release feed now announces v9.0.41. Its
+  [official release notes](https://github.com/google/libphonenumber/blob/v9.0.41/release_notes.txt)
+  describe newer phone, short-number, carrier and time-zone metadata.
+  Two fetches agree at 13,807 bytes with checksum
+  `077317918aa9cb8db32c07ca68f838ea080a3418d2d2fa930893f0efa288e2ce`.
+- The Brick postcode tags feed now includes 0.6.3. The
+  [upstream comparison](https://github.com/brick/postcode/compare/0.6.2...0.6.3)
+  adds Nigerian 11-character postcode support and PHP CI updates.
+  Two fetches agree at 5,269 bytes with checksum
+  `969f8c30c89858393f2d83564c42b07d6d8a6a3b29ee68281009674c825a8f94`.
+- These feed changes update monitoring only. The accepted phone metadata
+  remains v9.0.32 through nyaruka/phonenumbers v1.8.1, and the postal peer
+  remains the exact Brick 0.5.0 commit. No newer-profile conformance is
+  claimed; adopting newer datasets requires a separate compatibility review.
+  Historical Atom bytes are unavailable, so not every historical feed-field
+  delta is certified by this refresh.
+
 ### 2026-10-03
 
 - The IANA Language Subtag Registry advances its File-Date from 2026-08-08

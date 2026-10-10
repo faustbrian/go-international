@@ -13,6 +13,6 @@ iso4217-list-three-2026-01-01	2026-01-01	https://www.six-group.com/dam/download/
 iso4217-list-one-updates	reviewed 2026-10-02	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml	33139b438657d1cee116ba737807ea71d19d6de4b90f799a09c56f0cc6a1b0ff	pinned
 iso4217-list-three-updates	reviewed 2026-09-03	https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-three.xml	98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387	pinned
 libphonenumber-metadata	v9.0.32 via nyaruka/phonenumbers v1.8.1	https://raw.githubusercontent.com/nyaruka/phonenumbers/v1.8.1/data/metadata.xml.gz	5f819f3becbd7be4b90ffb3dbc273035e5432e9424b4dcba8d73c5a28ed2a2ee	pinned
-libphonenumber-releases	current	https://github.com/google/libphonenumber/releases.atom	d16b96f4bbb69cbd0df752b5f8bc8f2eaa3547aa1d7eeef4af0392b9eeef0273	pinned
+libphonenumber-releases	current	https://github.com/google/libphonenumber/releases.atom	077317918aa9cb8db32c07ca68f838ea080a3418d2d2fa930893f0efa288e2ce	pinned
 brick-postcode-0.5.0	0.5.0 at ead386982c31d825843e80ab86a1919eca1a1ad5	https://raw.githubusercontent.com/brick/postcode/ead386982c31d825843e80ab86a1919eca1a1ad5/composer.json	3f13da8f299f6418bf0a410d73dee6253794bee750a85ec62b5d463c87128032	pinned
-brick-postcode-releases	current	https://github.com/brick/postcode/tags.atom	f7781dd3dbbd35ae54942a85ff193debe6bafeaa4ae2f9fbb8e4c8ccc634d29a	pinned
+brick-postcode-releases	current	https://github.com/brick/postcode/tags.atom	969f8c30c89858393f2d83564c42b07d6d8a6a3b29ee68281009674c825a8f94	pinned
