@@ -2,8 +2,8 @@
 
 ## Before Editing
 
-1. Read [`AGENTS.md`](AGENTS.md) and the affected module's goals and docs.
-2. Run `make inventory` and the narrow baseline gate for the module.
+1. Read [`AGENTS.md`](AGENTS.md) and the affected package's documentation.
+2. Run ordinary Go tests for the affected package before editing.
 3. Identify owned dependencies and reverse dependants in `modules.json`.
 4. Preserve unrelated work and generated/corpus provenance.
 
@@ -25,7 +25,7 @@ and its machine bindings, and complete the Specification Decisions section of
 the pull request template. An unresolved interpretation or stale source pin is
 release-blocking; peer behavior cannot silently select policy.
 
-Required mutation gates must finish with zero surviving viable mutants.
+Selected mutation gates must finish with zero surviving viable mutants.
 
 Do not add package-local workflows, permanent replacements, machine-specific
 paths, bypass flags, broad mutation exclusions, or aggregate quality metrics
@@ -33,25 +33,41 @@ that hide a failing package.
 
 ## Verification
 
-Install the exact `golib` release declared by `.golib.yaml`; the Make targets
-below are intentionally thin wrappers around that CLI. CI installs and verifies
-the same release automatically.
-
-Run during development:
+Use Go 1.27.2 for development and CI; the public minimum remains Go 1.27.0.
+An ordinary checkout is sufficient for package tests and a focused active fuzz
+smoke; no sibling repository or goal ledger is required:
 
 ```bash
-make inventory
-make check
+go test ./...
+go test . -run '^$' -fuzz '^FuzzTextParsers$' -fuzztime=2s
 ```
 
-Before submitting a repository-wide change:
+Select the native target and package affected by your change. Ordinary Go tests
+already exercise deterministic fuzz seeds. For shared checks, install the
+public `golib` v2.1.0 release declared in `.golib.yaml` and verify its checksums;
+CI uses that same release, not a sibling source build:
 
 ```bash
+make check
 make ci
 ```
 
-The full scheduled and release gate is `make ci`. Report every unavailable or
-failing command; do not describe partial results as release-ready.
+Both commands use bounded local checks. Optional focused mutation analysis can
+select a single affected package, for example:
+
+```bash
+golib mutation --module . --package ./locale
+```
+
+Use `make check-full` for explicit full assurance, including the online
+specification check, full configured fuzz budgets, API compatibility, conformance,
+authoritative generated-data drift and provenance. Dataset changes must also
+follow [the update procedure](docs/dataset-report.md) and
+[source provenance](docs/provenance.md); core identifier operations stay offline.
+Run affected adapter integration and direct consumer tests for public-contract
+changes. Scheduled and release qualification retain their full selected gates;
+report unavailable or failing checks without claiming release readiness.
+CI/configuration-only changes do not require a library release.
 
 ## Adding A Module
 

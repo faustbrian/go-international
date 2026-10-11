@@ -7,8 +7,10 @@ hardware. Phone parsing is intentionally heavier than fixed-code lookup.
 
 ## Local verification
 
-`make ci` delegates to the pinned shared tool, which reproduces every blocking
-release gate: formatting, vet, Staticcheck, strict golangci-lint, tests, exact
+`make check` and `make ci` use the public pinned verifier's bounded local route.
+Use `make check-full` for full assurance and online specification checks. Its
+selected gates include formatting, vet, Staticcheck, strict golangci-lint,
+tests, exact
 coverage, race detection, generated-data drift, provenance and license checks,
 reviewed mutation checks, documentation, API compatibility, vulnerability
 scanning, workflow linting, fuzz smoke, and benchmarks. NilAway runs separately

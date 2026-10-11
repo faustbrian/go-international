@@ -89,13 +89,15 @@ dependency direction.
 
 ## Quality and performance report
 
-The local release contract is `make ci`; advisory nilness analysis is owned by
-the shared tool. The gates include formatting, vet, Staticcheck, strict
+Ordinary `make check` and `make ci` use bounded local checks. The explicit full
+assurance contract is `make check-full`, including online specification checks;
+advisory nilness analysis is owned by the shared tool. Full selected gates
+include formatting, vet, Staticcheck, strict
 golangci-lint, the full suite, exact production coverage, race, deterministic
 generation, semantic drift, provenance and licenses, mutation analysis,
 documentation, API compatibility, vulnerability scanning, workflow linting,
-five fuzz-smoke targets, and benchmarks. NilAway currently completes without
-findings.
+the seven configured native fuzz targets, and benchmarks. NilAway currently
+completes without findings.
 
 ### Mutation report
 

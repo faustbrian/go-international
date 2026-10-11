@@ -32,7 +32,7 @@ of the verified source payloads concatenated in the table order. The generator
 also pins and verifies each individual payload checksum before parsing it.
 
 Generated tables never update at runtime. An update must change pinned URLs or
-checksums, run the generated-data operation through `make ci`, review the
+checksums, run the generated-data operation through `make check-full`, review the
 semantic `DatasetDiff`, verify licenses, run `make check`, and record versions
 and compatibility effects in
 `CHANGELOG.md`. Additions are normally compatible. Removals, status changes,

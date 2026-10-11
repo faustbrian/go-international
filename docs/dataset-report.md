@@ -30,7 +30,7 @@ then run:
 ```sh
 make -f verification/package.mk dataset-diff BEFORE=/tmp/international-before.json \
   AFTER=data/dataset-snapshot.json
-make ci
+make check-full
 ```
 
 Attach the JSON diff to review and update this report and `CHANGELOG.md` with
