@@ -27,7 +27,7 @@ release-blocking; peer behavior cannot silently select policy.
 
 Selected mutation gates must finish with zero surviving viable mutants.
 
-Do not add package-local workflows, permanent replacements, machine-specific
+Do not fork shared verification workflows, add permanent replacements, machine-specific
 paths, bypass flags, broad mutation exclusions, or aggregate quality metrics
 that hide a failing package.
 
@@ -65,9 +65,32 @@ authoritative generated-data drift and provenance. Dataset changes must also
 follow [the update procedure](docs/dataset-report.md) and
 [source provenance](docs/provenance.md); core identifier operations stay offline.
 Run affected adapter integration and direct consumer tests for public-contract
-changes. Scheduled and release qualification retain their full selected gates;
-report unavailable or failing checks without claiming release readiness.
+changes. Explicit full and release qualification retain their selected gates;
+ordinary scheduled shared CI remains bounded.
+Report unavailable or failing checks without claiming release readiness.
 CI/configuration-only changes do not require a library release.
+
+## Selected Monthly Assurance
+
+The owner-level [selected-assurance caller](.github/workflows/assurance.yml) is
+configured for main only, on day 4 of each month at 05:41 UTC. It selects one
+of the 7 current declared root-module fuzz targets using the shared UTC-week
+rotation, with 30 seconds of active exploration. The selected risks are:
+identifier, phone/postal and persistence parsing, generated XML/ranges,
+and legacy/successor wire dispatch parity.
+These targets use in-process inputs; they do not update upstream datasets or
+qualify generated-data drift/provenance, full conformance or direct consumers.
+
+Base-free ordinary checks execute deterministic seeds, not active exploration;
+committed-range CI selects affected active smoke. Manual assurance requires an
+exact anchored selector from the root fuzz operation in `.golib.yaml`, for
+example `^FuzzTextParsers$`.
+Empty, unknown and malformed selections refuse. The shared job bounds setup
+and execution to ten minutes, active workers and CPU to two, owned memory to
+2 GiB, native output to 1 MiB and private-cache lifetime. Failure, cancellation,
+exhausted budgets and cleanup refusal remain attributable failures. This lane
+does not run mutation or replace Required, original full fuzz budgets,
+explicit `make check-full`, or relevant release qualification.
 
 ## Adding A Module
 
