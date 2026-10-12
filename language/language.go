@@ -1,5 +1,7 @@
-// Package language provides strict ISO 639 identifiers backed by the IANA
-// Language Subtag Registry through a pinned golang.org/x/text release.
+// Package language provides ISO 639 identifiers through pinned x/text registry
+// data. Use Parse for the canonical lowercase identity; ParseISO3 is a separate
+// provider conversion with deprecated-spelling limitations described below.
+// Name supplies presentation metadata, not negotiation or locale detection.
 package language
 
 import (
@@ -8,9 +10,11 @@ import (
 	"golang.org/x/text/language/display"
 )
 
-// Code is an immutable canonical ISO 639 language identifier. Its zero value
-// is absent. Two-letter identifiers are preferred where an ISO 639-1 mapping
-// exists.
+// Code stores an ISO 639 language identifier; its zero value is absent. Parse
+// produces canonical spelling, preferring two letters where a mapping exists.
+// ParseISO3 can instead produce a deprecated provider spelling that Parse rejects.
+// Encoders preserve that spelling rather than canonicalizing it, so a successful
+// encode need not round-trip through strict text, JSON or SQL decoding.
 type Code struct{ value string }
 
 // Parse accepts a canonical lowercase ISO identifier. It requires ISO 639-1
@@ -33,7 +37,11 @@ func Parse(input string) (Code, error) {
 	return Code{value: input}, nil
 }
 
-// ParseISO3 converts a canonical lowercase ISO 639 three-letter identifier.
+// ParseISO3 accepts a lowercase three-letter identifier recognized by the pinned
+// x/text ParseBase provider and returns Base.String spelling. Unlike Parse, it
+// does not additionally reject DeprecatedBase canonicalization differences: for
+// example, "heb" yields "iw", which Parse and default persistence decoding reject.
+// This is an existing provider-conversion limitation, not a canonicality guarantee.
 func ParseISO3(input string) (Code, error) {
 	if !validLowerAlpha(input, 3) {
 		return Code{}, international.NewParseError("language code", "invalid ISO 639 three-letter identifier")
@@ -45,7 +53,8 @@ func ParseISO3(input string) (Code, error) {
 	return Code{value: base.String()}, nil
 }
 
-// String returns the canonical identifier or empty string for the zero value.
+// String returns the stored identifier spelling, or empty for absence. ParseISO3
+// may have stored a deprecated spelling rather than Parse's canonical identity.
 func (code Code) String() string { return code.value }
 
 // IsZero reports whether the code represents an absent value.

@@ -24,17 +24,24 @@ const (
 
 // Snapshot is the compatibility-relevant projection of every generated table.
 type Snapshot struct {
-	Schema      int                    `json:"schema"`
-	Country     []international.Record `json:"country"`
+	// Schema selects the supported snapshot representation.
+	Schema int `json:"schema"`
+	// Country contains sorted country record projections.
+	Country []international.Record `json:"country"`
+	// Subdivision contains sorted subdivision record projections.
 	Subdivision []international.Record `json:"subdivision"`
-	Currency    []international.Record `json:"currency"`
+	// Currency contains sorted currency record projections.
+	Currency []international.Record `json:"currency"`
 }
 
 // Report classifies semantic changes independently for each generated dataset.
 type Report struct {
-	Country     international.DatasetDiff `json:"country"`
+	// Country classifies changes between the country projections.
+	Country international.DatasetDiff `json:"country"`
+	// Subdivision classifies changes between the subdivision projections.
 	Subdivision international.DatasetDiff `json:"subdivision"`
-	Currency    international.DatasetDiff `json:"currency"`
+	// Currency classifies changes between the currency projections.
+	Currency international.DatasetDiff `json:"currency"`
 }
 
 // Current returns a fresh snapshot of the compiled generated tables.
@@ -47,7 +54,8 @@ func Current() Snapshot {
 	}
 }
 
-// Encode writes a validated snapshot as deterministic indented JSON.
+// Encode validates before writing deterministic indented JSON to a borrowed
+// writer. It does not close the writer or roll back bytes after a write error.
 func Encode(writer io.Writer, snapshot Snapshot) error {
 	if writer == nil {
 		return fmt.Errorf("%w: snapshot writer is required", international.ErrInvalidDataset)
@@ -64,7 +72,9 @@ func Encode(writer io.Writer, snapshot Snapshot) error {
 	return nil
 }
 
-// Decode reads one bounded, strict snapshot document.
+// Decode reads one bounded document from a borrowed reader without closing it.
+// Unknown fields, trailing data, unsupported schemas and invalid record ordering
+// or fingerprints fail; successful slices belong to the decoded snapshot.
 func Decode(reader io.Reader) (Snapshot, error) {
 	if reader == nil {
 		return Snapshot{}, fmt.Errorf("%w: snapshot reader is required", international.ErrInvalidDataset)

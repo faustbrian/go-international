@@ -40,7 +40,9 @@ func Encode(format wire.Format, value any, unsupported error) ([]byte, error) {
 	}
 }
 
-// Decode dispatches to the bounded strict default profile for supported formats.
+// Decode delegates admission and target mutation to the selected codec. Keeping
+// this dispatch shared preserves legacy/successor behavior while the borrowed
+// unsupported error honors each public package's independently replaceable variable.
 func Decode(format wire.Format, payload []byte, target any, unsupported error) error {
 	switch format {
 	case wire.FormatJSON:

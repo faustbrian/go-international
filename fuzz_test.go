@@ -14,6 +14,9 @@ import (
 	"github.com/faustbrian/go-international/v4/subdivision"
 )
 
+// FuzzTextParsers exercises strict scalar entrypoints with arbitrary strings and
+// confusable, malformed UTF-8 and over-budget seeds. It checks panic resilience;
+// acceptance and canonicality assertions belong to the family tests.
 func FuzzTextParsers(fuzzer *testing.F) {
 	for _, seed := range []string{
 		"FI", "fi", "fi-FI", "EUR", "FI-18", "\xff", "",
@@ -39,6 +42,9 @@ func FuzzTextParsers(fuzzer *testing.F) {
 	})
 }
 
+// FuzzPhoneAndPostalBoundedParsing exercises arbitrary number/postal strings and
+// normalization only after successful postal admission. It is a panic-resilience
+// target, not a validity, delivery or normalization-correctness oracle.
 func FuzzPhoneAndPostalBoundedParsing(fuzzer *testing.F) {
 	fuzzer.Add("+16502530000", "00100")
 	fuzzer.Add("\xff", "\xff")
@@ -55,6 +61,9 @@ func FuzzPhoneAndPostalBoundedParsing(fuzzer *testing.F) {
 	})
 }
 
+// FuzzPersistenceDecoders feeds arbitrary bytes through text and JSON scalar
+// decoding, including null seeds. It checks panic resilience, not round-trip or
+// receiver-rollback invariants; encoding_roundtrip_test.go owns those assertions.
 func FuzzPersistenceDecoders(fuzzer *testing.F) {
 	fuzzer.Add([]byte(`"FI"`))
 	fuzzer.Add([]byte("null"))

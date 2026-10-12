@@ -28,6 +28,7 @@ type Numeric struct {
 
 // ParseOptions controls opt-in acceptance of withdrawn identifiers.
 type ParseOptions struct {
+	// AllowHistoric admits withdrawn identifiers without selecting a historical epoch.
 	AllowHistoric bool
 }
 
@@ -144,8 +145,9 @@ func (code Code) Name() string {
 // Status returns whether the identifier is current or historic.
 func (code Code) Status() international.Status { return currencyRecords[code.value].status }
 
-// WithdrawalDate returns the unmodified SIX date only when every listed entity
-// shares one date. Use WithdrawalDates when entity dates differ.
+// WithdrawalDate returns source date text only for a historic currency with
+// exactly one stored history projection. Multiple projections return empty,
+// even when their dates match; use WithdrawalDates to inspect all projections.
 func (code Code) WithdrawalDate() string {
 	if code.Status() != international.StatusHistoric {
 		return ""
@@ -157,8 +159,9 @@ func (code Code) WithdrawalDate() string {
 	return dates[0]
 }
 
-// WithdrawalDates returns independent unmodified SIX date values. Multiple
-// dates mean the currency was withdrawn at different times by listed entities.
+// WithdrawalDates returns a fresh slice of source date text, one entry per
+// history projection. Dates are not deduplicated or parsed as calendar dates;
+// nil means no history is stored.
 func (code Code) WithdrawalDates() []string {
 	history := code.History()
 	if len(history) == 0 {
@@ -173,7 +176,9 @@ func (code Code) WithdrawalDates() []string {
 
 // HistoricMetadata preserves one authoritative List Three row projection.
 type HistoricMetadata struct {
-	Name           string
+	// Name preserves the SIX currency name for this history projection.
+	Name string
+	// WithdrawalDate preserves source date text, which need not be a full calendar date.
 	WithdrawalDate string
 }
 

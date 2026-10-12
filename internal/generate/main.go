@@ -111,7 +111,10 @@ func Run(arguments []string) error {
 	return RunContext(context.Background(), arguments)
 }
 
-// RunContext executes deterministic acquisition and generation with caller-owned cancellation.
+// RunContext acquires checksum-pinned sources and generates only requested outputs.
+// The context must be non-nil; cancellation is checked between operations and
+// reaches network IO, but does not preempt CPU transformations or an ongoing file
+// write. Writes can leave earlier outputs or a partially written file on failure.
 func RunContext(ctx context.Context, arguments []string) error {
 	return runContext(ctx, arguments, fetchRemoteContext, os.WriteFile)
 }
@@ -150,6 +153,9 @@ func fetchRemoteContext(ctx context.Context, source, checksum string) ([]byte, e
 type fetchFunc func(string, string) ([]byte, error)
 type writeFileFunc func(string, []byte, os.FileMode) error
 
+// run writes only requested datasets, in country/currency/subdivision order.
+// Output paths are relative to the invoking package directory unless absolute.
+// Writes are not a multi-file transaction: earlier outputs survive later errors.
 func run(arguments []string, fetch fetchFunc, writeFile writeFileFunc) error {
 	flags := flag.NewFlagSet("international-generate", flag.ContinueOnError)
 	countryOutput := flags.String("country-output", "", "path for generated country data")
@@ -684,6 +690,9 @@ func download(client httpDoer, source, expectedChecksum string) ([]byte, error) 
 	return downloadContext(context.Background(), client, source, expectedChecksum)
 }
 
+// downloadContext authenticates bounded payload bytes before dataset parsing.
+// Context reaches HTTP/body IO; pure XML transformation is not preempted.
+// Closing the owned response body is best-effort and does not replace read errors.
 func downloadContext(ctx context.Context, client httpDoer, source, expectedChecksum string) ([]byte, error) {
 	if client == nil {
 		return nil, errors.New("download dataset: HTTP client is required")

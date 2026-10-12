@@ -13,9 +13,13 @@ import (
 	"github.com/faustbrian/go-international/v4/subdivision"
 )
 
-// TestingT is the subset of testing.TB used by helpers.
+// TestingT is the subset of testing.TB used by helpers. Methods run synchronously;
+// helpers neither retain the implementation nor recover its panics.
 type TestingT interface {
+	// Helper marks the calling fixture helper in failure reports.
 	Helper()
+	// Fatalf reports a formatted fixture failure. testing.T stops the test here;
+	// a recording implementation may return, after which helpers return normally.
 	Fatalf(format string, arguments ...any)
 }
 

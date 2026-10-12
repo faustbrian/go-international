@@ -10,7 +10,8 @@ import (
 // LowercaseUnicode applies locale-neutral full Unicode lowercasing within a
 // caller-owned byte budget. The transformation may expand text and therefore
 // checks both input and output sizes. Each call owns its Caser, so callers may
-// invoke the function concurrently without sharing state.
+// invoke the function concurrently without sharing state. Output admission occurs
+// after allocating the transformed string; the budget is not a peak-memory bound.
 func LowercaseUnicode(input string, maximumBytes int) (string, error) {
 	if maximumBytes <= 0 || len(input) > maximumBytes {
 		return "", ErrResourceLimit

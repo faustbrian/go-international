@@ -1,4 +1,6 @@
-// Command international-dataset-review snapshots and compares governed data.
+// Command international-dataset-review writes the compiled snapshot with -snapshot
+// or compares -before and -after files, emitting a JSON report to standard output.
+// Modes are exclusive; paths are explicit local arguments, not remote resolvers.
 package main
 
 import (
@@ -57,6 +59,8 @@ func run(arguments []string, output io.Writer) error {
 	return encoder.Encode(report)
 }
 
+// writeSnapshot owns the file, but creation truncates existing contents and
+// encoding/close failures can leave a partial snapshot; no rename transaction is used.
 func writeSnapshot(path string) error {
 	// #nosec G304 -- the path is an explicit local CLI output argument.
 	file, err := os.Create(path)

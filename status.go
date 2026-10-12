@@ -1,5 +1,14 @@
 // Package international defines shared contracts for versioned international
 // identifier datasets. Identifier-specific behavior lives in subpackages.
+//
+// Core parsing uses pinned in-process tables and providers, not network lookups.
+// Identifier values are snapshots; mutating decode methods require a non-nil,
+// caller-owned receiver and leave it unchanged on error. JSON null and SQL NULL
+// reset scalar identifiers to absence; empty text is not an absence encoding.
+// Historic acceptance remains explicit in options-bearing decode methods.
+// Phone and postal persistence exposes personal values despite redacted String
+// diagnostics. Status, Provenance and dataset projections are metadata, not
+// authentication, business-policy decisions or live registry freshness claims.
 package international
 
 import "encoding/json"
@@ -47,7 +56,8 @@ func (status Status) String() string {
 	}
 }
 
-// Known reports whether the status came from authoritative metadata.
+// Known reports whether the value is a recognized non-unknown enum member.
+// It does not authenticate the origin of a caller-constructed Status.
 func (status Status) Known() bool {
 	return status >= StatusOfficial && status <= StatusHistoric
 }

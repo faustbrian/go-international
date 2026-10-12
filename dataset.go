@@ -10,22 +10,37 @@ const MaxDatasetRecords = 100_000
 
 // Record is the compatibility-relevant projection of a generated entry.
 type Record struct {
-	ID          string `json:"id"`
-	Status      Status `json:"status"`
+	// ID is the comparison key; DiffRecords rejects duplicates, not empty keys.
+	ID string `json:"id"`
+	// Status is compared as supplied, without registry validation.
+	Status Status `json:"status"`
+	// Fingerprint is compared as opaque text; its digest format is not checked here.
 	Fingerprint string `json:"fingerprint"`
-	AliasOf     string `json:"alias_of"`
+	// AliasOf is the supplied replacement key, or empty when no alias is recorded.
+	AliasOf string `json:"alias_of"`
 }
 
-// DatasetDiff classifies changes that require compatibility review.
+// DatasetDiff classifies changes for compatibility review. DiffRecords returns
+// independent, lexically sorted key slices. A retained key may appear in several
+// change categories; categories are not exclusive.
 type DatasetDiff struct {
-	Added           []string `json:"added"`
-	Removed         []string `json:"removed"`
-	AliasesChanged  []string `json:"aliases_changed"`
-	StatusChanged   []string `json:"status_changed"`
+	// Added contains keys present only in the new projection.
+	Added []string `json:"added"`
+	// Removed contains keys present only in the old projection.
+	Removed []string `json:"removed"`
+	// AliasesChanged contains retained keys whose alias text changed.
+	AliasesChanged []string `json:"aliases_changed"`
+	// StatusChanged contains retained keys whose status changed.
+	StatusChanged []string `json:"status_changed"`
+	// MetadataChanged contains retained keys whose fingerprint text changed.
 	MetadataChanged []string `json:"metadata_changed"`
 }
 
-// DiffRecords deterministically classifies changes between two projections.
+// DiffRecords deterministically classifies two borrowed projections without
+// changing either. Each is limited to MaxDatasetRecords and must have unique
+// keys; record content and individual string sizes are not otherwise validated.
+// Successful empty categories are non-nil slices. Callers must not mutate the
+// inputs concurrently with comparison.
 func DiffRecords(before, after []Record) (DatasetDiff, error) {
 	if len(before) > MaxDatasetRecords || len(after) > MaxDatasetRecords {
 		return DatasetDiff{}, ErrResourceLimit

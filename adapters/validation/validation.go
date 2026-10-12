@@ -1,5 +1,8 @@
 // Package internationalvalidation exposes pure synchronous Validation rules
-// backed by International's strict, bounded parsers.
+// backed by International's strict, bounded parsers. Rules borrow the Validation
+// context for limits and paths but do not poll cancellation or call external IO.
+// They emit package-owned violation codes and safe invalid/resource-limit causes,
+// not personal input or provider diagnostics. Parsing does not apply business policy.
 package internationalvalidation
 
 import (
@@ -16,51 +19,52 @@ import (
 	validation "github.com/faustbrian/go-validation/v2"
 )
 
-// Country returns a country rule.
+// Country returns a strict current alpha-2 rule.
 func Country() validation.Validator[string] { return parserRule("country", country.Parse) }
 
-// CountryAlpha3 returns a country alpha-3 rule.
+// CountryAlpha3 returns a strict current alpha-3 rule.
 func CountryAlpha3() validation.Validator[string] {
 	return parserRule("country_alpha3", country.ParseAlpha3)
 }
 
-// CountryNumeric returns a country numeric rule.
+// CountryNumeric returns a strict current numeric country rule.
 func CountryNumeric() validation.Validator[string] {
 	return parserRule("country_numeric", country.ParseNumeric)
 }
 
-// Subdivision returns a subdivision rule.
+// Subdivision returns a strict current subdivision rule.
 func Subdivision() validation.Validator[string] {
 	return parserRule("subdivision", subdivision.Parse)
 }
 
-// Language returns a language rule.
+// Language returns a canonical language rule.
 func Language() validation.Validator[string] { return parserRule("language", language.Parse) }
 
-// Locale returns a locale rule.
+// Locale returns a bounded provider-backed locale rule.
 func Locale() validation.Validator[string] { return parserRule("locale", locale.Parse) }
 
-// Currency returns a currency rule.
+// Currency returns a strict active currency rule.
 func Currency() validation.Validator[string] { return parserRule("currency", currency.Parse) }
 
-// CurrencyNumeric returns a currency numeric rule.
+// CurrencyNumeric returns a strict active numeric currency rule.
 func CurrencyNumeric() validation.Validator[string] {
 	return parserRule("currency_numeric", currency.ParseNumeric)
 }
 
-// CallingCode returns a calling-code rule.
+// CallingCode returns a supported calling-code rule.
 func CallingCode() validation.Validator[string] {
 	return parserRule("calling_code", phone.ParseCallingCode)
 }
 
-// Phone returns a phone parseability rule.
+// Phone snapshots options and checks parseability, not Possible or Valid metadata.
 func Phone(options phone.ParseOptions) validation.Validator[string] {
 	return parserRule("phone", func(value string) (phone.Number, error) {
 		return phone.Parse(value, options)
 	})
 }
 
-// ValidPhone returns a valid-phone rule.
+// ValidPhone snapshots options and requires provider Valid metadata, not ownership
+// or reachability. A false validity result uses the safe invalid cause.
 func ValidPhone(options phone.ParseOptions) validation.Validator[string] {
 	return validation.ValidatorFunc[string](func(ctx validation.Context, value string) validation.Report {
 		number, err := phone.Parse(value, options)
@@ -71,7 +75,7 @@ func ValidPhone(options phone.ParseOptions) validation.Validator[string] {
 	})
 }
 
-// Postal returns a postal rule.
+// Postal returns a bounded opaque postal-value rule.
 func Postal(context country.Code) validation.Validator[string] {
 	return parserRule("postal", func(value string) (postal.Code, error) {
 		return postal.Parse(value, context)

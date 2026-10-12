@@ -1,5 +1,9 @@
-// Package phone provides bounded, immutable libphonenumber-backed values. It
-// makes no claim about ownership, reachability, identity, or delivery.
+// Package phone provides bounded snapshots through nyaruka/phonenumbers v1.8.1
+// (libphonenumber v9.0.32 metadata). Use Parse with explicit national-number
+// context or ParseE164 for canonical identity without an extension. Parsing is
+// offline; metadata is not proof of ownership, reachability or subscriber identity.
+// String diagnostics are redacted, but explicit formatting and persistence expose
+// the number. Decode mutations require a caller-owned receiver.
 package phone
 
 import (
@@ -78,11 +82,14 @@ type Number struct {
 
 // ParseOptions supplies context without inferring it from environment or IP.
 type ParseOptions struct {
+	// RegionHint supplies national-number context; absent hints require a leading plus.
 	RegionHint country.Code
 }
 
 // Parse validates syntax and snapshots possible-versus-valid metadata. A
-// successfully parsed number may still be possible but invalid.
+// successfully parsed number may be impossible or invalid. Neither metadata
+// result proves assignment, ownership or reachability. Provider objects are not
+// retained: the returned value snapshots identity, extension and display text.
 func Parse(input string, options ParseOptions) (Number, error) {
 	if len(input) > MaxBytes {
 		return Number{}, international.ErrResourceLimit
@@ -189,13 +196,14 @@ func (number Number) E164() string { return number.e164 }
 // Extension returns the separately parsed extension.
 func (number Number) Extension() string { return number.extension }
 
-// Region returns reliable libphonenumber region metadata when available.
+// Region returns the snapshotted provider region, or absence for non-geographic
+// calling codes and regions not accepted by the pinned country table.
 func (number Number) Region() country.Code { return number.region }
 
 // CallingCode returns the parsed ITU calling code.
 func (number Number) CallingCode() CallingCode { return number.callingCode }
 
-// Type returns reliable libphonenumber number-type metadata.
+// Type returns the snapshotted provider classification, not a verified usage.
 func (number Number) Type() NumberType { return number.numberType }
 
 // Possible reports whether the number has a possible numbering-plan shape.

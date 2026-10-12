@@ -16,7 +16,9 @@ func (code Code) MarshalText() ([]byte, error) {
 	return codec.MarshalText(code.encoded(), "postal code")
 }
 
-// UnmarshalText parses the package's context-preserving representation.
+// UnmarshalText parses country, a single tab and opaque postal text. Country
+// decoding uses current-only country.Parse even if Parse originally received
+// an opt-in historic context. An error leaves the non-nil receiver unchanged.
 func (code *Code) UnmarshalText(input []byte) error {
 	parsed, err := parseEncoded(string(input))
 	if err == nil {

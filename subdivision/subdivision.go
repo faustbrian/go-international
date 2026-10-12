@@ -17,6 +17,7 @@ type Code struct{ value string }
 
 // ParseOptions controls opt-in acceptance of deleted identifiers.
 type ParseOptions struct {
+	// AllowHistoric admits deleted subdivision records without substituting a successor.
 	AllowHistoric bool
 }
 

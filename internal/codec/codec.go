@@ -30,7 +30,9 @@ func MarshalJSON(value string) ([]byte, error) {
 	return json.Marshal(value)
 }
 
-// DecodeJSON accepts only null or a bounded JSON string.
+// DecodeJSON bounds the complete encoded input before decoding. Null returns
+// zero and absent=true without calling parse; a string invokes parse synchronously.
+// The caller owns the parser and destination commit; no input or callback is retained.
 func DecodeJSON[T any](input []byte, kind string, parse func(string) (T, error)) (T, bool, error) {
 	var zero T
 	if len(input) > MaxEncodedBytes {
@@ -55,7 +57,9 @@ func DatabaseValue(value string) (driver.Value, error) {
 	return value, nil
 }
 
-// Scan accepts only SQL NULL, string, or bounded byte slices.
+// Scan accepts SQL NULL, string or bytes and calls parse synchronously for text.
+// Bytes are copied to string before the 512-byte admission check; the bound is
+// not a pre-allocation guarantee. Neither input bytes nor callbacks are retained.
 func Scan[T any](source any, kind string, parse func(string) (T, error)) (T, bool, error) {
 	var zero T
 	if source == nil {

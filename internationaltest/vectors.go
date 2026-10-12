@@ -30,64 +30,97 @@ const (
 
 // CountryVector is an independent ISO 3166-1 mapping and status assertion.
 type CountryVector struct {
-	Alpha2  string
-	Alpha3  string
+	// Alpha2 is the expected alpha-2 spelling.
+	Alpha2 string
+	// Alpha3 is the expected alpha-3 spelling.
+	Alpha3 string
+	// Numeric is the expected zero-padded numeric spelling.
 	Numeric string
-	Status  international.Status
+	// Status is the expected registry status.
+	Status international.Status
+	// Options is the explicit acceptance policy for this vector.
 	Options country.ParseOptions
 }
 
 // SubdivisionVector is an independent ISO 3166-2-derived assertion.
 type SubdivisionVector struct {
-	Code    string
+	// Code is the expected subdivision identifier.
+	Code string
+	// Country is the expected parent-country identifier.
 	Country string
-	Status  international.Status
+	// Status is the expected registry status.
+	Status international.Status
+	// Options is the explicit acceptance policy for this vector.
 	Options subdivision.ParseOptions
 }
 
 // LanguageVector is an independent canonical ISO 639 mapping assertion.
 type LanguageVector struct {
+	// Code is the expected canonical language spelling.
 	Code string
+	// ISO3 is the expected three-letter representation.
 	ISO3 string
 }
 
 // LocaleVector is an independent BCP 47 canonicalization assertion.
 type LocaleVector struct {
-	Input     string
+	// Input is the source spelling submitted to Parse.
+	Input string
+	// Canonical is the expected explicit canonical spelling.
 	Canonical string
 }
 
 // CurrencyVector is an independent ISO 4217 mapping and metadata assertion.
 type CurrencyVector struct {
-	Alphabetic    string
-	Numeric       string
-	MinorUnits    uint8
+	// Alphabetic is the expected alphabetic identifier.
+	Alphabetic string
+	// Numeric is the expected zero-padded numeric identifier.
+	Numeric string
+	// MinorUnits is the expected exponent, meaningful only when HasMinorUnits is true.
+	MinorUnits uint8
+	// HasMinorUnits reports whether the exponent is specified rather than unavailable.
 	HasMinorUnits bool
-	Status        international.Status
-	Options       currency.ParseOptions
+	// Status is the expected registry status.
+	Status international.Status
+	// Options is the explicit acceptance policy for this vector.
+	Options currency.ParseOptions
 }
 
 // PhoneVector is an independent public libphonenumber behavior assertion.
 type PhoneVector struct {
+	// MetadataVersion is the provider metadata version attached to the expected behavior.
 	MetadataVersion string
-	Input           string
-	Region          string
-	E164            string
-	Extension       string
-	National        string
-	International   string
-	Type            phone.NumberType
-	Possible        bool
-	Valid           bool
+	// Input is the public example number submitted to Parse.
+	Input string
+	// Region is the explicit region hint for parsing.
+	Region string
+	// E164 is the expected identity excluding the extension.
+	E164 string
+	// Extension is the expected separately stored extension.
+	Extension string
+	// National is the expected national display text.
+	National string
+	// International is the expected international display text.
+	International string
+	// Type is the expected metadata classification.
+	Type phone.NumberType
+	// Possible is the expected numbering-plan shape result.
+	Possible bool
+	// Valid is the expected metadata validity result, not ownership or reachability.
+	Valid bool
 }
 
 // PostalVector is a package-policy normalization assertion without syntax or
 // deliverability meaning.
 type PostalVector struct {
-	Country    string
-	Input      string
+	// Country is the explicit country context.
+	Country string
+	// Input is the opaque caller spelling.
+	Input string
+	// Normalized is the expected transformed spelling.
 	Normalized string
-	Options    postal.NormalizeOptions
+	// Options is the explicit normalization policy.
+	Options postal.NormalizeOptions
 }
 
 var countryVectors = [...]CountryVector{

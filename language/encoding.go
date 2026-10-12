@@ -6,7 +6,9 @@ import (
 	"github.com/faustbrian/go-international/v4/internal/codec"
 )
 
-// MarshalText encodes a present language as canonical ISO 639 text.
+// MarshalText encodes the stored spelling without canonicalizing it, rejecting
+// absence. A deprecated spelling returned by ParseISO3 encodes successfully but
+// is rejected by UnmarshalText; see Code's conversion limitation.
 func (code Code) MarshalText() ([]byte, error) { return codec.MarshalText(code.value, "language code") }
 
 // UnmarshalText parses strict current canonical ISO 639 text.
@@ -18,7 +20,9 @@ func (code *Code) UnmarshalText(input []byte) error {
 	return err
 }
 
-// MarshalJSON encodes a present code as a string and an absent code as null.
+// MarshalJSON encodes the stored spelling as a string, or absence as null.
+// It does not canonicalize deprecated ParseISO3 results; UnmarshalJSON rejects
+// those spellings even when this encoding succeeds.
 func (code Code) MarshalJSON() ([]byte, error) { return codec.MarshalJSON(code.value) }
 
 // UnmarshalJSON accepts only a current canonical ISO 639 string or null.
@@ -34,7 +38,8 @@ func (code *Code) UnmarshalJSON(input []byte) error {
 	return err
 }
 
-// Value returns canonical text or SQL NULL for the zero value.
+// Value returns stored spelling, or SQL NULL for absence, without canonicalizing
+// deprecated ParseISO3 results. Such stored text is rejected by strict Scan.
 func (code Code) Value() (driver.Value, error) { return codec.DatabaseValue(code.value) }
 
 // Scan accepts SQL NULL, string, or byte text.

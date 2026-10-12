@@ -1,6 +1,7 @@
 // Package postal provides bounded postal-code values with explicit country
-// context. It makes no claim about syntax, deliverability, locality, address
-// correctness, geocoding, or carrier acceptance.
+// context. Parse stores opaque values; ValidSyntax is a separate opt-in pinned
+// compatibility profile. Neither establishes deliverability, locality, address
+// correctness, geocoding or carrier acceptance.
 package postal
 
 import (
@@ -48,8 +49,11 @@ const (
 
 // NormalizeOptions selects independent, deterministic transformations.
 type NormalizeOptions struct {
-	Spaces  SpacePolicy
-	Case    CasePolicy
+	// Spaces selects space preservation or trimmed Unicode-space collapse.
+	Spaces SpacePolicy
+	// Case selects preservation or ASCII-only uppercasing.
+	Case CasePolicy
+	// Unicode selects preservation or NFC normalization, applied before spaces and case.
 	Unicode UnicodePolicy
 }
 
@@ -60,7 +64,10 @@ type Code struct {
 	country country.Code
 }
 
-// Parse stores a bounded printable UTF-8 value without syntax normalization.
+// Parse stores bounded nonempty UTF-8 without Unicode control characters and
+// with non-absent country context. It does not require every rune to be printable,
+// validate postal syntax, trim spaces or normalize input. The immutable string
+// is retained without a forced backing-storage copy.
 func Parse(input string, context country.Code) (Code, error) {
 	if len(input) > MaxBytes {
 		return Code{}, international.ErrResourceLimit
@@ -80,7 +87,9 @@ func Parse(input string, context country.Code) (Code, error) {
 	return Code{value: input, country: context}, nil
 }
 
-// Normalize returns a transformed copy under explicit policies.
+// Normalize returns a transformed copy under explicit policies: NFC, then
+// space handling, then ASCII casing. The result is re-admitted through Parse,
+// so empty or over-budget output fails without changing the original value.
 func (code Code) Normalize(options NormalizeOptions) (Code, error) {
 	if code.IsZero() {
 		return Code{}, international.NewParseError("postal code", "absent value")

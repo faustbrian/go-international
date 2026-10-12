@@ -4,7 +4,18 @@ All notable changes and dataset updates are recorded here.
 
 ## [Unreleased]
 
+### Fixed
+
+- Route country, currency and subdivision `go generate` commands through the
+  actual command entry point, retaining pinned producers, inputs and output names.
+
 ### Documentation
+
+- Clarify metadata versus authority, locale fallback progress, historic currency
+  date projections, scalar ownership and persistence, postal syntax boundaries,
+  provider-backed phone validity and adapter failure contracts. Document the
+  existing deprecated-spelling conversion and strict round-trip limitation in
+  language ParseISO3 and locale Language, without changing canonical policy.
 
 - Record the current v4 security boundary and version-specific diagnostic and
   generator hardening disposition while preserving the historical v3 model.

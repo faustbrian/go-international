@@ -7,6 +7,9 @@ import (
 	"github.com/faustbrian/go-wire/v3"
 )
 
+// FuzzLegacyWireDispatch exercises arbitrary formats and at most 4096 payload
+// bytes against a fresh target. Oversized cases are skipped, not accepted; this
+// checks dispatch panic resilience rather than scalar round-trip correctness.
 func FuzzLegacyWireDispatch(fuzzer *testing.F) {
 	for _, seed := range []struct {
 		format string

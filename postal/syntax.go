@@ -12,7 +12,9 @@ const SyntaxDataset = "brick/postcode@0.5.0"
 // syntax dataset for context. It normalizes ASCII case and removes ASCII space
 // and dash separators exactly as the dataset does. Callers must bound
 // untrusted input before calling it. It does not claim that a syntactically
-// valid code exists, is deliverable, or belongs to an address.
+// valid code exists, is deliverable, or belongs to an address. A single terminal
+// line feed is accepted only for selected pinned compatibility cases; this is
+// separate from Parse, which rejects controls. Unknown countries return false.
 func ValidSyntax(value string, countryCode string) bool {
 	if len(countryCode) != 2 {
 		return false
@@ -50,6 +52,8 @@ func validNormalizedSyntax(countryCode string, normalized string) bool {
 	return supported && pattern.MatchString(normalized)
 }
 
+// validTrailingLineFeedSyntax preserves the source corpus's country-specific
+// end-anchor behavior rather than globally treating a final line feed as space.
 func validTrailingLineFeedSyntax(countryCode string, normalized string) bool {
 	switch countryCode {
 	case "AS":

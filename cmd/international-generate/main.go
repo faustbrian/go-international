@@ -1,4 +1,7 @@
-// Command international-generate updates pinned international metadata.
+// Command international-generate produces requested pinned metadata files using
+// -country-output, -currency-output and -subdivision-output. Relative paths use
+// the current directory. Interrupt cancellation reaches acquisition and checks
+// before writes; outputs are not atomically published as one dataset bundle.
 package main
 
 import (

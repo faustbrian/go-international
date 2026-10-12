@@ -31,8 +31,11 @@ type Numeric struct {
 
 // ParseOptions controls explicit acceptance outside current official codes.
 type ParseOptions struct {
-	AllowHistoric     bool
-	AllowReserved     bool
+	// AllowHistoric admits deleted, historic and transitional records without aliasing.
+	AllowHistoric bool
+	// AllowReserved admits records classified as reserved.
+	AllowReserved bool
+	// AllowUserAssigned admits records classified as user-assigned.
 	AllowUserAssigned bool
 }
 

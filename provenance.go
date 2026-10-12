@@ -9,19 +9,31 @@ import (
 
 var sha256Pattern = regexp.MustCompile(`\A[0-9a-f]{64}\z`)
 
-// Provenance records enough information to reproduce and review a dataset.
+// Provenance is mutable descriptive metadata for reproducing and reviewing a
+// dataset. Copy Transformations before independently mutating a copied value.
 type Provenance struct {
-	Dataset         string    `json:"dataset"`
-	Source          string    `json:"source"`
-	RetrievedAt     time.Time `json:"retrieved_at"`
-	UpstreamVersion string    `json:"upstream_version"`
-	License         string    `json:"license"`
-	SHA256          string    `json:"sha256"`
-	Generator       string    `json:"generator"`
-	Transformations []string  `json:"transformations"`
+	// Dataset names the projected dataset.
+	Dataset string `json:"dataset"`
+	// Source describes the retrieval location or upstream inputs.
+	Source string `json:"source"`
+	// RetrievedAt records the retrieval instant.
+	RetrievedAt time.Time `json:"retrieved_at"`
+	// UpstreamVersion identifies the pinned data or provider version.
+	UpstreamVersion string `json:"upstream_version"`
+	// License records the declared upstream license or terms.
+	License string `json:"license"`
+	// SHA256 records lowercase hexadecimal digest text; Validate does not authenticate it.
+	SHA256 string `json:"sha256"`
+	// Generator identifies the declared producer.
+	Generator string `json:"generator"`
+	// Transformations records ordered producer steps; struct copies share this slice.
+	Transformations []string `json:"transformations"`
 }
 
-// Validate verifies required provenance fields without network access.
+// Validate checks required nonempty fields, a nonzero retrieval instant, digest
+// spelling and a nonempty transformation list without network access. It does
+// not authenticate content, resolve sources, validate licenses or inspect each
+// transformation string.
 func (provenance Provenance) Validate() error {
 	switch {
 	case provenance.Dataset == "":
@@ -45,7 +57,8 @@ func (provenance Provenance) Validate() error {
 	}
 }
 
-// Equal reports whether all immutable provenance fields match.
+// Equal compares field values and ordered transformations. Retrieval timestamps
+// compare as instants, not by their location or textual representation.
 func (provenance Provenance) Equal(other Provenance) bool {
 	return provenance.Dataset == other.Dataset &&
 		provenance.Source == other.Source &&

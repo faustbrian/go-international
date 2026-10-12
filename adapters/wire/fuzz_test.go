@@ -11,6 +11,9 @@ import (
 	"github.com/faustbrian/go-wire/v3"
 )
 
+// FuzzSuccessorWireDispatch compares legacy/successor bytes, error presence and
+// target values for arbitrary formats with at most 4096 payload bytes. It does
+// not compare error categories or establish conformance against an external oracle.
 func FuzzSuccessorWireDispatch(fuzzer *testing.F) {
 	for _, seed := range []struct {
 		format string

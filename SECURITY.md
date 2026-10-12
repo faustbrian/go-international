@@ -31,7 +31,8 @@ phone validity is not ownership, and postal syntax is not deliverability.
 
 Exact byte, segment, diagnostic, dataset, and generator budgets and their
 hostile-input evidence are maintained in `docs/verification.md`. Unsupported
-display locales return no metadata rather than panicking or inferring a locale.
+display languages are delegated to pinned x/text namers and their fallback;
+absence yields no display value. Display names are not identity evidence.
 
 Applications should redact phone and postal values from logs and telemetry,
 limit request bodies before decoding, use explicit locale policies, review data

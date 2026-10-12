@@ -1,5 +1,8 @@
 // Package locale provides bounded BCP 47 tags with explicit canonicalization
-// and fallback policies.
+// and fallback policies through pinned x/text registry and CLDR data. Parsing
+// preserves input spelling; Raw component access avoids likely-subtag inference.
+// Zero means absence, distinct from the present undefined-language tag "und".
+// This package does not negotiate content or detect the caller's locale.
 package locale
 
 import (
@@ -67,7 +70,8 @@ func (tag Tag) String() string { return tag.source }
 // IsZero reports whether the tag represents an absent value.
 func (tag Tag) IsZero() bool { return tag.source == "" }
 
-// Canonical applies all BCP 47 recommended canonicalizations explicitly.
+// Canonical explicitly applies the pinned x/text BCP47 canonicalization profile.
+// It does not re-admit the resulting spelling against Parse's byte/segment bounds.
 func (tag Tag) Canonical() (Tag, error) {
 	if tag.IsZero() {
 		return Tag{}, international.NewParseError("locale", "absent tag")
@@ -76,7 +80,10 @@ func (tag Tag) Canonical() (Tag, error) {
 	return Tag{source: canonical.String(), parsed: canonical}, nil
 }
 
-// Language returns the tag's explicit base language.
+// Language converts the explicit Raw base through language.ParseISO3 without
+// likely-subtag inference. The provider conversion can return a deprecated
+// spelling such as "iw" for base "he"; strict language decoding rejects that
+// result. It is not a guarantee of canonical spelling or persistence round-trip.
 func (tag Tag) Language() intlLanguage.Code {
 	if tag.IsZero() {
 		return intlLanguage.Code{}
@@ -145,7 +152,10 @@ func (tag Tag) HasPrivateUse() bool {
 	return ok
 }
 
-// Fallback applies only the selected lossy policy.
+// Fallback applies only the selected lossy policy. False means absent, disabled,
+// unknown policy, root parent or undefined base language. FallbackLanguage can
+// return the same language-only tag with true; true does not promise progress
+// for an iterative fallback loop. Returned tags own their source spelling.
 func (tag Tag) Fallback(policy FallbackPolicy) (Tag, bool) {
 	if tag.IsZero() {
 		return Tag{}, false

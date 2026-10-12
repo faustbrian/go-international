@@ -15,7 +15,10 @@ func Encode(format wire.Format, value any) ([]byte, error) {
 	return wireadapter.Encode(format, value, ErrUnsupportedFormat)
 }
 
-// Decode decodes a value in a supported format.
+// Decode synchronously borrows payload and a caller-owned target, using the
+// selected Wire v3 codec's default profile. There is no context parameter or
+// adapter-wide rollback guarantee; target mutation on error is codec-specific.
+// Unsupported formats return the package's current sentinel without decoding.
 func Decode(format wire.Format, payload []byte, target any) error {
 	return wireadapter.Decode(format, payload, target, ErrUnsupportedFormat)
 }

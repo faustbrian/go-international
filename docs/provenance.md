@@ -1,9 +1,11 @@
 # Data provenance and compatibility
 
-Each dataset exposes `DatasetProvenance()`. The returned immutable record names
-the source, retrieval date, upstream version, license, SHA-256 checksum,
-generator version, and ordered transformations. `Validate` checks completeness
-offline.
+Each dataset exposes `DatasetProvenance()`. The returned mutable metadata value
+names the source, retrieval date, upstream version, license, SHA-256 checksum,
+generator version and ordered transformations. Each call creates a fresh
+transformation slice; copies of that returned struct share its slice unless the
+caller copies it. `Validate` checks required field shape offline, not content
+authentication or license validity.
 
 Pinned inputs are CLDR 48.2 country/subdivision data, the IANA Language Subtag
 Registry dated 2026-06-14 through `x/text` v0.42.0, SIX ISO 4217 lists published
@@ -47,8 +49,8 @@ Independently frozen expected results and their source labels are exported by
 `internationaltest`; they protect representative current, historic, reserved,
 canonicalization, formatting, and policy behavior from generator self-agreement.
 
-The shared API gate compares the current exported module API with the v1
-baseline. Intentional incompatible changes require a major-version module path
+The shared API gate compares the current exported module API with the configured
+v4 baseline; released v1, v2 and v3 snapshots remain historical inputs. Intentional incompatible changes require a major-version module path
 and a deliberately reviewed baseline update.
 
 Persisted identifiers retain their textual identity. Applications must not
