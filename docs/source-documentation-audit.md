@@ -215,3 +215,12 @@ approved targets. All491 comment groups parsed/rendered; final native language
 and locale docs exposed the corrected Code, encoder and extraction caveats.
 The owned refresh and all three caches/helpers/rendered outputs were removed
 with absence verified. Fresh whole-diff review is required before commit.
+
+## Objective Enforcement
+
+The checksum-pinned public Tools v2.4.1 verifier now supplies
+`make source-docs-check` as a prerequisite of the existing local and CI Make
+routes. Ordinary shared CI selects strict source-documentation checking and
+requires its result. Native prerequisites, operation budgets, security and
+release controls are retained. Hosted exact-head evidence is recorded by the
+coordination ledger; configuration alone does not establish green delivery.
