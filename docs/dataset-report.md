@@ -1,5 +1,7 @@
 # Dataset update and reproducibility report
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 This v1 baseline is the semantic projection in
 `data/dataset-snapshot.json` (schema 1, SHA-256
 `a1e2d3de3b36bb5642b13f3340a81324240090cf700dc30bf7d43581bf938983`).
@@ -36,3 +38,6 @@ make check-full
 Attach the JSON diff to review and update this report and `CHANGELOG.md` with
 every non-empty category. An empty alias category means the package retains
 historic identifiers as distinct values; it does not silently redirect them.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

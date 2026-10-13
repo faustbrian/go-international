@@ -1,5 +1,7 @@
 # International threat model
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Version and scope
 
 Model version: 1. Reviewed source boundary: International `v3.0.0`, commit
@@ -159,3 +161,6 @@ privacy, dependency, dataset, adapter, or generation trust boundaries change.
 Any new vulnerability exception or materially broader acceptance decision
 requires its actual owner and rationale; no such decision is inferred from
 this document or from a green ordinary consumer test.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

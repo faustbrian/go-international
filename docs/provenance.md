@@ -1,5 +1,7 @@
 # Data provenance and compatibility
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Each dataset exposes `DatasetProvenance()`. The returned mutable metadata value
 names the source, retrieval date, upstream version, license, SHA-256 checksum,
 generator version and ordered transformations. Each call creates a fresh
@@ -70,3 +72,6 @@ rerun the full conformance corpus, and update `SyntaxDataset`, the source
 checksum, notices, and changelog together. The committed conformance test names
 the exact source revision and license; it is generated from the upstream
 literal formatter vectors and must not be hand-edited.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # Specification decisions
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 This register records observable choices where a standard, registry, or
 maintained compatibility profile does not by itself select one application
 behavior. The machine bindings, authority pins, update monitoring, and
@@ -159,3 +161,6 @@ strength `informative`.
 | Documentation | `docs/specification-decisions.md`; `docs/reference.md`; `docs/provenance.md` |
 | Upstream status | The exact x/text-derived snapshot and the current IANA registry are monitored; no local alias extension is defined. |
 | Reconsider when | The IANA registry or pinned x/text tables change preferred-value or ISO 639 mapping semantics. |
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

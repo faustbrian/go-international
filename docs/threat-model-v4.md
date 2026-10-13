@@ -1,5 +1,7 @@
 # International v4 security supplement
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Version and scope
 
 Model version: 2. Reviewed on 2026-10-07 against public International v4.0.0,
@@ -77,3 +79,6 @@ caller-owned normalization, cooperative generation and non-atomic writes.
 | Application owners | Explicit serialization and comparison are necessary application operations. Apply ingress limits, personal-data redaction, access/retention policy and explicit identity comparison rules. | New output, log, authorization or normalization-based identity integration. |
 | Generation operators and maintainers | Generation is opt-in offline tooling with trusted paths. Use bounded cooperative I/O, restrict command logs, inspect the complete generated diff and do not publish partial output. | New collaborators, output workflows, remote inputs or atomicity requirements. |
 | Wire producer and application owners | International composes producer defaults rather than replacing its parser or surrounding application policy. Preserve safe defaults and inspect relevant producer advisories. | Producer findings, decoder changes, custom encoding or newly supported formats. |
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

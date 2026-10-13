@@ -1,5 +1,7 @@
 # API and standards reference
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 | Package | Identity/standard | Default acceptance |
 |---|---|---|
 | `country` | ISO 3166-1 alpha-2/alpha-3/numeric | distinct current types |
@@ -85,3 +87,6 @@ source constant, and the package tests evaluate frozen expected results rather
 than deriving expectations from the generated tables. Country mappings are
 also compared across the complete official set with `x/text`; stable currency
 and locale behavior and all public phone vectors have differential checks.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

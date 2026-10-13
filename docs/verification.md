@@ -1,5 +1,7 @@
 # Release verification and acceptance evidence
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 This document maps the v1 requirements to executable evidence. It complements
 the API reference and dataset report; a percentage or green aggregate command
 is not treated as proof for an unrelated requirement.
@@ -141,3 +143,6 @@ At the time of the reference run, [Go 1.26.6](https://go.dev/doc/devel/release)
 was the module minimum and official stable release. Workflow actions,
 Go tools, module dependencies, dataset versions, source checksums, and
 generator identity are pinned.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

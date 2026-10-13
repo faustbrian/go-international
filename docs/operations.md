@@ -1,5 +1,7 @@
 # Performance, FAQ, and troubleshooting
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Lookups use immutable generated maps and require no network. Benchmark with the
 shared tooling benchmark gate; protect regressions by comparing `ns/op`,
 allocations, and bulk conversion throughput on the same Go version and
@@ -47,3 +49,6 @@ deliverable.
 For generated drift, verify network access, upstream checksum changes, and
 license terms before updating a pin. For config or SQL failures, inspect the
 typed safe error and confirm the input is a string/byte value, not a number.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

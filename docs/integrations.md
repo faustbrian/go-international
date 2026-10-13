@@ -1,5 +1,7 @@
 # Parsing, validation, and integrations
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Parse at untrusted boundaries, store the typed value, validate application
 policy separately, and format only at presentation boundaries. A parse error
 means malformed or unaccepted identity. `Possible` and `Valid` are separate
@@ -36,3 +38,6 @@ Database schemas should use bounded text columns matching the documented
 maximum and a nullable column for absence. Do not index localized country names
 as identifiers. Phone and postal values are personal data: avoid logs,
 telemetry, traces, and error payloads.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

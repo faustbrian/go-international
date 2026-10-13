@@ -1,5 +1,7 @@
 # Five-minute quickstarts
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Adapters
 
 ```go
@@ -99,3 +101,6 @@ normalized, err := code.Normalize(postal.NormalizeOptions{
 
 The country context is mandatory and preserved. Parsing and normalization make
 no claim about syntax, locality, deliverability, or carrier acceptance.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

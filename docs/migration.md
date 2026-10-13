@@ -1,5 +1,7 @@
 # Migration guide
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Version 4 Wire adoption
 
 Use `github.com/faustbrian/go-international/v4` and all of its package paths
@@ -125,3 +127,6 @@ classify rejected obsolete aliases, choose opt-in policies, backfill canonical
 representations transactionally, and dual-read before switching writes. Never
 log rejected phone or postal values. Pin the package and dataset versions in
 the migration record.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.
