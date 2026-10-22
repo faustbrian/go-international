@@ -59,11 +59,13 @@ func TestSentinelReplacementControlsUnsupportedResults(t *testing.T) {
 	internationalwire.ErrUnsupportedFormat = replacement
 	t.Cleanup(func() { internationalwire.ErrUnsupportedFormat = original })
 
-	if _, err := internationalwire.Encode(wire.FormatSOAP, document{}); !sameErrorIdentity(err, replacement) {
-		t.Fatalf("Encode() error = %v, want replacement", err)
-	}
-	if err := internationalwire.Decode(wire.FormatSOAP, nil, &document{}); !sameErrorIdentity(err, replacement) {
-		t.Fatalf("Decode() error = %v, want replacement", err)
+	for _, format := range []wire.Format{wire.FormatSOAP, wire.FormatCBOR, wire.FormatBSON, wire.Format("unknown")} {
+		if _, err := internationalwire.Encode(format, document{}); !sameErrorIdentity(err, replacement) {
+			t.Fatalf("Encode(%s) error = %v, want replacement", format, err)
+		}
+		if err := internationalwire.Decode(format, nil, &document{}); !sameErrorIdentity(err, replacement) {
+			t.Fatalf("Decode(%s) error = %v, want replacement", format, err)
+		}
 	}
 }
 
