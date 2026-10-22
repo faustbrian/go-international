@@ -21,9 +21,9 @@ this compatibility contract. Deprecated APIs follow
 
 Version 5 removed the `internationalpgx`, `internationalvalidation`, and
 `internationalwire` packages in favour of `adapters/postgres`,
-`adapters/validation`, and `adapters/wire`. The v4 line keeps them for their
-announced interval: the longer of 180 days after the successors became public
-and two subsequently published stable root-module minor releases.
+`adapters/validation`, and `adapters/wire` before their announced interval
+ended. Published v4 releases keep them and remain available; no further v4
+releases are planned.
 
 International v2 uses the official `/v2` module suffix and Validation v2 nominal
 types. Applications must select matching major identities explicitly; retaining

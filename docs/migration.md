@@ -10,8 +10,10 @@ import `adapters/postgres` (package `internationalpostgres`),
 `adapters/validation`, and `adapters/wire` instead. `adapters/validation`
 returns `github.com/faustbrian/go-validation/v3` validators, so move
 go-validation to `/v3` in the same change. Codes, parsing, wire encodings and
-PostgreSQL text mappings are unchanged. The facades are removed before their
-announced window ended; the v4 line keeps them.
+PostgreSQL text mappings are unchanged. The facades were removed before their
+announced window ended; published v4 releases keep them and remain
+available, and no further v4 releases are planned. The current major's API
+snapshot is `api/v5.txt`.
 
 ## Version 4 Wire adoption
 
@@ -48,7 +50,7 @@ documented facade support window remains the longer of 180 days after public
 successor availability and two subsequently published stable root-module minor
 releases; adopting a major does not remove the facades. Released API snapshots
 in `api/baseline.txt`, `api/v2.txt`, and `api/v3.txt` remain unchanged; the
-current major uses `api/v4.txt`. No version-specific source directory or branch
+v4 used `api/v4.txt`. No version-specific source directory or branch
 is required.
 
 ## Version 3 diagnostic redaction

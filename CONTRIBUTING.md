@@ -33,7 +33,7 @@ that hide a failing package.
 
 ## Verification
 
-Use Go 1.27.2 for development and CI; the public minimum remains Go 1.27.0.
+Use Go 1.27.3 for development and CI; the public minimum remains Go 1.27.0.
 An ordinary checkout is sufficient for package tests and a focused active fuzz
 smoke; no sibling repository or goal ledger is required:
 
@@ -44,7 +44,7 @@ go test . -run '^$' -fuzz '^FuzzTextParsers$' -fuzztime=2s
 
 Select the native target and package affected by your change. Ordinary Go tests
 already exercise deterministic fuzz seeds. For shared checks, install the
-public `golib` v2.4.1 release declared in `.golib.yaml` and verify its checksums;
+public `golib` v2.5.1 release declared in `.golib.yaml` and verify its checksums;
 CI uses that same release, not a sibling source build:
 
 ```bash

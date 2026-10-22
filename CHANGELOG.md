@@ -14,8 +14,8 @@ All notable changes and dataset updates are recorded here.
 
 - Remove the deprecated `internationalpgx`, `internationalvalidation` and
   `internationalwire` facades. Import the matching `adapters/*` package. The
-  removal precedes the announced support window; the v4 line keeps the
-  facades.
+  removal precedes the announced support window; published v4 releases keep
+  the facades and no further v4 releases are planned.
 
 ## 4.1.0 - 2026-10-22
 
