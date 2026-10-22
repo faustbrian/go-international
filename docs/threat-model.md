@@ -11,7 +11,7 @@ Model version: 1. Reviewed source boundary: International `v3.0.0`, commit
 the dependency and package boundary. This document describes that source;
 it does not change parsing, dependency pins, or release behavior.
 
-The [current v4 supplement](threat-model-v4.md) records subsequent changes and
+The [current v4 supplement](threat-model-v4.md), which also covers v5, records subsequent changes and
 their disclosure disposition. This v3 source attribution remains historical.
 
 International maintainers own the library contracts, generated datasets,

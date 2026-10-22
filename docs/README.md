@@ -46,6 +46,6 @@
 - [API and standards reference](reference.md) — `docs/reference.md`
 - [Source documentation audit](source-documentation-audit.md) — `docs/source-documentation-audit.md`
 - [Specification decisions](specification-decisions.md) — `docs/specification-decisions.md`
-- [International v4 security supplement](threat-model-v4.md) — `docs/threat-model-v4.md`
+- [International v4 and v5 security supplement](threat-model-v4.md) — `docs/threat-model-v4.md`
 - [International threat model](threat-model.md) — `docs/threat-model.md`
 - [Release verification and acceptance evidence](verification.md) — `docs/verification.md`

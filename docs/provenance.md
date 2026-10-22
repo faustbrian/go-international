@@ -52,7 +52,7 @@ Independently frozen expected results and their source labels are exported by
 canonicalization, formatting, and policy behavior from generator self-agreement.
 
 The shared API gate compares the current exported module API with the configured
-v4 baseline; released v1, v2 and v3 snapshots remain historical inputs. Intentional incompatible changes require a major-version module path
+v5 baseline; released v1 to v4 snapshots remain historical inputs. Intentional incompatible changes require a major-version module path
 and a deliberately reviewed baseline update.
 
 Persisted identifiers retain their textual identity. Applications must not

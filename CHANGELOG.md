@@ -25,7 +25,7 @@ All notable changes and dataset updates are recorded here.
 - Build with Go 1.27.3 to address GO-2026-6809 in `crypto/x509`.
   Consumers should use Go 1.27.3 or newer.
 
-## [Unreleased]
+## Unreleased notes shipped by 4.1.0
 
 ### Fixed
 

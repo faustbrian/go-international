@@ -50,3 +50,23 @@ func TestUnsupportedFormatIsExplicit(t *testing.T) {
 		}
 	}
 }
+
+// Replacing the exported sentinel must change what both directions return.
+// This test is not parallel because it mutates a package variable.
+func TestSentinelReplacementControlsUnsupportedResults(t *testing.T) {
+	replacement := errors.New("replacement unsupported format")
+	original := internationalwire.ErrUnsupportedFormat
+	internationalwire.ErrUnsupportedFormat = replacement
+	t.Cleanup(func() { internationalwire.ErrUnsupportedFormat = original })
+
+	if _, err := internationalwire.Encode(wire.FormatSOAP, document{}); !sameErrorIdentity(err, replacement) {
+		t.Fatalf("Encode() error = %v, want replacement", err)
+	}
+	if err := internationalwire.Decode(wire.FormatSOAP, nil, &document{}); !sameErrorIdentity(err, replacement) {
+		t.Fatalf("Decode() error = %v, want replacement", err)
+	}
+}
+
+func sameErrorIdentity(left, right error) bool {
+	return left == right //nolint:errorlint // Direct identity is the contract under test.
+}

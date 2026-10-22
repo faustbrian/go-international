@@ -41,8 +41,8 @@ func TestRulesDelegateToDistinctStrictParsers(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			if report := test.rule.Validate(ctx, test.valid); report.Err() != nil {
-				t.Fatalf("valid report = %v", report)
+			if report := test.rule.Validate(ctx, test.valid); report.Err() != nil || !report.Empty() || len(report.Violations()) != 0 {
+				t.Fatalf("valid report = %#v", report)
 			}
 			if report := test.rule.Validate(ctx, test.invalid); report.Err() == nil {
 				t.Fatal("invalid value passed")

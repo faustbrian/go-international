@@ -1,5 +1,5 @@
-// Package wireadapter owns the shared bounded dispatch used by both public
-// International wire paths.
+// Package wireadapter owns the bounded dispatch used by the International wire
+// adapter.
 package wireadapter
 
 import (
@@ -11,8 +11,8 @@ import (
 	"github.com/faustbrian/go-wire/v3/yamlwire"
 )
 
-// UnsupportedFormatError is the immutable initial identity shared by public
-// paths. Its zero value is ready to use.
+// UnsupportedFormatError is the immutable initial unsupported-format identity.
+// Its zero value is ready to use.
 type UnsupportedFormatError struct{}
 
 // Error returns the stable, value-safe unsupported-format message.
@@ -40,9 +40,9 @@ func Encode(format wire.Format, value any, unsupported error) ([]byte, error) {
 	}
 }
 
-// Decode delegates admission and target mutation to the selected codec. Keeping
-// this dispatch shared preserves legacy/successor behavior while the borrowed
-// unsupported error honors each public package's independently replaceable variable.
+// Decode delegates admission and target mutation to the selected codec. The
+// borrowed unsupported error lets the adapter return its current replaceable
+// variable.
 func Decode(format wire.Format, payload []byte, target any, unsupported error) error {
 	switch format {
 	case wire.FormatJSON:

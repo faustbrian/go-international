@@ -24,11 +24,10 @@ dispatch. SOAP, CBOR, and BSON return `ErrUnsupportedFormat`
 because their current generic adapters cannot guarantee lossless immutable
 scalar round trips.
 
-The released `internationalpgx`, `internationalvalidation`, and
-`internationalwire` imports remain behavior-preserving compatibility paths for
-the documented deprecation interval. Their successor calls have identical
-signatures. The wire sentinels share one initial error identity, while each
-package continues to honor replacement of its own exported variable only.
+Version 5 removed the `internationalpgx`, `internationalvalidation`, and
+`internationalwire` compatibility paths. `adapters/wire` returns its current
+`ErrUnsupportedFormat` variable, so replacing that variable changes the
+returned sentinel.
 
 `money` may consume `currency.Code`; this module never imports money.
 Coordinates and spatial algorithms remain in `geo`. Optional UI formatting
