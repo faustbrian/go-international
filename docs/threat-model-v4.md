@@ -9,8 +9,8 @@ commit `7511086bcf28a8f8d745da1c0a570c5fa688de5a`, module
 `github.com/faustbrian/go-international/v4`, Go 1.27. The
 [original v3 model](threat-model.md) retains its historical source attribution;
 this supplement does not relabel that review as v4 evidence. Version 5
-changes only the module path, adopts Validation and Config v3, and removes the
-retained compatibility adapters; the boundaries below apply to the canonical
+moves the module path, exposes Validation v3 through `adapters/validation`,
+uses Config v3 only in tests, and removes the retained compatibility adapters; the boundaries below apply to the canonical
 adapters.
 
 The original assets, trust boundaries, input policies and owned residual risks
