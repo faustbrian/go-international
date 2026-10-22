@@ -2,6 +2,12 @@
 
 All notable changes and dataset updates are recorded here.
 
+## 4.1.0 - 2026-10-22
+
+### Changed
+
+- Publish the current source and documentation with a fresh immutable tag.
+
 ## [Unreleased]
 
 ### Fixed
