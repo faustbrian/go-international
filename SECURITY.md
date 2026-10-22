@@ -8,8 +8,8 @@ Severity classification, acknowledgement and remediation targets, embargo
 handling, advisories, and coordinated releases follow the shared
 [ecosystem vulnerability-management policy](https://github.com/faustbrian/go-library-tools/blob/main/docs/ecosystem/security/vulnerability-management.md).
 
-The [current threat-model supplement](docs/threat-model-v4.md), which v5
-inherits unchanged apart from removing the compatibility facades, and
+The [current threat-model supplement](docs/threat-model-v4.md), whose v5 row
+records the facade removal and the Validation v3 move, and
 [historical v3 model](docs/threat-model.md) document repository-specific
 trust boundaries, control ownership, and maintained contract limitations.
 

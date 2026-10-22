@@ -74,10 +74,10 @@ CI/configuration-only changes do not require a library release.
 
 The owner-level [selected-assurance caller](.github/workflows/assurance.yml) is
 configured for main only, on day 4 of each month at 05:41 UTC. It selects one
-of the 7 current declared root-module fuzz targets using the shared UTC-week
+of the 6 current declared root-module fuzz targets using the shared UTC-week
 rotation, with 30 seconds of active exploration. The selected risks are:
 identifier, phone/postal and persistence parsing, generated XML/ranges,
-and legacy/successor wire dispatch parity.
+and wire dispatch panic resilience.
 These targets use in-process inputs; they do not update upstream datasets or
 qualify generated-data drift/provenance, full conformance or direct consumers.
 

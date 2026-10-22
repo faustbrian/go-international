@@ -8,14 +8,6 @@
       "package_directory": "adapters/wire",
       "reason": "The package contains only direct dispatch delegation and an immutable error initialization, so the complete enabled Gremlins operator set has no viable transformation.",
       "source_digest": "33d4fa5139a60227c626a1fbd3a458e37e944fb5cbd04c941f77000902a4030c"
-    },
-    {
-      "gremlins_verifier_sha256": "9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
-      "gremlins_version": "v0.6.0",
-      "module_directory": ".",
-      "package_directory": "internal/wireadapter",
-      "reason": "The package dispatches through switch cases and direct codec calls that the complete enabled Gremlins operator set cannot transform; exhaustive format tests remain mandatory.",
-      "source_digest": "2917e0ad610bb17cc444d4953b2223a120d25c8bf8cc668cda4e12ce76ef13a7"
     }
   ]
 }

@@ -27,20 +27,22 @@ defines private reporting and coordinated disclosure.
 |---|---|
 | v3.0.1 normalization and dependencies | Explicit postal NFC normalization adopts corrected `x/text` behavior. Parsing and stored values do not automatically normalize. Applications must select comparison policy rather than treating normalized text as identity proof. See [postal](../postal/postal.go) and [verification](verification.md). |
 | v3.0.2 Config integration | Config v2 adoption affects test composition, not an implicit runtime configuration or environment reader. Core values remain synchronous and perform no configuration acquisition. |
-| v4.0.0 Wire integration | Both canonical and retained adapters use public Wire v3 types and safe producer defaults. MessagePack aggregate-value and key-comparison work limits refuse excess work without changing the decode target. Errors retain inspectable categories without default payload text; YAML scalar corrections are intentional compatibility changes. See [dispatch](../internal/wireadapter/dispatch.go) and [migration](migration.md). |
+| v4.0.0 Wire integration | Both canonical and retained adapters use public Wire v3 types and safe producer defaults. MessagePack aggregate-value and key-comparison work limits refuse excess work without changing the decode target. Errors retain inspectable categories without default payload text; YAML scalar corrections are intentional compatibility changes. See [dispatch](../adapters/wire/wire.go) and [migration](migration.md). |
+| v5.0.0 adapter consolidation | The retained compatibility adapters are removed and the wire dispatch moves into `adapters/wire`; parsing, scalar and wire behaviour are unchanged. Validation v3 is exposed through `adapters/validation`; Config v3 is used only by tests. No new input format, callback surface or resource-producing operation is added. |
 
 Wire adapters intentionally serialize application-selected values. Their safe
 defaults do not sanitize arbitrary caller envelopes, custom serialization code
 or a later log sink. Explicit phone/postal serialization remains a deliberate
 personal-data release boundary, not encryption or permission to log values.
 
-Current source has successful [main CI](https://github.com/faustbrian/go-international/actions/runs/37473523902)
+For v4.0.0, the source had successful [main CI](https://github.com/faustbrian/go-international/actions/runs/37473523902)
 and [release rehearsal](https://github.com/faustbrian/go-international/actions/runs/37473584849).
 Retained source reviews and an actual clean public v4 consumer cover fifteen
 packages, five wire formats, canonical/retained adapter parity, PostgreSQL and
 Validation composition, redacted error classification, and MessagePack refusal
-with unchanged targets. These are current release-boundary evidence; historical
-benchmark or mutation prose is not presented as a fresh v4 execution.
+with unchanged targets. These were the v4.0.0 release-boundary evidence; historical
+benchmark or mutation prose is not presented as a fresh v4 execution. They do
+not qualify v5.
 
 ## Diagnostic and generator disclosure disposition
 

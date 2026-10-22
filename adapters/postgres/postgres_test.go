@@ -48,7 +48,7 @@ func TestRegisterSupportsPgxTextEncodeAndScan(t *testing.T) {
 	}
 }
 
-func TestRegisterMapsEveryReleasedScalarTypeToText(t *testing.T) {
+func TestRegisterRoundTripsEveryReleasedScalarTypeAsText(t *testing.T) {
 	t.Parallel()
 
 	finland, _ := country.Parse("FI")
@@ -72,6 +72,15 @@ func TestRegisterMapsEveryReleasedScalarTypeToText(t *testing.T) {
 		dataType, ok := typeMap.TypeForValue(value)
 		if !ok || dataType == nil || dataType.Name != "text" {
 			t.Fatalf("%s maps to %#v, %v", reflect.TypeOf(value), dataType, ok)
+		}
+		encoded, err := typeMap.Encode(pgtype.TextOID, pgtype.TextFormatCode, value, nil)
+		if err != nil {
+			t.Fatalf("%s Encode() error = %v", reflect.TypeOf(value), err)
+		}
+		destination := reflect.New(reflect.TypeOf(value)).Interface()
+		if err := typeMap.Scan(pgtype.TextOID, pgtype.TextFormatCode, encoded, destination); err != nil ||
+			!reflect.DeepEqual(reflect.ValueOf(destination).Elem().Interface(), value) {
+			t.Fatalf("%s Scan(%q) = %#v, %v", reflect.TypeOf(value), encoded, destination, err)
 		}
 	}
 }

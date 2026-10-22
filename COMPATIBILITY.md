@@ -35,4 +35,5 @@ Validation remains on `/v2`. Earlier releases and their API snapshots remain
 available. See [the migration guide](docs/migration.md) before combining major
 identities in an application.
 
-International v5 uses `/v5` with Validation v3 and Config v3 nominal types.
+International v5 uses `/v5` with Validation v3 nominal types; Config v3 is used
+only by tests.

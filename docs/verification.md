@@ -98,7 +98,7 @@ include formatting, vet, Staticcheck, strict
 golangci-lint, the full suite, exact production coverage, race, deterministic
 generation, semantic drift, provenance and licenses, mutation analysis,
 documentation, API compatibility, vulnerability scanning, workflow linting,
-the seven configured native fuzz targets, and benchmarks. NilAway currently
+the six configured native fuzz targets, and benchmarks. NilAway currently
 completes without findings.
 
 ### Mutation report

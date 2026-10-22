@@ -142,18 +142,6 @@
         },
         {
           "module_directory": ".",
-          "directory": "internal/wireadapter",
-          "name": "wireadapter",
-          "import_path": "github.com/faustbrian/go-international/v5/internal/wireadapter",
-          "kind": "internal",
-          "production": true,
-          "executable": true,
-          "coverage_required": true,
-          "build_required": true,
-          "build_tags": []
-        },
-        {
-          "module_directory": ".",
           "directory": "internationaltest",
           "name": "internationaltest",
           "import_path": "github.com/faustbrian/go-international/v5/internationaltest",
