@@ -8,15 +8,15 @@ package internationalvalidation
 import (
 	"errors"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/country"
-	"github.com/faustbrian/go-international/v4/currency"
-	"github.com/faustbrian/go-international/v4/language"
-	"github.com/faustbrian/go-international/v4/locale"
-	"github.com/faustbrian/go-international/v4/phone"
-	"github.com/faustbrian/go-international/v4/postal"
-	"github.com/faustbrian/go-international/v4/subdivision"
-	validation "github.com/faustbrian/go-validation/v2"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/country"
+	"github.com/faustbrian/go-international/v5/currency"
+	"github.com/faustbrian/go-international/v5/language"
+	"github.com/faustbrian/go-international/v5/locale"
+	"github.com/faustbrian/go-international/v5/phone"
+	"github.com/faustbrian/go-international/v5/postal"
+	"github.com/faustbrian/go-international/v5/subdivision"
+	validation "github.com/faustbrian/go-validation/v3"
 )
 
 // Country returns a strict current alpha-2 rule.

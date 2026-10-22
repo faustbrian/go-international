@@ -19,12 +19,11 @@ Ambiguities require documented decisions and stable tests. The
 this compatibility contract. Deprecated APIs follow
 [`DEPRECATION.md`](DEPRECATION.md).
 
-The `internationalpgx`, `internationalvalidation`, and `internationalwire`
-packages remain supported for the longer of 180 days after their
-target-oriented successors become public and two subsequently published stable
-root-module minor releases. Their `adapters/postgres`, `adapters/validation`,
-and `adapters/wire` successors are additive within a module major and preserve
-call signatures and observable behavior.
+Version 5 removed the `internationalpgx`, `internationalvalidation`, and
+`internationalwire` packages in favour of `adapters/postgres`,
+`adapters/validation`, and `adapters/wire`. The v4 line keeps them for their
+announced interval: the longer of 180 days after the successors became public
+and two subsequently published stable root-module minor releases.
 
 International v2 uses the official `/v2` module suffix and Validation v2 nominal
 types. Applications must select matching major identities explicitly; retaining
@@ -35,3 +34,5 @@ wire paths. All International scalar identities move with that module major;
 Validation remains on `/v2`. Earlier releases and their API snapshots remain
 available. See [the migration guide](docs/migration.md) before combining major
 identities in an application.
+
+International v5 uses `/v5` with Validation v3 and Config v3 nominal types.

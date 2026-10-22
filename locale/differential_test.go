@@ -3,8 +3,8 @@ package locale_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v4/internationaltest"
-	"github.com/faustbrian/go-international/v4/locale"
+	"github.com/faustbrian/go-international/v5/internationaltest"
+	"github.com/faustbrian/go-international/v5/locale"
 	textlanguage "golang.org/x/text/language"
 )
 

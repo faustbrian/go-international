@@ -10,7 +10,7 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/faustbrian/go-international/v4/internal/generate"
+	"github.com/faustbrian/go-international/v5/internal/generate"
 )
 
 func main() {

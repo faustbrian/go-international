@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"slices"
 
-	international "github.com/faustbrian/go-international/v4"
+	international "github.com/faustbrian/go-international/v5"
 )
 
 // DatasetRecords returns a sorted, independent compatibility projection for

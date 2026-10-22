@@ -2,6 +2,17 @@
 
 [Documentation index](README.md) · [Repository entry](../README.md)
 
+## Version 5
+
+Replace `/v4` with `/v5` in every International import. Version 5 removes the
+`internationalpgx`, `internationalvalidation`, and `internationalwire` facades;
+import `adapters/postgres` (package `internationalpostgres`),
+`adapters/validation`, and `adapters/wire` instead. `adapters/validation`
+returns `github.com/faustbrian/go-validation/v3` validators, so move
+go-validation to `/v3` in the same change. Codes, parsing, wire encodings and
+PostgreSQL text mappings are unchanged. The facades are removed before their
+announced window ended; the v4 line keeps them.
+
 ## Version 4 Wire adoption
 
 Use `github.com/faustbrian/go-international/v4` and all of its package paths

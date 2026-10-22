@@ -1,10 +1,10 @@
-module github.com/faustbrian/go-international/v4
+module github.com/faustbrian/go-international/v5
 
 go 1.27.0
 
 require (
-	github.com/faustbrian/go-config/v2 v2.0.0
-	github.com/faustbrian/go-validation/v2 v2.0.0
+	github.com/faustbrian/go-config/v3 v3.0.0
+	github.com/faustbrian/go-validation/v3 v3.0.1
 	github.com/faustbrian/go-wire/v3 v3.0.0
 	github.com/jackc/pgx/v5 v5.11.0
 	github.com/nyaruka/phonenumbers v1.8.1

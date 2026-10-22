@@ -5,7 +5,7 @@
 package language
 
 import (
-	international "github.com/faustbrian/go-international/v4"
+	international "github.com/faustbrian/go-international/v5"
 	textlanguage "golang.org/x/text/language"
 	"golang.org/x/text/language/display"
 )

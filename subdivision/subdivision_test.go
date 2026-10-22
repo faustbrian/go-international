@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/subdivision"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/subdivision"
 )
 
 func TestParseCurrentSubdivisionAndCountryContext(t *testing.T) {

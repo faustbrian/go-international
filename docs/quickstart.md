@@ -6,10 +6,10 @@
 
 ```go
 import (
-    internationalpostgres "github.com/faustbrian/go-international/v4/adapters/postgres"
-    internationalvalidation "github.com/faustbrian/go-international/v4/adapters/validation"
-    internationalwire "github.com/faustbrian/go-international/v4/adapters/wire"
-    "github.com/faustbrian/go-international/v4/country"
+    internationalpostgres "github.com/faustbrian/go-international/v5/adapters/postgres"
+    internationalvalidation "github.com/faustbrian/go-international/v5/adapters/validation"
+    internationalwire "github.com/faustbrian/go-international/v5/adapters/wire"
+    "github.com/faustbrian/go-international/v5/country"
     validation "github.com/faustbrian/go-validation/v2"
     "github.com/faustbrian/go-wire/v3"
     "github.com/jackc/pgx/v5/pgtype"

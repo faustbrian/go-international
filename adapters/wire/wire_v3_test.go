@@ -5,10 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	successor "github.com/faustbrian/go-international/v4/adapters/wire"
-	//lint:ignore SA1019 This import exercises the supported deprecated facade.
-	//nolint:staticcheck // Compatibility coverage requires the supported deprecated facade.
-	legacy "github.com/faustbrian/go-international/v4/internationalwire"
+	successor "github.com/faustbrian/go-international/v5/adapters/wire"
 	"github.com/faustbrian/go-wire/v3"
 	"github.com/faustbrian/go-wire/v3/msgpackwire"
 )
@@ -18,8 +15,6 @@ func TestWireV3ErrorCategoriesReachBothPublicPaths(t *testing.T) {
 
 	for name, decode := range map[string]func(wire.Format, []byte, any) error{
 		"canonical": successor.Decode,
-		//nolint:staticcheck // Compatibility coverage requires the supported deprecated facade.
-		"facade": legacy.Decode,
 	} {
 		t.Run(name, func(t *testing.T) {
 			for _, test := range []struct {
@@ -68,8 +63,6 @@ func TestMessagePackWorkLimitPreservesTargetsThroughBothPublicPaths(t *testing.T
 
 	for name, decode := range map[string]func(wire.Format, []byte, any) error{
 		"canonical": successor.Decode,
-		//nolint:staticcheck // Compatibility coverage requires the supported deprecated facade.
-		"facade": legacy.Decode,
 	} {
 		t.Run(name, func(t *testing.T) {
 			target := map[string]string{"preserved": "FI"}

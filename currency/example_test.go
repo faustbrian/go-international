@@ -3,7 +3,7 @@ package currency_test
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/v4/currency"
+	"github.com/faustbrian/go-international/v5/currency"
 )
 
 func Example() {

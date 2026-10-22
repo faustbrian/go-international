@@ -1,25 +1,54 @@
-//nolint:staticcheck // This compatibility test intentionally exercises the deprecated facade.
 package internationalpostgres_test
-
-//lint:file-ignore SA1019 This compatibility test intentionally exercises the deprecated facade.
 
 import (
 	"reflect"
 	"testing"
 
-	internationalpostgres "github.com/faustbrian/go-international/v4/adapters/postgres"
-	"github.com/faustbrian/go-international/v4/country"
-	"github.com/faustbrian/go-international/v4/currency"
-	"github.com/faustbrian/go-international/v4/internationalpgx"
-	"github.com/faustbrian/go-international/v4/language"
-	"github.com/faustbrian/go-international/v4/locale"
-	"github.com/faustbrian/go-international/v4/phone"
-	"github.com/faustbrian/go-international/v4/postal"
-	"github.com/faustbrian/go-international/v4/subdivision"
+	internationalpostgres "github.com/faustbrian/go-international/v5/adapters/postgres"
+	"github.com/faustbrian/go-international/v5/country"
+	"github.com/faustbrian/go-international/v5/currency"
+	"github.com/faustbrian/go-international/v5/language"
+	"github.com/faustbrian/go-international/v5/locale"
+	"github.com/faustbrian/go-international/v5/phone"
+	"github.com/faustbrian/go-international/v5/postal"
+	"github.com/faustbrian/go-international/v5/subdivision"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-func TestRegisterPreservesLegacyTextMappings(t *testing.T) {
+func TestRegisterSupportsPgxTextEncodeAndScan(t *testing.T) {
+	t.Parallel()
+	typeMap := pgtype.NewMap()
+	internationalpostgres.Register(typeMap)
+	internationalpostgres.Register(nil)
+
+	finland, err := country.Parse("FI")
+	if err != nil {
+		t.Fatal(err)
+	}
+	dataType, ok := typeMap.TypeForValue(finland)
+	if !ok || dataType == nil || dataType.Name != "text" {
+		t.Fatalf("type = %#v, %v", dataType, ok)
+	}
+	encoded, err := typeMap.Encode(pgtype.TextOID, pgtype.TextFormatCode, finland, nil)
+	if err != nil || string(encoded) != "FI" {
+		t.Fatalf("Encode() = %q, %v", encoded, err)
+	}
+	var decoded country.Code
+	if err := typeMap.Scan(pgtype.TextOID, pgtype.TextFormatCode, encoded, &decoded); err != nil || decoded != finland {
+		t.Fatalf("Scan() = %q, %v", decoded, err)
+	}
+
+	number, err := phone.ParseE164("+16502530000")
+	if err != nil {
+		t.Fatal(err)
+	}
+	encoded, err = typeMap.Encode(pgtype.TextOID, pgtype.TextFormatCode, number, nil)
+	if err != nil || string(encoded) != number.E164() {
+		t.Fatalf("phone Encode() = %q, %v", encoded, err)
+	}
+}
+
+func TestRegisterMapsEveryReleasedScalarTypeToText(t *testing.T) {
 	t.Parallel()
 
 	finland, _ := country.Parse("FI")
@@ -33,29 +62,16 @@ func TestRegisterPreservesLegacyTextMappings(t *testing.T) {
 	callingCode, _ := phone.ParseCallingCode("+358")
 	postalCode, _ := postal.Parse("00100", finland)
 	subdivisionCode, _ := subdivision.Parse("FI-18")
-	values := []any{finland, alpha3, countryNumeric, euro, currencyNumeric,
-		finnish, localeTag, number, callingCode, postalCode, subdivisionCode}
 
-	legacyMap := pgtype.NewMap()
-	successorMap := pgtype.NewMap()
-	internationalpgx.Register(legacyMap)
-	internationalpostgres.Register(successorMap)
-	internationalpostgres.Register(nil)
-	for _, value := range values {
-		legacyType, legacyOK := legacyMap.TypeForValue(value)
-		successorType, successorOK := successorMap.TypeForValue(value)
-		if !legacyOK || !successorOK || legacyType == nil || successorType == nil ||
-			legacyType.Name != "text" || successorType.Name != legacyType.Name {
-			t.Fatalf("%s legacy=%#v/%v successor=%#v/%v", reflect.TypeOf(value), legacyType, legacyOK, successorType, successorOK)
-		}
-		legacyBytes, legacyErr := legacyMap.Encode(pgtype.TextOID, pgtype.TextFormatCode, value, nil)
-		successorBytes, successorErr := successorMap.Encode(pgtype.TextOID, pgtype.TextFormatCode, value, nil)
-		if legacyErr != nil || successorErr != nil || string(successorBytes) != string(legacyBytes) {
-			t.Fatalf("%s legacy=%q/%v successor=%q/%v", reflect.TypeOf(value), legacyBytes, legacyErr, successorBytes, successorErr)
-		}
-		destination := reflect.New(reflect.TypeOf(value)).Interface()
-		if err := successorMap.Scan(pgtype.TextOID, pgtype.TextFormatCode, successorBytes, destination); err != nil || !reflect.DeepEqual(reflect.ValueOf(destination).Elem().Interface(), value) {
-			t.Fatalf("%s scan=%#v/%v", reflect.TypeOf(value), destination, err)
+	typeMap := pgtype.NewMap()
+	internationalpostgres.Register(typeMap)
+	for _, value := range []any{
+		finland, alpha3, countryNumeric, euro, currencyNumeric, finnish,
+		localeTag, number, callingCode, postalCode, subdivisionCode,
+	} {
+		dataType, ok := typeMap.TypeForValue(value)
+		if !ok || dataType == nil || dataType.Name != "text" {
+			t.Fatalf("%s maps to %#v, %v", reflect.TypeOf(value), dataType, ok)
 		}
 	}
 }

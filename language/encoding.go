@@ -3,7 +3,7 @@ package language
 import (
 	"database/sql/driver"
 
-	"github.com/faustbrian/go-international/v4/internal/codec"
+	"github.com/faustbrian/go-international/v5/internal/codec"
 )
 
 // MarshalText encodes the stored spelling without canonicalizing it, rejecting

@@ -76,10 +76,8 @@ that boolean alone as a loop-progress condition.
 Core deliberately excludes message catalogs, content negotiation, money arithmetic, address validation,
 geocoding, tax, sanctions, delivery, and locale detection.
 
-The legacy `internationalpgx`, `internationalvalidation`, and
-`internationalwire` packages remain importable compatibility paths. Their
-target-oriented successors preserve signatures and behavior; new code should
-select the successor imports above.
+Version 5 removed the former `internationalpgx`, `internationalvalidation`, and
+`internationalwire` packages; use the successor imports above.
 
 `internationaltest` exports independently mutable copies of governed country,
 subdivision, language, locale, currency, phone, and postal vectors. Each vector family has a

@@ -8,7 +8,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/go-international/v4"
+	international "github.com/faustbrian/go-international/v5"
 )
 
 func TestStatusHasStableTextAndKnownSemantics(t *testing.T) {

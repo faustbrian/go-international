@@ -16,7 +16,7 @@ api:
   baselines:
     - module: .
       mode: apidiff
-      path: api/v4.txt
+      path: api/v5.txt
 operations:
   - module: .
     gate: conformance
@@ -65,13 +65,8 @@ operations:
         budget: 10000x
         timeout: 20m
       - type: go-test
-        packages: [./internationalwire]
-        fuzz: '^FuzzLegacyWireDispatch$'
-        budget: 10000x
-        timeout: 20m
-      - type: go-test
         packages: [./adapters/wire]
-        fuzz: '^FuzzSuccessorWireDispatch$'
+        fuzz: '^FuzzWireDispatch$'
         budget: 10000x
         timeout: 20m
   - module: .

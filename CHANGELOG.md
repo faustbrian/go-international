@@ -2,6 +2,21 @@
 
 All notable changes and dataset updates are recorded here.
 
+## 5.0.0 - 2026-10-22
+
+### Changed
+
+- Move the module to `github.com/faustbrian/go-international/v5` and adopt
+  `go-validation/v3` and `go-config/v3`; `adapters/validation` returns
+  Validation v3 validators.
+
+### Removed
+
+- Remove the deprecated `internationalpgx`, `internationalvalidation` and
+  `internationalwire` facades. Import the matching `adapters/*` package. The
+  removal precedes the announced support window, which the v4 line continues
+  to honour.
+
 ## 4.1.0 - 2026-10-22
 
 ### Changed

@@ -1,20 +1,16 @@
-//nolint:staticcheck // This parity fuzz test intentionally exercises the deprecated facade.
 package internationalwire_test
-
-//lint:file-ignore SA1019 This parity fuzz test intentionally exercises the deprecated facade.
 
 import (
 	"testing"
 
-	successor "github.com/faustbrian/go-international/v4/adapters/wire"
-	legacy "github.com/faustbrian/go-international/v4/internationalwire"
+	internationalwire "github.com/faustbrian/go-international/v5/adapters/wire"
 	"github.com/faustbrian/go-wire/v3"
 )
 
-// FuzzSuccessorWireDispatch compares legacy/successor bytes, error presence and
-// target values for arbitrary formats with at most 4096 payload bytes. It does
-// not compare error categories or establish conformance against an external oracle.
-func FuzzSuccessorWireDispatch(fuzzer *testing.F) {
+// FuzzWireDispatch exercises arbitrary formats and at most 4096 payload
+// bytes against a fresh target. Oversized cases are skipped, not accepted; this
+// checks dispatch panic resilience rather than scalar round-trip correctness.
+func FuzzWireDispatch(fuzzer *testing.F) {
 	for _, seed := range []struct {
 		format string
 		input  []byte
@@ -29,21 +25,13 @@ func FuzzSuccessorWireDispatch(fuzzer *testing.F) {
 	} {
 		fuzzer.Add(seed.format, seed.input)
 	}
-	fuzzer.Fuzz(func(t *testing.T, format string, input []byte) {
+	fuzzer.Fuzz(func(_ *testing.T, format string, input []byte) {
 		if len(input) > 4096 {
 			return
 		}
 		selected := wire.Format(format)
-		legacyPayload, legacyEncodeErr := legacy.Encode(selected, document{})
-		successorPayload, successorEncodeErr := successor.Encode(selected, document{})
-		if (legacyEncodeErr == nil) != (successorEncodeErr == nil) || string(legacyPayload) != string(successorPayload) {
-			t.Fatalf("encode parity differs")
-		}
-		var legacyTarget, successorTarget document
-		legacyDecodeErr := legacy.Decode(selected, input, &legacyTarget)
-		successorDecodeErr := successor.Decode(selected, input, &successorTarget)
-		if (legacyDecodeErr == nil) != (successorDecodeErr == nil) || legacyTarget != successorTarget {
-			t.Fatalf("decode parity differs")
-		}
+		_, _ = internationalwire.Encode(selected, document{})
+		var target document
+		_ = internationalwire.Decode(selected, input, &target)
 	})
 }

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/country"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/country"
 )
 
 func TestParseByteAndValidationBoundaries(t *testing.T) {

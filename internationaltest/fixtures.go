@@ -3,14 +3,14 @@
 package internationaltest
 
 import (
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/country"
-	"github.com/faustbrian/go-international/v4/currency"
-	"github.com/faustbrian/go-international/v4/language"
-	"github.com/faustbrian/go-international/v4/locale"
-	"github.com/faustbrian/go-international/v4/phone"
-	"github.com/faustbrian/go-international/v4/postal"
-	"github.com/faustbrian/go-international/v4/subdivision"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/country"
+	"github.com/faustbrian/go-international/v5/currency"
+	"github.com/faustbrian/go-international/v5/language"
+	"github.com/faustbrian/go-international/v5/locale"
+	"github.com/faustbrian/go-international/v5/phone"
+	"github.com/faustbrian/go-international/v5/postal"
+	"github.com/faustbrian/go-international/v5/subdivision"
 )
 
 // TestingT is the subset of testing.TB used by helpers. Methods run synchronously;

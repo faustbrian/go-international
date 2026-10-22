@@ -11,7 +11,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/faustbrian/go-international/v4/internal/datasetreview"
+	"github.com/faustbrian/go-international/v5/internal/datasetreview"
 )
 
 func main() {

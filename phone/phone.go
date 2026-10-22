@@ -11,8 +11,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/country"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/country"
 	"github.com/nyaruka/phonenumbers"
 )
 

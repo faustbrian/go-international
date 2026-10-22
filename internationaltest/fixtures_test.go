@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"testing"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/country"
-	"github.com/faustbrian/go-international/v4/internationaltest"
-	"github.com/faustbrian/go-international/v4/phone"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/country"
+	"github.com/faustbrian/go-international/v5/internationaltest"
+	"github.com/faustbrian/go-international/v5/phone"
 )
 
 type recordingT struct{ message string }

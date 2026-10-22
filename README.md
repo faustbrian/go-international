@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-risk_selected-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-optional_local%2Fselected_scheduled-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-international/v4.svg)](https://pkg.go.dev/github.com/faustbrian/go-international/v4)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-international/v5.svg)](https://pkg.go.dev/github.com/faustbrian/go-international/v5)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-international?sort=semver)](https://github.com/faustbrian/go-international/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -16,7 +16,7 @@ postal values remain distinct types with strict parsing, explicit
 canonicalization, offline behavior, and versioned dataset provenance.
 
 ```sh
-go get github.com/faustbrian/go-international/v4@v4.0.0
+go get github.com/faustbrian/go-international/v5@v5.0.0
 ```
 
 ```go
@@ -69,9 +69,8 @@ calling adapter's `ErrUnsupportedFormat` sentinel.
 | `adapters/wire` | Strict bounded JSON, XML, YAML, TOML, and MessagePack dispatch |
 | `internationaltest` | Test-only governed fixtures and assertions |
 
-The former `internationalpgx`, `internationalvalidation`, and
-`internationalwire` paths remain supported compatibility facades; new code
-should use the target-oriented adapters. See the
+Version 5 removed the former `internationalpgx`, `internationalvalidation`,
+and `internationalwire` facades; use the target-oriented adapters. See the
 [compiler-checked adapter example](adapter_successor_test.go) and the
 [migration guide](docs/migration.md).
 

@@ -4,8 +4,8 @@ import (
 	"database/sql/driver"
 	"strings"
 
-	international "github.com/faustbrian/go-international/v4"
-	"github.com/faustbrian/go-international/v4/internal/codec"
+	international "github.com/faustbrian/go-international/v5"
+	"github.com/faustbrian/go-international/v5/internal/codec"
 )
 
 const extensionSeparator = ";ext="
