@@ -114,23 +114,25 @@ version `0.5.0 at ead386982c31d825843e80ab86a1919eca1a1ad5`; source authority
 section `Formatter implementations and formatter test corpus`; requirement
 strength `informative`.
 
+Additional authoritative sources: `{"id":"brick-postcode-0.7.0-vn","version":"0.7.0 at 4c9484da6100a4dec32a4b6e338258c89f71d91c","url":"https://raw.githubusercontent.com/brick/postcode/4c9484da6100a4dec32a4b6e338258c89f71d91c/src/Formatter/VNFormatter.php","specifications":["Brick postcode compatibility profile"]}`. It supplies the Vietnam rule and test vectors only.
+
 | Field | Decision |
 |---|---|
 | Issue | Country-specific syntax rules can provide compatibility screening but cannot establish postal-code existence, deliverability, locality, or address correctness. |
 | Credible interpretations | Apply country syntax during every postal parse and imply address validity. Or: Keep postal values opaque and expose pinned syntax matching as an explicit optional operation. |
-| Known peer behavior | ValidSyntax is checked against the pinned Brick postcode 0.5.0 formatter corpus while ordinary Parse deliberately accepts bounded printable values outside that syntax profile. |
-| Selected behavior | Parse stores a bounded printable UTF-8 value with explicit country context without a syntax claim; ValidSyntax separately applies the pinned Brick-compatible country rule after ASCII space, dash, and case handling. |
-| Rationale | The split avoids turning a maintained peer's formatter rules into an unsupported deliverability or address-validation claim. |
+| Known peer behavior | ValidSyntax is checked against the pinned Brick postcode 0.5.0 formatter corpus, with the Vietnam cases taken from Brick postcode 0.7.0, while ordinary Parse deliberately accepts bounded printable values outside that syntax profile. |
+| Selected behavior | Parse stores a bounded printable UTF-8 value with explicit country context without a syntax claim; ValidSyntax separately applies the pinned Brick-compatible country rule after ASCII space, dash, and case handling. Vietnam uses the five-digit rule from Brick postcode 0.7.0 at 4c9484da6100a4dec32a4b6e338258c89f71d91c; every other country retains the 0.5.0 rule. |
+| Rationale | The split avoids turning a maintained peer's formatter rules into an unsupported deliverability or address-validation claim. Only the Vietnam rule is adopted from 0.7.0 because Vietnam has used five-digit postcodes since 2018 and the 0.5.0 rule rejects every current code, while the rest of the 0.5.0 to 0.7.0 range rewrites nearly every formatter and needs its own corpus review. |
 | Security consequences | Postal values are redacted from default formatting, invalid UTF-8 and control characters fail, and callers must bound transport input before syntax validation. |
 | Resource consequences | Stored values are limited to 32 bytes and syntax checks use fixed precompiled country rules without network access. |
 | Compatibility consequences | Ordinary parsing remains stable when the optional syntax corpus changes; a syntax-boundary change requires corpus, compatibility, and changelog review. |
 | Wire consequences | Encoded identity preserves the country and raw value; syntax validity is not serialized as an authoritative fact. |
-| Executable evidence | `TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims`; `TestValidSyntaxMatchesLegacyPostcodeContract`; `TestValidSyntaxMatchesPinnedBrickPostcodeCorpus` |
+| Executable evidence | `TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims`; `TestValidSyntaxMatchesLegacyPostcodeContract`; `TestValidSyntaxMatchesPinnedBrickPostcodeCorpus`; `TestValidSyntaxAppliesVietnamFiveDigitPostcodes` |
 | Fixture and fuzz evidence | `postal/syntax_compatibility_test.go`; `FuzzPhoneAndPostalBoundedParsing` |
 | Maintained-peer evidence | `postal/syntax_compatibility_test.go` |
 | Public APIs | `postal.Parse`; `postal.Code.Normalize`; `postal.ValidSyntax`; `postal.SyntaxDataset` |
 | Documentation | `docs/specification-decisions.md`; `docs/reference.md`; `docs/provenance.md` |
-| Upstream status | The exact Brick commit and current tags feed are monitored; the package makes no claim that the peer profile is an official postal authority. |
+| Upstream status | The exact Brick 0.5.0 commit, the Brick 0.7.0 Vietnam formatter, and the current tags feed are monitored; the package makes no claim that the peer profile is an official postal authority. |
 | Reconsider when | The compatibility profile changes materially or an authoritative, licensed, maintainable syntax source is adopted. |
 
 ## INTERNATIONAL-DEC-005: Canonical language identifier representation

@@ -1,5 +1,6 @@
 // Code generated from brick/postcode v0.5.0 formatter tests; DO NOT EDIT.
 // Source: https://github.com/brick/postcode/tree/ead386982c31d825843e80ab86a1919eca1a1ad5
+// VN cases: https://github.com/brick/postcode/blob/4c9484da6100a4dec32a4b6e338258c89f71d91c/tests/Formatter/VNFormatterTest.php (0.7.0)
 // License: MIT
 package postal_test
 
@@ -3356,8 +3357,8 @@ func TestValidSyntaxMatchesPinnedBrickPostcodeCorpus(t *testing.T) {
 		{country: "VN", value: "12", valid: false},
 		{country: "VN", value: "123", valid: false},
 		{country: "VN", value: "1234", valid: false},
-		{country: "VN", value: "12345", valid: false},
-		{country: "VN", value: "123456", valid: true},
+		{country: "VN", value: "12345", valid: true},
+		{country: "VN", value: "123456", valid: false},
 		{country: "VN", value: "1234567", valid: false},
 		{country: "VN", value: "A", valid: false},
 		{country: "VN", value: "AB", valid: false},

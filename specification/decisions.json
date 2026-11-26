@@ -143,9 +143,9 @@
         "Apply country syntax during every postal parse and imply address validity.",
         "Keep postal values opaque and expose pinned syntax matching as an explicit optional operation."
       ],
-      "peer_behavior": "ValidSyntax is checked against the pinned Brick postcode 0.5.0 formatter corpus while ordinary Parse deliberately accepts bounded printable values outside that syntax profile.",
-      "selected_behavior": "Parse stores a bounded printable UTF-8 value with explicit country context without a syntax claim; ValidSyntax separately applies the pinned Brick-compatible country rule after ASCII space, dash, and case handling.",
-      "rationale": "The split avoids turning a maintained peer's formatter rules into an unsupported deliverability or address-validation claim.",
+      "peer_behavior": "ValidSyntax is checked against the pinned Brick postcode 0.5.0 formatter corpus, with the Vietnam cases taken from Brick postcode 0.7.0, while ordinary Parse deliberately accepts bounded printable values outside that syntax profile.",
+      "selected_behavior": "Parse stores a bounded printable UTF-8 value with explicit country context without a syntax claim; ValidSyntax separately applies the pinned Brick-compatible country rule after ASCII space, dash, and case handling. Vietnam uses the five-digit rule from Brick postcode 0.7.0 at 4c9484da6100a4dec32a4b6e338258c89f71d91c; every other country retains the 0.5.0 rule.",
+      "rationale": "The split avoids turning a maintained peer's formatter rules into an unsupported deliverability or address-validation claim. Only the Vietnam rule is adopted from 0.7.0 because Vietnam has used five-digit postcodes since 2018 and the 0.5.0 rule rejects every current code, while the rest of the 0.5.0 to 0.7.0 range rewrites nearly every formatter and needs its own corpus review.",
       "security_consequences": "Postal values are redacted from default formatting, invalid UTF-8 and control characters fail, and callers must bound transport input before syntax validation.",
       "resource_consequences": "Stored values are limited to 32 bytes and syntax checks use fixed precompiled country rules without network access.",
       "compatibility_consequences": "Ordinary parsing remains stable when the optional syntax corpus changes; a syntax-boundary change requires corpus, compatibility, and changelog review.",
@@ -153,7 +153,8 @@
       "executable_evidence": [
         "TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims",
         "TestValidSyntaxMatchesLegacyPostcodeContract",
-        "TestValidSyntaxMatchesPinnedBrickPostcodeCorpus"
+        "TestValidSyntaxMatchesPinnedBrickPostcodeCorpus",
+        "TestValidSyntaxAppliesVietnamFiveDigitPostcodes"
       ],
       "fixture_evidence": ["postal/syntax_compatibility_test.go"],
       "fuzz_evidence": ["FuzzPhoneAndPostalBoundedParsing"],
@@ -161,7 +162,7 @@
       "differential_evidence": ["postal/syntax_compatibility_test.go"],
       "public_apis": ["postal.Parse", "postal.Code.Normalize", "postal.ValidSyntax", "postal.SyntaxDataset"],
       "documentation": ["docs/specification-decisions.md", "docs/reference.md", "docs/provenance.md"],
-      "upstream_status": "The exact Brick commit and current tags feed are monitored; the package makes no claim that the peer profile is an official postal authority.",
+      "upstream_status": "The exact Brick 0.5.0 commit, the Brick 0.7.0 Vietnam formatter, and the current tags feed are monitored; the package makes no claim that the peer profile is an official postal authority.",
       "reconsider_when": "The compatibility profile changes materially or an authoritative, licensed, maintainable syntax source is adopted."
     },
     {

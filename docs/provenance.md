@@ -14,7 +14,9 @@ Registry dated 2026-06-14 through `x/text` v0.42.0, SIX ISO 4217 lists published
 2026-09-17 (List One) and 2026-01-01 (List Three), and `nyaruka/phonenumbers`
 v1.8.1 reconciled with libphonenumber v9.0.32. Postal syntax compatibility is
 pinned to `brick/postcode` 0.5.0 at
-commit `ead386982c31d825843e80ab86a1919eca1a1ad5`. See
+commit `ead386982c31d825843e80ab86a1919eca1a1ad5`, except the Vietnam rule,
+which is pinned to `brick/postcode` 0.7.0 at commit
+`4c9484da6100a4dec32a4b6e338258c89f71d91c`. See
 `THIRD_PARTY_NOTICES.md` for licenses.
 
 | Dataset | Authority and version | License | Pinned source checksum |
@@ -24,7 +26,7 @@ commit `ead386982c31d825843e80ab86a1919eca1a1ad5`. See
 | Language and locale | IANA registry 2026-06-14 through `x/text` v0.42.0 | IANA terms; BSD-3-Clause | `be1fad86a99e3a932d07b80c9b3c271ec2381a5909ce22420144e5077ab0a43a` |
 | Currency | SIX ISO 4217 List One 2026-09-17 and List Three 2026-01-01 | SIX ISO 4217 terms | `33139b438657d1cee116ba737807ea71d19d6de4b90f799a09c56f0cc6a1b0ff` plus `98fde2423cdb916dd59dcf5fe96222edad8fa198d865c1c83dbc464b9cc52387` |
 | Phone | `nyaruka/phonenumbers` v1.8.1, upstream v9.0.32 | Apache-2.0 | `79ff27d5ee74c223c5851d9c562751bc21863358c1b7070d3ec2ab9b0cd6a070` |
-| Postal syntax | `brick/postcode` 0.5.0 formatter rules and upstream test vectors | MIT | commit `ead386982c31d825843e80ab86a1919eca1a1ad5`; deterministic Git archive `8a5dd1f053a349468ea5ee32e6cc55b8e5c9c2adbecbfd2f0ecadc0512e7232f` |
+| Postal syntax | `brick/postcode` 0.5.0 formatter rules and upstream test vectors; Vietnam rule and vectors from 0.7.0 | MIT | commit `ead386982c31d825843e80ab86a1919eca1a1ad5`; deterministic Git archive `8a5dd1f053a349468ea5ee32e6cc55b8e5c9c2adbecbfd2f0ecadc0512e7232f`; Vietnam: commit `4c9484da6100a4dec32a4b6e338258c89f71d91c`, `VNFormatter.php` `b483c7fac62962c1c77855526031daccbbae460a1c999188310915ff38dc3b45` |
 
 The active parser uses `x/text` v0.42.0. Its language tables are byte-identical
 to the reviewed v0.40.0 snapshot, so the registry date, retrieval date and
@@ -71,7 +73,10 @@ and conformance cases from `src/Formatter/*Formatter.php` and
 rerun the full conformance corpus, and update `SyntaxDataset`, the source
 checksum, notices, and changelog together. The committed conformance test names
 the exact source revision and license; it is generated from the upstream
-literal formatter vectors and must not be hand-edited.
+literal formatter vectors and must not be hand-edited. The one exception is
+the Vietnam override under INTERNATIONAL-DEC-004: its rule and its two
+conformance rows follow brick/postcode 0.7.0 at `4c9484da` while every other
+country and `SyntaxDataset` stay on 0.5.0, and a full upgrade replaces both.
 
 Choose the next guide in the [documentation index](README.md)
 or return to the [repository entry](../README.md) for installation and ownership.

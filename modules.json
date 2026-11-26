@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "repository": "github.com/faustbrian/go-international",
-  "go_version": "1.27.3",
+  "go_version": "1.27.4",
   "modules": [
     {
       "directory": ".",
@@ -347,7 +347,7 @@
       "conformance_corpora": [
         "Pinned golang.org/x/text country, currency, and language-tag comparisons",
         "Pinned libphonenumber metadata comparisons",
-        "Brick postcode 0.5.0 formatter corpus"
+        "Brick postcode 0.5.0 formatter corpus with brick/postcode 0.7.0 Vietnam vectors"
       ],
       "provenance": [
         "specification/sources.tsv",

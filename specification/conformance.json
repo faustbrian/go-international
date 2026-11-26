@@ -39,8 +39,8 @@
     },
     {
       "id": "INTERNATIONAL-DEC-004",
-      "authoritative_sources": ["brick-postcode-0.5.0"],
-      "executable_evidence": ["TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims", "TestValidSyntaxMatchesLegacyPostcodeContract", "TestValidSyntaxMatchesPinnedBrickPostcodeCorpus"],
+      "authoritative_sources": ["brick-postcode-0.5.0", "brick-postcode-0.7.0-vn"],
+      "executable_evidence": ["TestParsePreservesCallerValueAndCountryWithoutSyntaxClaims", "TestValidSyntaxMatchesLegacyPostcodeContract", "TestValidSyntaxMatchesPinnedBrickPostcodeCorpus", "TestValidSyntaxAppliesVietnamFiveDigitPostcodes"],
       "fixtures": ["postal/syntax_compatibility_test.go"],
       "fuzz": ["FuzzPhoneAndPostalBoundedParsing"],
       "interoperability_evidence": [],

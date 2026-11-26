@@ -64,3 +64,33 @@ func TestValidSyntaxRejectsAbsentCountryAndUnsupportedSyntax(t *testing.T) {
 		t.Fatal("ValidSyntax() applied Unicode case folding")
 	}
 }
+
+func TestValidSyntaxAppliesVietnamFiveDigitPostcodes(t *testing.T) {
+	t.Parallel()
+
+	if postal.SyntaxDataset != "brick/postcode@0.5.0" {
+		t.Fatalf("SyntaxDataset = %q, want the stable 0.5.0 base profile identifier", postal.SyntaxDataset)
+	}
+	tests := []struct {
+		value string
+		valid bool
+	}{
+		{value: "10000", valid: true},
+		{value: "70000", valid: true},
+		{value: "100 00", valid: true},
+		{value: "100-00", valid: true},
+		{value: "10000\n", valid: true},
+		{value: "100000\n", valid: false},
+		{value: "100000", valid: false},
+		{value: "700000", valid: false},
+		{value: "1000", valid: false},
+		{value: "1000A", valid: false},
+	}
+	for _, country := range []string{"VN", "vn"} {
+		for _, test := range tests {
+			if valid := postal.ValidSyntax(test.value, country); valid != test.valid {
+				t.Fatalf("ValidSyntax(%q, %q) = %v, want %v", test.value, country, valid, test.valid)
+			}
+		}
+	}
+}

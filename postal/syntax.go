@@ -5,7 +5,9 @@ import (
 	"strings"
 )
 
-// SyntaxDataset identifies the compatibility data behind ValidSyntax.
+// SyntaxDataset identifies the compatibility data behind ValidSyntax. Every
+// country follows brick/postcode 0.5.0 except Vietnam (VN), which follows the
+// five-digit brick/postcode 0.7.0 rule under INTERNATIONAL-DEC-004.
 const SyntaxDataset = "brick/postcode@0.5.0"
 
 // ValidSyntax reports whether value is accepted by the pinned postal-code
@@ -408,7 +410,7 @@ var (
 		"UY": regexp.MustCompile(`^[0-9]{5}$`),
 		"UZ": regexp.MustCompile(`^[0-9]{6}$`),
 		"VE": regexp.MustCompile(`^[0-9]{4}$`),
-		"VN": regexp.MustCompile(`^[0-9]{6}$`),
+		"VN": regexp.MustCompile(`^[0-9]{5}$`),
 		"ZA": regexp.MustCompile(`^[0-9]{4}$`),
 		"ZM": regexp.MustCompile(`^[0-9]{5}$`),
 	}

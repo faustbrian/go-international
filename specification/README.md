@@ -9,7 +9,7 @@ and update authorities are in `sources.tsv` and `monitoring.json`.
 | INTERNATIONAL-DEC-001 | CLDR 48.2 region/subdivision data; SIX List One 2026-09-17 and List Three 2026-01-01 | Current versus historic status and numeric-reuse tests; governed vectors; parser fuzzing | Pinned x/text country and currency comparisons |
 | INTERNATIONAL-DEC-002 | RFC 5646 and the IANA snapshot represented by x/text v0.40.0 | Source preservation, canonicalization, fallback, governed vectors, and parser fuzzing | Pinned x/text language-tag comparison |
 | INTERNATIONAL-DEC-003 | libphonenumber v9.0.32 metadata through nyaruka/phonenumbers v1.8.1 | Identity, region, possibility, validity, formatting, governed vectors, and bounded-input fuzzing | Pinned libphonenumber wrapper comparison |
-| INTERNATIONAL-DEC-004 | Brick postcode 0.5.0 at `ead386982c31d825843e80ab86a1919eca1a1ad5` | Opaque parsing, explicit normalization, optional syntax rules, and bounded-input fuzzing | Complete pinned Brick formatter corpus |
+| INTERNATIONAL-DEC-004 | Brick postcode 0.5.0 at `ead386982c31d825843e80ab86a1919eca1a1ad5`; Vietnam rule from 0.7.0 at `4c9484da6100a4dec32a4b6e338258c89f71d91c` | Opaque parsing, explicit normalization, optional syntax rules, and bounded-input fuzzing | Complete pinned Brick formatter corpus |
 | INTERNATIONAL-DEC-005 | IANA registry snapshot represented by x/text v0.40.0 | Canonical two-letter and three-letter-only identity, ISO 639-3 conversion, strict parsing, governed vectors, and parser fuzzing | Maintained x/text-derived registry tables; differential behavior not separately assessed |
 
 ISO 3166 labels describe the public identifier family, but the executable
@@ -20,6 +20,56 @@ compatibility profile, not an official postal authority or deliverability
 claim.
 
 ## Upstream review history
+
+### 2026-11-26
+
+- All 17 previously declared authorities were retrieved. Fourteen retain their
+  recorded checksums, including every pinned runtime dataset, registry and RFC
+  source. The 30-day interval and every existing authority URL remain
+  unchanged. Each changed response was retrieved twice and both responses were
+  byte-identical.
+
+  | Authority | Previous SHA-256 | Current SHA-256 |
+  | --- | --- | --- |
+  | `iana-language-releases` | `755fad43283be7b41ebe3c89ad054b6eaf928f404f9c0edb74799e0eab74beb1` | `8ac4e58567593c96e9e6d66e2017dbb8d3953dbcb42fe32ecd3b3fccdfdaba7b` |
+  | `libphonenumber-releases` | `077317918aa9cb8db32c07ca68f838ea080a3418d2d2fa930893f0efa288e2ce` | `a951546d7a87c4b8e63ed3464410ef6338f5e3527596aee7139bc8f4f73f69d4` |
+  | `brick-postcode-releases` | `969f8c30c89858393f2d83564c42b07d6d8a6a3b29ee68281009674c825a8f94` | `0879e966cef147307946993187fd4d77bb7a7cd4902c1964e1b7b6e1b2a8e2b9` |
+
+- The Brick postcode tags feed now includes 0.7.0. The
+  [upstream comparison](https://github.com/brick/postcode/compare/0.6.3...0.7.0)
+  contains one commit, `4c9484da6100a4dec32a4b6e338258c89f71d91c`, which
+  changes Vietnam postcodes from six to five digits, in use since 2018. The
+  pinned 0.5.0 rule rejected every current Vietnamese postcode, so this
+  changes the postal syntax decision above: `ValidSyntax` now applies the 0.7.0 Vietnam
+  rule and its upstream test vectors as a Vietnam-only override, while
+  `SyntaxDataset` keeps its `brick/postcode@0.5.0` value. The full 0.5.0 to 0.7.0 range spans 20
+  commits that rewrite nearly every formatter, so every other country keeps
+  the 0.5.0 rule until a separate corpus review. The Vietnam source is pinned
+  as `brick-postcode-0.7.0-vn` at
+  `b483c7fac62962c1c77855526031daccbbae460a1c999188310915ff38dc3b45`. The feed
+  also shows a newer timestamp for the 0.4.0 tag, which still points to commit
+  `590857ef7a55165ad247695bc9b27b511929ea55`; the pinned 0.5.0 tag still
+  points to `ead386982c31d825843e80ab86a1919eca1a1ad5`.
+
+- The IANA Language Subtag Registry advances its File-Date from 2026-09-17 to
+  2026-11-18 and adds two variant subtags, `1995` and `2026`, for Uzbek Latin
+  orthographies, each with prefixes `uz` and `uz-Latn` and no preferred value.
+  Removing only those two records and restoring the previous File-Date
+  reproduces the previous checksum exactly. No language, region, alias,
+  deprecation or preferred-value record changed, so canonicalization
+  requirements are unchanged. Runtime parsing remains backed by the pinned
+  `x/text` v0.40.0 snapshot, whose monitored tables still match
+  `876a73fb8b8fffd239efa592ffdf903c25757b4d17b715fc80d7aee8db2b985e`; the
+  new variants are not adopted and no newer-registry conformance is claimed.
+- The libphonenumber release feed now announces v9.0.42, v9.0.43 and v9.0.44.
+  Their [official release notes](https://github.com/google/libphonenumber/blob/v9.0.44/release_notes.txt)
+  describe newer phone, short-number, geocoding and carrier metadata, and a
+  catastrophic-backtracking fix in the Java, JavaScript and C++ RFC 3966
+  `phone-context` check. The Go runtime uses linear-time RE2 matching and does
+  not include that code. The accepted metadata remains v9.0.32 through
+  `nyaruka/phonenumbers` v1.8.1 at
+  `5f819f3becbd7be4b90ffb3dbc273035e5432e9424b4dcba8d73c5a28ed2a2ee`;
+  adopting newer metadata requires a separate dataset review.
 
 ### 2026-10-10
 
