@@ -8,7 +8,8 @@ Generated metadata and parsing behavior retain their upstream licenses:
 - ISO 4217 XML lists distributed by SIX: SIX ISO 4217 terms of use.
 - `github.com/nyaruka/phonenumbers` and upstream libphonenumber metadata:
   Apache-2.0.
-- `brick/postcode` 0.5.0 formatter rules and test vectors: MIT License,
+- `brick/postcode` 0.5.0 formatter rules and test vectors, and the 0.7.0
+  Vietnam rule and test vectors: MIT License,
   Copyright (c) 2013-present Benjamin Morel.
 
 The exact source versions, retrieval date, checksums, generator identity, and

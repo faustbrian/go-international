@@ -2,6 +2,19 @@
 
 All notable changes and dataset updates are recorded here.
 
+## Unreleased
+
+### Fixed
+
+- `postal.ValidSyntax` now accepts five-digit Vietnamese postcodes and
+  rejects six-digit ones, following the Vietnam rule from `brick/postcode`
+  0.7.0. Vietnam has used five-digit postcodes since 2018, so the 0.5.0 rule
+  rejected every current code. Callers that store syntax results for `VN`
+  values should revalidate them. This is a Vietnam-only override: every other
+  country keeps the 0.5.0 rule, and `postal.SyntaxDataset` keeps its value
+  `brick/postcode@0.5.0`. Updated decision record:
+  `INTERNATIONAL-DEC-004 sha256:95f8cc20ede1528feb3ca110685820fd64ea6472cb7fdc73fbfd46252753e55f`.
+
 ## 5.0.0 - 2026-10-23
 
 ### Changed
