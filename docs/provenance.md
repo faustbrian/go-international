@@ -73,7 +73,10 @@ and conformance cases from `src/Formatter/*Formatter.php` and
 rerun the full conformance corpus, and update `SyntaxDataset`, the source
 checksum, notices, and changelog together. The committed conformance test names
 the exact source revision and license; it is generated from the upstream
-literal formatter vectors and must not be hand-edited.
+literal formatter vectors and must not be hand-edited. The one exception is
+the Vietnam override under INTERNATIONAL-DEC-004: its rule and its two
+conformance rows follow brick/postcode 0.7.0 at `4c9484da` while every other
+country and `SyntaxDataset` stay on 0.5.0, and a full upgrade replaces both.
 
 Choose the next guide in the [documentation index](README.md)
 or return to the [repository entry](../README.md) for installation and ownership.
